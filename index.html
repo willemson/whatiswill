@@ -344,6 +344,11 @@
             transform: rotate(180deg);
         }
         
+        .giscus-container {
+            margin-top: 10px;
+            min-height: 100px;
+        }
+        
         .comments-section {
             padding: 15px;
             border-top: 1px solid;
@@ -885,7 +890,7 @@
     </div>
     
     <script>
-        // Media reviews data with comments
+        // Media reviews data (simplified for Giscus)
         const mediaReviews = [
             {
                 title: "Hitchhiker's Guide to Galaxy",
@@ -894,10 +899,7 @@
                 review: "Absolutely hilarious and mind-bending! Adams' wit is unmatched and the absurdist humor had me laughing out loud. Perfect blend of sci-fi and comedy that never takes itself too seriously.",
                 date: "Watched: Jul 15th",
                 dateObj: new Date(2025, 6, 15),
-                type: "book",
-                comments: [
-                    { author: "SciFiFan42", text: "Totally agree! The humor is timeless." }
-                ]
+                type: "book"
             },
             {
                 title: "Super Metroid",
@@ -906,8 +908,7 @@
                 review: "Masterpiece of game design! Atmospheric exploration, tight controls, and incredible soundtrack. One of the best games ever made that still holds up perfectly today.",
                 date: "Finished: Jul 22nd",
                 dateObj: new Date(2025, 6, 22),
-                type: "game",
-                comments: []
+                type: "game"
             },
             {
                 title: "The Matrix",
@@ -916,11 +917,7 @@
                 review: "Revolutionary filmmaking that changed action movies forever. Deep philosophical themes and groundbreaking effects make this a classic. Minor pacing issues in the middle act.",
                 date: "Watched: Jul 28th",
                 dateObj: new Date(2025, 6, 28),
-                type: "movie",
-                comments: [
-                    { author: "MovieBuff", text: "Classic! Changed everything about action films." },
-                    { author: "CinemaLover", text: "The sequels don't hold up as well though." }
-                ]
+                type: "movie"
             },
             {
                 title: "OK Computer",
@@ -929,8 +926,7 @@
                 review: "Haunting meditation on technology and alienation. Every track perfectly crafted from the paranoid 'Paranoid Android' to the ethereal 'No Surprises'. Gets better with every listen.",
                 date: "Listened: Aug 1st",
                 dateObj: new Date(2025, 7, 1),
-                type: "album",
-                comments: []
+                type: "album"
             },
             {
                 title: "Neuromancer",
@@ -939,8 +935,7 @@
                 review: "The cyberpunk bible! Gibson's vision feels incredibly prescient with today's digital landscape. Dense prose takes some getting used to but the phenomenal world-building makes it worth the effort.",
                 date: "Finished: Aug 3rd",
                 dateObj: new Date(2025, 7, 3),
-                type: "book",
-                comments: []
+                type: "book"
             },
             {
                 title: "Chrono Trigger",
@@ -949,8 +944,7 @@
                 review: "Pure JRPG perfection! Engaging time travel story with memorable characters and multiple endings for great replay value. Akira Toriyama's gorgeous art style combined with an incredible soundtrack.",
                 date: "Finished: Aug 4th",
                 dateObj: new Date(2025, 7, 4),
-                type: "game",
-                comments: []
+                type: "game"
             }
         ];
 
@@ -1087,144 +1081,97 @@
             }
         }
 
-        // GitHub Issues API for comments (Fine-grained token compatible)
-        const GITHUB_CONFIG = {
-            owner: 'willemson',             // Your GitHub username
-            repo: 'whatiswill',         // Replace with your repository name
-            token: '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' // Replace with your fine-grained token (starts with github_pat_)
-        };
-
-        // Helper function to get headers for fine-grained token
-        function getGitHubHeaders() {
-            return {
-                'Authorization': `Bearer ${GITHUB_CONFIG.token}`,
-                'Accept': 'application/vnd.github+json',
-                'X-GitHub-Api-Version': '2022-11-28'
-            };
+        // Giscus comments using GitHub Discussions (secure, no tokens needed)
+        function createGiscusCommentsSection(media, mediaIndex) {
+            return `
+                <div class="comments-toggle" onclick="toggleComments(${mediaIndex})">
+                    <div class="comments-toggle-text">Comments</div>
+                    <div class="comments-arrow">▼</div>
+                </div>
+                <div class="comments-section" id="comments-${mediaIndex}">
+                    <div class="giscus-container" id="giscus-${mediaIndex}"></div>
+                </div>
+            `;
         }
 
-        // Load comments from GitHub Issues
-        async function loadCommentsFromGitHub() {
-            try {
-                // Get all issues (each media item has its own issue)
-                const response = await fetch(`https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/issues?state=all&labels=comment`, {
-                    headers: getGitHubHeaders()
-                });
+        // Initialize Giscus for a specific media item
+        function initializeGiscus(mediaIndex, mediaTitle) {
+            const container = document.getElementById(`giscus-${mediaIndex}`);
+            if (!container) return;
+
+            // Create unique discussion title for each media item
+            const discussionTitle = `Comments: ${mediaTitle}`;
+            
+            // Create giscus script element
+            const script = document.createElement('script');
+            script.src = 'https://giscus.app/client.js';
+            script.setAttribute('data-repo', 'willemson/YOUR_REPO_NAME'); // Replace with your actual repo
+            script.setAttribute('data-repo-id', 'YOUR_REPO_ID'); // Get this from giscus.app
+            script.setAttribute('data-category', 'General'); // Or create a "Comments" category
+            script.setAttribute('data-category-id', 'YOUR_CATEGORY_ID'); // Get this from giscus.app
+            script.setAttribute('data-mapping', 'specific');
+            script.setAttribute('data-term', discussionTitle);
+            script.setAttribute('data-strict', '1');
+            script.setAttribute('data-reactions-enabled', '1');
+            script.setAttribute('data-emit-metadata', '0');
+            script.setAttribute('data-input-position', 'top');
+            script.setAttribute('data-theme', 'light');
+            script.setAttribute('data-lang', 'en');
+            script.setAttribute('data-loading', 'lazy');
+            script.crossOrigin = 'anonymous';
+            script.async = true;
+
+            // Clear container and add script
+            container.innerHTML = '';
+            container.appendChild(script);
+        }
+
+        // Toggle comments dropdown (updated for Giscus)
+        function toggleComments(mediaIndex) {
+            const commentsSection = document.getElementById(`comments-${mediaIndex}`);
+            const arrow = document.querySelectorAll('.comments-toggle')[mediaIndex].querySelector('.comments-arrow');
+            
+            if (commentsSection.classList.contains('expanded')) {
+                commentsSection.classList.remove('expanded');
+                arrow.classList.remove('expanded');
+            } else {
+                commentsSection.classList.add('expanded');
+                arrow.classList.add('expanded');
                 
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    console.error('GitHub API response:', response.status, errorText);
-                    throw new Error(`GitHub API error: ${response.status}`);
-                }
-                
-                const issues = await response.json();
-                
-                // Load comments for each media item
-                for (const review of mediaReviews) {
-                    const issue = issues.find(issue => issue.title === `Comments for: ${review.title}`);
-                    if (issue) {
-                        const commentsResponse = await fetch(issue.comments_url, {
-                            headers: getGitHubHeaders()
-                        });
-                        
-                        if (commentsResponse.ok) {
-                            const comments = await commentsResponse.json();
-                            review.comments = comments.map(comment => ({
-                                author: comment.user.login,
-                                text: comment.body,
-                                timestamp: comment.created_at,
-                                id: comment.id
-                            }));
-                        }
-                    } else {
-                        review.comments = review.comments || [];
-                    }
-                }
-            } catch (error) {
-                console.error('Failed to load comments from GitHub:', error);
-                // Fallback to empty comments
-                mediaReviews.forEach(review => {
-                    if (!review.comments) review.comments = [];
-                });
+                // Initialize Giscus when first opened
+                const currentReviews = getCurrentFilteredReviews();
+                const mediaTitle = currentReviews[mediaIndex].title;
+                initializeGiscus(mediaIndex, mediaTitle);
             }
         }
 
-        // Create or find GitHub issue for a media item
-        async function getOrCreateIssue(mediaTitle) {
-            try {
-                // First, try to find existing issue
-                const searchResponse = await fetch(`https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/issues?state=all&labels=comment`, {
-                    headers: getGitHubHeaders()
-                });
-                
-                if (searchResponse.ok) {
-                    const issues = await searchResponse.json();
-                    const existingIssue = issues.find(issue => issue.title === `Comments for: ${mediaTitle}`);
-                    if (existingIssue) {
-                        return existingIssue;
-                    }
-                }
-                
-                // Create new issue if not found
-                const createResponse = await fetch(`https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/issues`, {
-                    method: 'POST',
-                    headers: {
-                        ...getGitHubHeaders(),
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        title: `Comments for: ${mediaTitle}`,
-                        body: `This issue tracks comments for the media review: **${mediaTitle}**\n\nComments will appear below.`,
-                        labels: ['comment']
-                    })
-                });
-                
-                if (!createResponse.ok) {
-                    const errorText = await createResponse.text();
-                    console.error('Failed to create issue:', createResponse.status, errorText);
-                    throw new Error(`Failed to create issue: ${createResponse.status}`);
-                }
-                
-                return await createResponse.json();
-            } catch (error) {
-                console.error('Failed to get or create issue:', error);
-                throw error;
-            }
-        }
-
-        // Add comment to GitHub
-        async function addCommentToGitHub(mediaTitle, author, text) {
-            try {
-                const issue = await getOrCreateIssue(mediaTitle);
-                
-                const response = await fetch(`https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/issues/${issue.number}/comments`, {
-                    method: 'POST',
-                    headers: {
-                        ...getGitHubHeaders(),
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        body: `**${author}** said:\n\n${text}`
-                    })
-                });
-                
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    console.error('Failed to add comment:', response.status, errorText);
-                    throw new Error(`Failed to add comment: ${response.status}`);
-                }
-                
-                const newComment = await response.json();
-                return {
-                    author: author,
-                    text: text,
-                    timestamp: newComment.created_at,
-                    id: newComment.id
-                };
-            } catch (error) {
-                console.error('Failed to add comment to GitHub:', error);
-                throw error;
-            }
+        // Create media card (updated for Giscus)
+        function createMediaCard(media, index) {
+            return `
+                <div class="media-card" data-type="${media.type}">
+                    <div class="media-card-content">
+                        <div class="media-cover-section">
+                            <div class="media-cover">
+                                ${createImageElement(media.coverUrl, media.title, media.type)}
+                            </div>
+                        </div>
+                        <div class="media-content-section">
+                            <div class="media-title">${media.title}</div>
+                            <div class="dividing-line rating-above"></div>
+                            <div class="star-rating">
+                                ${generateStars(media.rating)}
+                            </div>
+                            <div class="dividing-line rating-below"></div>
+                            <div class="media-review">
+                                ${media.review}
+                            </div>
+                            <div class="dividing-line"></div>
+                            <div class="media-date">${media.date}</div>
+                        </div>
+                    </div>
+                    ${createGiscusCommentsSection(media, index)}
+                </div>
+            `;
         }
 
         // Add comment function (updated for GitHub)
@@ -1394,9 +1341,8 @@
             });
         }
 
-        // Initialize everything
-        async function initializeApp() {
-            await loadCommentsFromGitHub(); // Load shared comments from GitHub
+        // Initialize everything (simplified)
+        function initializeApp() {
             renderMediaCards();
             
             setTimeout(() => {
