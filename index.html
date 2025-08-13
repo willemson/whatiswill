@@ -880,7 +880,7 @@
 
         // Image Handling
         function createImageElement(coverUrl, title) {
-            const imagePath = `reviews/${coverUrl}`;
+            const imagePath = `review/${coverUrl}`;
             return `<img src="${imagePath}" alt="${title}" 
                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="error-message" style="display: none;">
@@ -1142,3 +1142,4 @@
     </script>
 </body>
 </html>
+
