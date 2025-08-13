@@ -561,25 +561,6 @@
             cursor: not-allowed;
         }
         
-        /* Add Media Button */
-        .add-media-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: #5d4e37;
-            color: #ede8d3;
-            border: 2px solid #5d4e37;
-            font-size: 20px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: monospace;
-        }
-        
         .add-media-btn:hover {
             background: #4a3b2a;
             border-color: #4a3b2a;
@@ -1145,15 +1126,6 @@
                     });
                 });
             }, 100);
-            
-            // Add media button
-            const addButton = document.querySelector('.add-media-btn');
-            if (addButton) {
-                addButton.addEventListener('click', () => {
-                    alert('To add a new review, add an object to the mediaReviews array in the code!');
-                });
-            }
-        }
 
         // Application Initialization
         async function initializeApp() {
@@ -1176,4 +1148,5 @@
     </script>
 </body>
 </html>
+
 
