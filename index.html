@@ -396,7 +396,7 @@
         
         .dividing-line {
             height: 2px;
-            background: #8b7355;
+            background: #666666;
             margin: 8px 0;
         }
         
@@ -411,12 +411,34 @@
         .star-rating {
             display: flex;
             justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .rating-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .stars {
+            display: flex;
             gap: 3px;
+            align-items: center;
         }
         
         .star {
             font-size: 16px;
             font-family: monospace;
+        }
+        
+        .rating-text {
+            font-size: 6px;
+            text-transform: uppercase;
+            font-weight: bold;
+            white-space: nowrap;
+            color: #2c2416;
+            line-height: 1;
         }
         
         .media-review {
@@ -427,7 +449,7 @@
         }
         
         .media-date {
-            color: #8b7355;
+            color: #999999;
             font-size: 7px;
             text-align: right;
             text-transform: uppercase;
@@ -739,15 +761,14 @@
         
         // Media reviews data
         const mediaReviews = [
-             {
-                 title: "The Fantastic Four: First Steps (2025)",
-                 coverUrl: "fan4.jpg",
-                 rating: 3.5,
-                 review: "FINALLY MARVEL DOES SOMETHING DIFFERENT! I'm at a point where I dont even know what phase we're in but im just glad we finally get to see THE THING!!!! The design was perfect and he even has a rock beard like cmon. Still has a lot of the stereotypical marvel schlop factors but the retro-futuristic design of the movie really saved it for me. Shoutout to the art department cause they really killed it with this one.",
-                 date: "Watched: Aug 9th",
-                 dateObj: new Date(2025, 8, 9),
-                 type: "movie",
-                 comments: []
+             {title: "The Fantastic Four: First Steps (2025)",
+              coverUrl: "fan4.jpg",
+              rating: 3.5,
+              review: "FINALLY MARVEL DOES SOMETHING DIFFERENT! I'm at a point where I dont even know what phase we're in but im just glad we finally get to see THE THING!!!! The design was perfect and he even has a rock beard like cmon. Still has a lot of the stereotypical marvel schlop factors but the retro-futuristic design of the movie really saved it for me. Shoutout to the art department cause they really killed it with this one.",
+              date: "Watched: Aug 9th",
+              dateObj: new Date(2025, 8, 9),
+              type: "movie",
+              comments: []
              },
             {
                 title: "Super Metroid",
@@ -856,13 +877,45 @@
         function generateStars(rating) {
             let starsHtml = '';
             let starColor;
+            let ratingText;
             
-            if (rating >= 4.5) starColor = '#00FF00';
-            else if (rating >= 3.5) starColor = '#32CD32';
-            else if (rating >= 2.5) starColor = '#FFD700';
-            else if (rating >= 1.5) starColor = '#FF4500';
-            else starColor = '#FF0000';
+            // Custom rating text based on exact rating values
+            if (rating === 5.0) {
+                starColor = '#00FF00';
+                ratingText = 'WOWZA!';
+            } else if (rating === 4.5) {
+                starColor = '#00FF00';
+                ratingText = 'Almost Perfect';
+            } else if (rating === 4.0) {
+                starColor = '#32CD32';
+                ratingText = 'Fantastic';
+            } else if (rating === 3.5) {
+                starColor = '#32CD32';
+                ratingText = 'Pretty Great';
+            } else if (rating === 3.0) {
+                starColor = '#FFD700';
+                ratingText = 'Decent';
+            } else if (rating === 2.5) {
+                starColor = '#FFD700';
+                ratingText = 'Meh';
+            } else if (rating === 2.0) {
+                starColor = '#FF4500';
+                ratingText = 'Pretty Bad';
+            } else if (rating === 1.5) {
+                starColor = '#FF4500';
+                ratingText = 'They Tried ig?';
+            } else if (rating === 1.0) {
+                starColor = '#FF0000';
+                ratingText = 'Abysmal';
+            } else if (rating === 0.5) {
+                starColor = '#FF0000';
+                ratingText = 'Not worth a rating';
+            } else {
+                starColor = '#FF0000';
+                ratingText = 'Not worth a rating';
+            }
             
+            // Generate stars
             for (let i = 1; i <= 5; i++) {
                 if (i <= Math.floor(rating)) {
                     starsHtml += `<span class="star" style="color: ${starColor}">★</span>`;
@@ -875,12 +928,19 @@
                     starsHtml += '<span class="star" style="color: #c4b5a0;">★</span>';
                 }
             }
-            return starsHtml;
+            
+            // Return stars with rating text
+            return `
+                <div class="rating-container">
+                    <div class="stars">${starsHtml}</div>
+                    <div class="rating-text">${rating}/5 - ${ratingText}</div>
+                </div>
+            `;
         }
 
         // Image Handling
         function createImageElement(coverUrl, title) {
-            const imagePath = `review/${coverUrl}`;
+            const imagePath = `reviews/${coverUrl}`;
             return `<img src="${imagePath}" alt="${title}" 
                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="error-message" style="display: none;">
@@ -1142,4 +1202,3 @@
     </script>
 </body>
 </html>
-
