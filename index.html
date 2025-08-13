@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Media Tracker</title>
+    <title>Willboxd - Media Journal</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
         
@@ -28,13 +28,13 @@
             padding: 20px;
         }
         
+        /* Header Styles */
         header {
             text-align: center;
             margin-bottom: 40px;
             background: #ede8d3;
             padding: 20px;
             border: 2px solid #8b7355;
-            image-rendering: pixelated;
         }
         
         h1 {
@@ -56,7 +56,6 @@
             font-size: 10px;
             color: #5d4e37;
             text-transform: uppercase;
-            font-family: 'Press Start 2P', monospace;
             letter-spacing: 1px;
             margin-top: 5px;
             line-height: 1.4;
@@ -68,6 +67,7 @@
             font-size: 12px;
         }
         
+        /* Instructions */
         .instructions {
             text-align: center;
             margin-bottom: 30px;
@@ -76,6 +76,7 @@
             line-height: 1.5;
         }
         
+        /* Stats Bar */
         .stats-bar {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -102,6 +103,7 @@
             text-transform: uppercase;
         }
         
+        /* Filter and Search Bar */
         .filter-bar {
             display: flex;
             justify-content: center;
@@ -151,7 +153,7 @@
             color: #000000;
         }
         
-        .search-clear {
+        .search-button {
             padding: 8px;
             background: #808080;
             color: #d3d3d3;
@@ -168,11 +170,12 @@
             justify-content: center;
         }
         
-        .search-clear:hover {
+        .search-button:hover {
             background: #2c2c2c;
             border-color: #2c2c2c;
         }
         
+        /* Filter Buttons */
         .filter-btn {
             padding: 10px 15px;
             background: #ede8d3;
@@ -197,7 +200,7 @@
             border-color: #5d4e37;
         }
         
-        /* Filter button colors for each media type */
+        /* Media Type Colors */
         .filter-btn[data-filter="books"] {
             background: #d4b896;
             color: #8b4513;
@@ -206,14 +209,11 @@
         
         .filter-btn[data-filter="books"]:hover {
             background: #c4a886;
-            color: #8b4513;
-            border-color: #8b4513;
         }
         
         .filter-btn[data-filter="books"].active {
             background: #8b4513;
             color: #d4b896;
-            border-color: #8b4513;
         }
         
         .filter-btn[data-filter="games"] {
@@ -224,14 +224,11 @@
         
         .filter-btn[data-filter="games"]:hover {
             background: #98b8dc;
-            color: #2e5984;
-            border-color: #2e5984;
         }
         
         .filter-btn[data-filter="games"].active {
             background: #2e5984;
             color: #a8c8ec;
-            border-color: #2e5984;
         }
         
         .filter-btn[data-filter="movies"] {
@@ -242,14 +239,11 @@
         
         .filter-btn[data-filter="movies"]:hover {
             background: #b892b8;
-            color: #663366;
-            border-color: #663366;
         }
         
         .filter-btn[data-filter="movies"].active {
             background: #663366;
             color: #c8a2c8;
-            border-color: #663366;
         }
         
         .filter-btn[data-filter="tv"] {
@@ -260,14 +254,11 @@
         
         .filter-btn[data-filter="tv"]:hover {
             background: #c49898;
-            color: #8b4545;
-            border-color: #8b4545;
         }
         
         .filter-btn[data-filter="tv"].active {
             background: #8b4545;
             color: #d4a8a8;
-            border-color: #8b4545;
         }
         
         .filter-btn[data-filter="albums"] {
@@ -278,16 +269,14 @@
         
         .filter-btn[data-filter="albums"]:hover {
             background: #a8c4a8;
-            color: #4a6741;
-            border-color: #4a6741;
         }
         
         .filter-btn[data-filter="albums"].active {
             background: #4a6741;
             color: #b8d4b8;
-            border-color: #4a6741;
         }
         
+        /* Media Grid */
         .media-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, 350px);
@@ -297,12 +286,12 @@
             align-items: start;
         }
         
+        /* Media Cards */
         .media-card {
             background: #e0e0e0;
             border: 3px solid #000;
             display: flex;
             flex-direction: column;
-            height: auto;
             width: 350px;
             transition: all 0.3s ease;
         }
@@ -312,264 +301,33 @@
             flex: 1;
         }
         
-        .comments-toggle {
-            padding: 10px 15px;
-            border-top: 2px solid;
-            background: rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 7px;
-            text-transform: uppercase;
-            color: #2c2416;
-            user-select: none;
-            transition: background 0.2s ease;
-        }
-        
-        .comments-toggle:hover {
-            background: rgba(0, 0, 0, 0.2);
-        }
-        
-        .comments-toggle-text {
-            font-weight: bold;
-        }
-        
-        .comments-arrow {
-            font-size: 10px;
-            transition: transform 0.3s ease;
-        }
-        
-        .comments-arrow.expanded {
-            transform: rotate(180deg);
-        }
-        
-        .comments-section {
-            padding: 15px;
-            border-top: 1px solid;
-            font-size: 7px;
-            display: none;
-            animation: slideDown 0.3s ease-out;
-        }
-        
-        .comments-section.expanded {
-            display: block;
-        }
-        
-        .comment {
-            background: rgba(255, 255, 255, 0.3);
-            border: 1px solid;
-            padding: 8px;
-            margin-bottom: 8px;
-            line-height: 1.3;
-        }
-        
-        .comment-author {
-            font-weight: bold;
-            color: #2c2416;
-            margin-bottom: 3px;
-            text-transform: uppercase;
-        }
-        
-        .comment-text {
-            color: #2c2416;
-        }
-        
-        .comment-form {
-            margin-top: 10px;
-        }
-        
-        .comment-input {
-            width: 100%;
-            padding: 5px;
-            font-family: 'Press Start 2P', monospace;
-            font-size: 6px;
-            border: 1px solid;
-            background: rgba(255, 255, 255, 0.5);
-            margin-bottom: 5px;
-            text-transform: uppercase;
-        }
-        
-        .comment-textarea {
-            width: 100%;
-            height: 40px;
-            padding: 5px;
-            font-family: 'Press Start 2P', monospace;
-            font-size: 6px;
-            border: 1px solid;
-            background: rgba(255, 255, 255, 0.5);
-            margin-bottom: 5px;
-            resize: none;
-        }
-        
-        .comment-submit {
-            width: 100%;
-            padding: 6px;
-            font-family: 'Press Start 2P', monospace;
-            font-size: 6px;
-            border: 1px solid;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            cursor: pointer;
-            text-transform: uppercase;
-        }
-        
-        .comment-submit:hover {
-            background: rgba(0, 0, 0, 0.9);
-        }
-        
-        .comment-submit:disabled {
-            background: rgba(0, 0, 0, 0.5);
-            cursor: not-allowed;
-        }
-        
-        /* Color-coded comment sections for each media type */
-        .media-card[data-type="book"] .comment {
-            border-color: #8b4513;
-        }
-        
-        .media-card[data-type="book"] .comment-input,
-        .media-card[data-type="book"] .comment-textarea {
-            border-color: #8b4513;
-        }
-        
-        .media-card[data-type="book"] .comment-submit {
-            border-color: #8b4513;
-        }
-        
-        .media-card[data-type="game"] .comment {
-            border-color: #2e5984;
-        }
-        
-        .media-card[data-type="game"] .comment-input,
-        .media-card[data-type="game"] .comment-textarea {
-            border-color: #2e5984;
-        }
-        
-        .media-card[data-type="game"] .comment-submit {
-            border-color: #2e5984;
-        }
-        
-        .media-card[data-type="movie"] .comment {
-            border-color: #663366;
-        }
-        
-        .media-card[data-type="movie"] .comment-input,
-        .media-card[data-type="movie"] .comment-textarea {
-            border-color: #663366;
-        }
-        
-        .media-card[data-type="movie"] .comment-submit {
-            border-color: #663366;
-        }
-        
-        .media-card[data-type="tv"] .comment {
-            border-color: #8b4545;
-        }
-        
-        .media-card[data-type="tv"] .comment-input,
-        .media-card[data-type="tv"] .comment-textarea {
-            border-color: #8b4545;
-        }
-        
-        .media-card[data-type="tv"] .comment-submit {
-            border-color: #8b4545;
-        }
-        
-        .media-card[data-type="album"] .comment {
-            border-color: #4a6741;
-        }
-        
-        .media-card[data-type="album"] .comment-input,
-        .media-card[data-type="album"] .comment-textarea {
-            border-color: #4a6741;
-        }
-        
-        .media-card[data-type="album"] .comment-submit {
-            border-color: #4a6741;
-        }
-        
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                max-height: 0;
-            }
-            to {
-                opacity: 1;
-                max-height: 500px;
-            }
-        }
-        
-        /* Book Color Palette - Warm browns/oranges */
+        /* Media Type Card Colors */
         .media-card[data-type="book"] {
             background: #d4b896;
             border-color: #8b4513;
         }
         
-        .media-card[data-type="book"] .media-cover {
-            border-color: #8b4513;
-        }
-        
-        .media-card[data-type="book"] .comments-toggle {
-            border-color: #8b4513;
-        }
-        
-        /* Game Color Palette - Cool blues/teals */
         .media-card[data-type="game"] {
             background: #a8c8ec;
             border-color: #2e5984;
         }
         
-        .media-card[data-type="game"] .media-cover {
-            border-color: #2e5984;
-        }
-        
-        .media-card[data-type="game"] .comments-toggle {
-            border-color: #2e5984;
-        }
-        
-        /* Movie Color Palette - Purple/lavender */
         .media-card[data-type="movie"] {
             background: #c8a2c8;
             border-color: #663366;
         }
         
-        .media-card[data-type="movie"] .media-cover {
-            border-color: #663366;
-        }
-        
-        .media-card[data-type="movie"] .comments-toggle {
-            border-color: #663366;
-        }
-        
-        /* TV Color Palette - Muted red */
         .media-card[data-type="tv"] {
             background: #d4a8a8;
             border-color: #8b4545;
         }
         
-        .media-card[data-type="tv"] .media-cover {
-            border-color: #8b4545;
-        }
-        
-        .media-card[data-type="tv"] .comments-toggle {
-            border-color: #8b4545;
-        }
-        
-        /* Album Color Palette - Green/sage */
         .media-card[data-type="album"] {
             background: #b8d4b8;
             border-color: #4a6741;
         }
         
-        .media-card[data-type="album"] .media-cover {
-            border-color: #4a6741;
-        }
-        
-        .media-card[data-type="album"] .comments-toggle {
-            border-color: #4a6741;
-        }
-        
+        /* Cover Section */
         .media-cover-section {
             width: 25%;
             min-width: 100px;
@@ -580,7 +338,7 @@
         
         .media-cover {
             width: 100%;
-            border: 2px solid #000;
+            border: 2px solid;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -589,27 +347,26 @@
             text-align: center;
             overflow: hidden;
             background: #333;
-            position: relative;
         }
         
-        /* Different aspect ratios for different media types */
         .media-card[data-type="book"] .media-cover,
         .media-card[data-type="game"] .media-cover,
         .media-card[data-type="movie"] .media-cover,
         .media-card[data-type="tv"] .media-cover {
-            height: 120px; /* Rectangular for books, games, movies, TV */
+            height: 120px;
+            border-color: inherit;
         }
         
         .media-card[data-type="album"] .media-cover {
-            height: 100px; /* Square for albums */
+            height: 100px;
             aspect-ratio: 1 / 1;
+            border-color: inherit;
         }
         
         .media-cover img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block;
         }
         
         .error-message {
@@ -620,6 +377,7 @@
             padding: 5px;
         }
         
+        /* Content Section */
         .media-content-section {
             width: 75%;
             display: flex;
@@ -661,10 +419,6 @@
             font-family: monospace;
         }
         
-        .star.empty {
-            color: #c4b5a0;
-        }
-        
         .media-review {
             font-size: 8px;
             line-height: 1.4;
@@ -679,6 +433,135 @@
             text-transform: uppercase;
         }
         
+        /* Comments Section */
+        .comments-toggle {
+            padding: 10px 15px;
+            border-top: 2px solid;
+            background: rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 7px;
+            text-transform: uppercase;
+            color: #2c2416;
+            user-select: none;
+            transition: background 0.2s ease;
+            border-color: inherit;
+        }
+        
+        .comments-toggle:hover {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .comments-toggle-text {
+            font-weight: bold;
+        }
+        
+        .comments-arrow {
+            font-size: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .comments-arrow.expanded {
+            transform: rotate(180deg);
+        }
+        
+        .comments-section {
+            padding: 15px;
+            border-top: 1px solid;
+            display: none;
+            animation: slideDown 0.3s ease-out;
+            border-color: inherit;
+        }
+        
+        .comments-section.expanded {
+            display: block;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                max-height: 0;
+            }
+            to {
+                opacity: 1;
+                max-height: 500px;
+            }
+        }
+        
+        .comment {
+            background: rgba(255, 255, 255, 0.3);
+            border: 1px solid;
+            padding: 8px;
+            margin-bottom: 8px;
+            line-height: 1.3;
+            border-color: inherit;
+        }
+        
+        .comment-author {
+            font-weight: bold;
+            color: #2c2416;
+            margin-bottom: 3px;
+            text-transform: uppercase;
+            font-size: 7px;
+        }
+        
+        .comment-text {
+            color: #2c2416;
+            font-size: 7px;
+        }
+        
+        .comment-form {
+            margin-top: 10px;
+        }
+        
+        .comment-input,
+        .comment-textarea {
+            width: 100%;
+            padding: 5px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 6px;
+            border: 1px solid;
+            background: rgba(255, 255, 255, 0.5);
+            margin-bottom: 5px;
+            outline: none;
+            border-color: inherit;
+        }
+        
+        .comment-input {
+            text-transform: uppercase;
+        }
+        
+        .comment-textarea {
+            height: 40px;
+            resize: none;
+        }
+        
+        .comment-submit {
+            width: 100%;
+            padding: 6px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 6px;
+            border: 1px solid;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background 0.2s ease;
+            border-color: inherit;
+        }
+        
+        .comment-submit:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+        
+        .comment-submit:disabled {
+            background: rgba(0, 0, 0, 0.5);
+            cursor: not-allowed;
+        }
+        
+        /* Add Media Button */
         .add-media-btn {
             position: fixed;
             bottom: 30px;
@@ -702,10 +585,10 @@
             border-color: #4a3b2a;
         }
         
+        /* Responsive Design */
         @media (max-width: 768px) {
             .media-grid {
                 grid-template-columns: repeat(auto-fit, 320px);
-                justify-content: center;
             }
             
             .media-card {
@@ -765,7 +648,6 @@
             
             .media-grid {
                 grid-template-columns: 300px;
-                justify-content: center;
             }
             
             .media-card {
@@ -793,9 +675,10 @@
                 padding: 6px 10px;
             }
             
-            .search-clear {
-                padding: 6px 10px;
-                font-size: 6px;
+            .search-button {
+                width: 30px;
+                height: 30px;
+                font-size: 10px;
             }
         }
     </style>
@@ -846,32 +729,32 @@
             
             <div class="search-container">
                 <input type="text" class="search-input" id="searchInput" placeholder="Search media...">
-                <button class="search-clear" id="searchButton">⚲</button>
+                <button class="search-button" id="searchButton">⚲</button>
             </div>
         </div>
         
         <div class="media-grid" id="mediaGrid">
-            <!-- Reviews will be generated here -->
+            <!-- Media cards will be generated here -->
         </div>
         
         <button class="add-media-btn">+</button>
-        
     </div>
     
     <script>
-        // Media reviews data (with sample comments)
+        // Configuration
+        const API_BASE = 'http://localhost:3000/api';
+        
+        // Media reviews data
         const mediaReviews = [
             {
                 title: "Hitchhiker's Guide to Galaxy",
                 coverUrl: "hitchhikers-guide.jpg",
                 rating: 4.5,
                 review: "Absolutely hilarious and mind-bending! Adams' wit is unmatched and the absurdist humor had me laughing out loud. Perfect blend of sci-fi and comedy that never takes itself too seriously.",
-                date: "Watched: Jul 15th",
+                date: "Read: Jul 15th",
                 dateObj: new Date(2025, 6, 15),
                 type: "book",
-                comments: [
-                    { author: "SciFiFan42", text: "Totally agree! The humor is timeless." }
-                ]
+                comments: []
             },
             {
                 title: "Super Metroid",
@@ -891,10 +774,7 @@
                 date: "Watched: Jul 28th",
                 dateObj: new Date(2025, 6, 28),
                 type: "movie",
-                comments: [
-                    { author: "MovieBuff", text: "Classic! Changed everything about action films." },
-                    { author: "CinemaLover", text: "The sequels don't hold up as well though." }
-                ]
+                comments: []
             },
             {
                 title: "OK Computer",
@@ -911,7 +791,7 @@
                 coverUrl: "neuromancer.jpg",
                 rating: 2.5,
                 review: "The cyberpunk bible! Gibson's vision feels incredibly prescient with today's digital landscape. Dense prose takes some getting used to but the phenomenal world-building makes it worth the effort.",
-                date: "Finished: Aug 3rd",
+                date: "Read: Aug 3rd",
                 dateObj: new Date(2025, 7, 3),
                 type: "book",
                 comments: []
@@ -928,7 +808,11 @@
             }
         ];
 
-        // Calculate stats
+        // Global variables
+        let currentFilter = 'all';
+        let currentSearchTerm = '';
+
+        // Utility Functions
         function calculateStats(reviews) {
             const total = reviews.length;
             const avgRating = total > 0 ? (reviews.reduce((sum, review) => sum + review.rating, 0) / total).toFixed(1) : 0;
@@ -946,7 +830,14 @@
             return { total, avgRating, thisMonth, fiveStars };
         }
 
-        // Animate counter
+        function updateStats(reviews) {
+            const stats = calculateStats(reviews);
+            document.getElementById('totalCount').textContent = stats.total;
+            document.getElementById('avgRating').textContent = stats.avgRating;
+            document.getElementById('thisMonth').textContent = stats.thisMonth;
+            document.getElementById('fiveStars').textContent = stats.fiveStars;
+        }
+
         function animateCounter(targetNumber) {
             const counterElement = document.getElementById('mediaCounter');
             let currentNumber = 0;
@@ -956,65 +847,47 @@
             function updateCounter() {
                 const elapsed = Date.now() - startTime;
                 const progress = Math.min(elapsed / duration, 1);
-                
                 const easeOutQuart = 1 - Math.pow(1 - progress, 4);
                 currentNumber = Math.floor(easeOutQuart * targetNumber);
                 
-                const formattedNumber = currentNumber.toString().padStart(7, '0');
-                counterElement.textContent = formattedNumber;
+                counterElement.textContent = currentNumber.toString().padStart(7, '0');
                 
                 if (progress < 1) {
                     requestAnimationFrame(updateCounter);
                 }
             }
-            
             updateCounter();
         }
 
-        // Update stats display
-        function updateStats(reviews) {
-            const stats = calculateStats(reviews);
-            
-            document.getElementById('totalCount').textContent = stats.total;
-            document.getElementById('avgRating').textContent = stats.avgRating;
-            document.getElementById('thisMonth').textContent = stats.thisMonth;
-            document.getElementById('fiveStars').textContent = stats.fiveStars;
-        }
-
-        // Generate star rating with colors and half-stars
+        // Star Rating System
         function generateStars(rating) {
             let starsHtml = '';
-            
-            // Dramatic color scale from red to green based on rating
             let starColor;
-            if (rating >= 4.5) starColor = '#00FF00'; // Bright Green - Excellent
-            else if (rating >= 3.5) starColor = '#32CD32'; // Lime Green - Good  
-            else if (rating >= 2.5) starColor = '#FFD700'; // Gold - Average
-            else if (rating >= 1.5) starColor = '#FF4500'; // Red Orange - Below Average
-            else starColor = '#FF0000'; // Bright Red - Poor
+            
+            if (rating >= 4.5) starColor = '#00FF00';
+            else if (rating >= 3.5) starColor = '#32CD32';
+            else if (rating >= 2.5) starColor = '#FFD700';
+            else if (rating >= 1.5) starColor = '#FF4500';
+            else starColor = '#FF0000';
             
             for (let i = 1; i <= 5; i++) {
                 if (i <= Math.floor(rating)) {
-                    // Full star
                     starsHtml += `<span class="star" style="color: ${starColor}">★</span>`;
                 } else if (i === Math.ceil(rating) && rating % 1 === 0.5) {
-                    // Half star - create a span with half filled
                     starsHtml += `<span class="star" style="position: relative; display: inline-block;">
                         <span style="color: #c4b5a0;">★</span>
                         <span style="position: absolute; left: 0; top: 0; width: 50%; overflow: hidden; color: ${starColor};">★</span>
                     </span>`;
                 } else {
-                    // Empty star
                     starsHtml += '<span class="star" style="color: #c4b5a0;">★</span>';
                 }
             }
             return starsHtml;
         }
 
-        // Create image element with error handling
-        function createImageElement(coverUrl, title, type) {
+        // Image Handling
+        function createImageElement(coverUrl, title) {
             const imagePath = `reviews/${coverUrl}`;
-            
             return `<img src="${imagePath}" alt="${title}" 
                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="error-message" style="display: none;">
@@ -1022,10 +895,7 @@
                     </div>`;
         }
 
-        // Simple server-based comment system
-        const API_BASE = 'http://localhost:3000/api';
-
-        // Load comments from server for each media item
+        // Comment System
         async function loadCommentsFromServer() {
             try {
                 for (const review of mediaReviews) {
@@ -1044,43 +914,29 @@
                 }
             } catch (error) {
                 console.error('Failed to load comments:', error);
-                // Fallback to empty comments
                 mediaReviews.forEach(review => {
                     review.comments = review.comments || [];
                 });
             }
         }
 
-        // Add comment to server
         async function addCommentToServer(mediaTitle, author, text) {
-            try {
-                const response = await fetch(`${API_BASE}/comments`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        mediaTitle,
-                        author,
-                        text
-                    })
-                });
-                
-                if (!response.ok) {
-                    throw new Error('Failed to add comment');
-                }
-                
-                return await response.json();
-            } catch (error) {
-                console.error('Failed to add comment:', error);
-                throw error;
+            const response = await fetch(`${API_BASE}/comments`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mediaTitle, author, text })
+            });
+            
+            if (!response.ok) {
+                throw new Error('Failed to add comment');
             }
+            
+            return await response.json();
         }
 
-        // Simple comment system with server
         function createCommentsSection(media, mediaIndex) {
-            const existingComments = media.comments || [];
-            const commentsHtml = existingComments.map(comment => `
+            const comments = media.comments || [];
+            const commentsHtml = comments.map(comment => `
                 <div class="comment">
                     <div class="comment-author">${comment.author}</div>
                     <div class="comment-text">${comment.text}</div>
@@ -1089,7 +945,7 @@
             
             return `
                 <div class="comments-toggle" onclick="toggleComments(${mediaIndex})">
-                    <div class="comments-toggle-text">Comments (${existingComments.length})</div>
+                    <div class="comments-toggle-text">Comments (${comments.length})</div>
                     <div class="comments-arrow">▼</div>
                 </div>
                 <div class="comments-section" id="comments-${mediaIndex}">
@@ -1103,7 +959,6 @@
             `;
         }
 
-        // Add comment function
         async function addComment(mediaIndex) {
             const card = document.querySelectorAll('.media-card')[mediaIndex];
             const nameInput = card.querySelector('.comment-input');
@@ -1112,54 +967,45 @@
             const name = nameInput.value.trim();
             const text = textInput.value.trim();
             
-            if (name && text) {
-                try {
-                    // Show loading state
-                    const submitButton = card.querySelector('.comment-submit');
-                    const originalText = submitButton.textContent;
-                    submitButton.textContent = 'POSTING...';
-                    submitButton.disabled = true;
-                    
-                    // Get the media title
-                    const currentReviews = getCurrentFilteredReviews();
-                    const mediaTitle = currentReviews[mediaIndex].title;
-                    
-                    // Add to server
-                    const newComment = await addCommentToServer(mediaTitle, name, text);
-                    
-                    // Add to local data
-                    const actualMediaIndex = mediaReviews.findIndex(review => review.title === mediaTitle);
-                    mediaReviews[actualMediaIndex].comments.push({
-                        author: newComment.author,
-                        text: newComment.text,
-                        timestamp: newComment.timestamp,
-                        id: newComment.id
-                    });
-                    
-                    // Clear inputs
-                    nameInput.value = '';
-                    textInput.value = '';
-                    
-                    // Reset button
-                    submitButton.textContent = originalText;
-                    submitButton.disabled = false;
-                    
-                    // Re-render to show new comment
-                    applyFiltersAndSearch();
-                    
-                } catch (error) {
-                    alert('Failed to add comment. Make sure the server is running!');
-                    // Reset button on error
-                    const submitButton = card.querySelector('.comment-submit');
-                    submitButton.textContent = 'Post Comment';
-                    submitButton.disabled = false;
-                }
-            } else {
+            if (!name || !text) {
                 alert('Please enter both name and comment!');
+                return;
+            }
+            
+            try {
+                const submitButton = card.querySelector('.comment-submit');
+                const originalText = submitButton.textContent;
+                submitButton.textContent = 'POSTING...';
+                submitButton.disabled = true;
+                
+                const currentReviews = getCurrentFilteredReviews();
+                const mediaTitle = currentReviews[mediaIndex].title;
+                
+                const newComment = await addCommentToServer(mediaTitle, name, text);
+                
+                const actualMediaIndex = mediaReviews.findIndex(review => review.title === mediaTitle);
+                mediaReviews[actualMediaIndex].comments.push({
+                    author: newComment.author,
+                    text: newComment.text,
+                    timestamp: newComment.timestamp,
+                    id: newComment.id
+                });
+                
+                nameInput.value = '';
+                textInput.value = '';
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+                
+                applyFiltersAndSearch();
+                
+            } catch (error) {
+                alert('Failed to add comment. Make sure the server is running!');
+                const submitButton = card.querySelector('.comment-submit');
+                submitButton.textContent = 'Post Comment';
+                submitButton.disabled = false;
             }
         }
 
-        // Toggle comments dropdown
         function toggleComments(mediaIndex) {
             const commentsSection = document.getElementById(`comments-${mediaIndex}`);
             const arrow = document.querySelectorAll('.comments-toggle')[mediaIndex].querySelector('.comments-arrow');
@@ -1173,14 +1019,14 @@
             }
         }
 
-        // Create media card (updated for simple comments)
+        // Media Card Creation
         function createMediaCard(media, index) {
             return `
                 <div class="media-card" data-type="${media.type}">
                     <div class="media-card-content">
                         <div class="media-cover-section">
                             <div class="media-cover">
-                                ${createImageElement(media.coverUrl, media.title, media.type)}
+                                ${createImageElement(media.coverUrl, media.title)}
                             </div>
                         </div>
                         <div class="media-content-section">
@@ -1190,9 +1036,7 @@
                                 ${generateStars(media.rating)}
                             </div>
                             <div class="dividing-line rating-below"></div>
-                            <div class="media-review">
-                                ${media.review}
-                            </div>
+                            <div class="media-review">${media.review}</div>
                             <div class="dividing-line"></div>
                             <div class="media-date">${media.date}</div>
                         </div>
@@ -1202,36 +1046,13 @@
             `;
         }
 
-        // Render all cards (simplified for Giscus)
         function renderMediaCards(reviews = mediaReviews) {
             const mediaGrid = document.getElementById('mediaGrid');
             mediaGrid.innerHTML = reviews.map((media, index) => createMediaCard(media, index)).join('');
             updateStats(reviews);
         }
 
-        // Search functionality - click to search
-        let currentFilter = 'all';
-        let currentSearchTerm = '';
-
-        function applyFiltersAndSearch() {
-            let filteredReviews = mediaReviews;
-            
-            // Apply type filter
-            if (currentFilter !== 'all') {
-                filteredReviews = filteredReviews.filter(media => media.type === currentFilter);
-            }
-            
-            // Apply search filter (titles only)
-            if (currentSearchTerm) {
-                filteredReviews = filteredReviews.filter(media => 
-                    media.title.toLowerCase().includes(currentSearchTerm.toLowerCase())
-                );
-            }
-            
-            renderMediaCards(filteredReviews);
-        }
-
-        // Get current filtered reviews (simplified for Giscus)
+        // Filtering and Search
         function getCurrentFilteredReviews() {
             let filteredReviews = mediaReviews;
             
@@ -1248,58 +1069,70 @@
             return filteredReviews;
         }
 
-        // Search input functionality - click to search
-        const searchInput = document.getElementById('searchInput');
-        const searchButton = document.getElementById('searchButton');
-        
-        if (searchInput && searchButton) {
-            // Search when button is clicked
-            searchButton.addEventListener('click', () => {
-                currentSearchTerm = searchInput.value;
-                applyFiltersAndSearch();
-            });
+        function applyFiltersAndSearch() {
+            const filteredReviews = getCurrentFilteredReviews();
+            renderMediaCards(filteredReviews);
+        }
+
+        // Event Listeners
+        function initializeEventListeners() {
+            // Search functionality
+            const searchInput = document.getElementById('searchInput');
+            const searchButton = document.getElementById('searchButton');
             
-            // Also search when Enter key is pressed
-            searchInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
+            if (searchButton) {
+                searchButton.addEventListener('click', () => {
                     currentSearchTerm = searchInput.value;
                     applyFiltersAndSearch();
-                }
+                });
+            }
+            
+            if (searchInput) {
+                searchInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        currentSearchTerm = searchInput.value;
+                        applyFiltersAndSearch();
+                    }
+                });
+            }
+            
+            // Filter functionality
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentFilter = btn.getAttribute('data-filter');
+                    applyFiltersAndSearch();
+                });
             });
+            
+            // Add media button
+            const addButton = document.querySelector('.add-media-btn');
+            if (addButton) {
+                addButton.addEventListener('click', () => {
+                    alert('To add a new review, add an object to the mediaReviews array in the code!');
+                });
+            }
         }
 
-        // Filter functionality (updated to work with search)
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                
-                currentFilter = btn.getAttribute('data-filter');
-                applyFiltersAndSearch();
-            });
-        });
-        
-        // Add button with error checking
-        const addButton = document.querySelector('.add-media-btn');
-        if (addButton) {
-            addButton.addEventListener('click', () => {
-                alert('To add a new review, just add an object to the mediaReviews array with a coverUrl filename!');
-            });
-        }
-
-        // Initialize everything
+        // Application Initialization
         async function initializeApp() {
-            await loadCommentsFromServer(); // Load shared comments from server
+            try {
+                await loadCommentsFromServer();
+            } catch (error) {
+                console.log('Server not available, running without comments');
+            }
+            
             renderMediaCards();
+            initializeEventListeners();
             
             setTimeout(() => {
                 animateCounter(mediaReviews.length);
             }, 500);
         }
 
-        // Start the app
+        // Start the application
         initializeApp();
     </script>
 </body>
