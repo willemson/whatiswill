@@ -561,11 +561,6 @@
             cursor: not-allowed;
         }
         
-        .add-media-btn:hover {
-            background: #4a3b2a;
-            border-color: #4a3b2a;
-        }
-        
         /* Responsive Design */
         @media (max-width: 768px) {
             .media-grid {
@@ -736,8 +731,6 @@
         <div class="media-grid" id="mediaGrid">
             <!-- Media cards will be generated here -->
         </div>
-        
-        <button class="add-media-btn">+</button>
     </div>
     
     <script>
@@ -747,15 +740,15 @@
         // Media reviews data
         const mediaReviews = [
              {
-                title: "The Fantastic Four: First Steps (2025)",
-                coverUrl: "fan4.jpg",
-                rating: 3.5,
-                review: "FINALLY MARVEL DOES SOMETHING DIFFERENT! I'm at a point where I dont even know what phase we're in but im just glad we finally get to see THE THING!!!! The design was perfect and he even has a rock beard like cmon. Still has a lot of the stereotypical marvel schlop factors but the retro-futuristic design of the movie really saved it for me. Shoutout to the art department cause they really killed it with this one.",
-                date: "Watched: Aug 9th",
-                dateObj: new Date(2025, 8, 9),
-                type: "movie",
-                comments: []
-            },
+                 title: "The Fantastic Four: First Steps (2025)",
+                 coverUrl: "fan4.jpg",
+                 rating: 3.5,
+                 review: "FINALLY MARVEL DOES SOMETHING DIFFERENT! I'm at a point where I dont even know what phase we're in but im just glad we finally get to see THE THING!!!! The design was perfect and he even has a rock beard like cmon. Still has a lot of the stereotypical marvel schlop factors but the retro-futuristic design of the movie really saved it for me. Shoutout to the art department cause they really killed it with this one.",
+                 date: "Watched: Aug 9th",
+                 dateObj: new Date(2025, 8, 9),
+                 type: "movie",
+                 comments: []
+             },
             {
                 title: "Super Metroid",
                 coverUrl: "super-metroid.jpg",
@@ -1126,6 +1119,7 @@
                     });
                 });
             }, 100);
+        }
 
         // Application Initialization
         async function initializeApp() {
@@ -1148,5 +1142,3 @@
     </script>
 </body>
 </html>
-
-
