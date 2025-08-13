@@ -201,47 +201,47 @@
         }
         
         /* Media Type Colors */
-        .filter-btn[data-filter="books"] {
+        .filter-btn[data-filter="book"] {
             background: #d4b896;
             color: #8b4513;
             border-color: #8b4513;
         }
         
-        .filter-btn[data-filter="books"]:hover {
+        .filter-btn[data-filter="book"]:hover {
             background: #c4a886;
         }
         
-        .filter-btn[data-filter="books"].active {
+        .filter-btn[data-filter="book"].active {
             background: #8b4513;
             color: #d4b896;
         }
         
-        .filter-btn[data-filter="games"] {
+        .filter-btn[data-filter="game"] {
             background: #a8c8ec;
             color: #2e5984;
             border-color: #2e5984;
         }
         
-        .filter-btn[data-filter="games"]:hover {
+        .filter-btn[data-filter="game"]:hover {
             background: #98b8dc;
         }
         
-        .filter-btn[data-filter="games"].active {
+        .filter-btn[data-filter="game"].active {
             background: #2e5984;
             color: #a8c8ec;
         }
         
-        .filter-btn[data-filter="movies"] {
+        .filter-btn[data-filter="movie"] {
             background: #c8a2c8;
             color: #663366;
             border-color: #663366;
         }
         
-        .filter-btn[data-filter="movies"]:hover {
+        .filter-btn[data-filter="movie"]:hover {
             background: #b892b8;
         }
         
-        .filter-btn[data-filter="movies"].active {
+        .filter-btn[data-filter="movie"].active {
             background: #663366;
             color: #c8a2c8;
         }
@@ -261,17 +261,17 @@
             color: #d4a8a8;
         }
         
-        .filter-btn[data-filter="albums"] {
+        .filter-btn[data-filter="album"] {
             background: #b8d4b8;
             color: #4a6741;
             border-color: #4a6741;
         }
         
-        .filter-btn[data-filter="albums"]:hover {
+        .filter-btn[data-filter="album"]:hover {
             background: #a8c4a8;
         }
         
-        .filter-btn[data-filter="albums"].active {
+        .filter-btn[data-filter="album"].active {
             background: #4a6741;
             color: #b8d4b8;
         }
@@ -766,13 +766,13 @@
         // Media reviews data
         const mediaReviews = [
             {
-                title: "The Fantastic Four: First Steps (2025)",
-                coverUrl: "fan4.jpg",
-                rating: 3.5,
-                review: "FINALLY MARVEL DOES SOMETHING DIFFERENT! I'm at a point where I dont even know what phase we're in but im just glad we finally get to see THE THING!!!! The design was perfect and he even has a rock beard like cmon. Still has a lot of the stereotypical marvel schlop factors but the retro-futuristic design of the movie really saved it for me. Shoutout to the art department cause they really killed it with this one.",
-                date: "Watched: Aug 9th",
-                dateObj: new Date(2025, 8, 9),
-                type: "movie",
+                title: "Hitchhiker's Guide to Galaxy",
+                coverUrl: "hitchhikers-guide.jpg",
+                rating: 4.5,
+                review: "Absolutely hilarious and mind-bending! Adams' wit is unmatched and the absurdist humor had me laughing out loud. Perfect blend of sci-fi and comedy that never takes itself too seriously.",
+                date: "Read: Jul 15th",
+                dateObj: new Date(2025, 6, 15),
+                type: "book",
                 comments: []
             },
             {
@@ -906,7 +906,7 @@
 
         // Image Handling
         function createImageElement(coverUrl, title) {
-            const imagePath = `review/${coverUrl}`;
+            const imagePath = `reviews/${coverUrl}`;
             return `<img src="${imagePath}" alt="${title}" 
                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="error-message" style="display: none;">
@@ -1075,8 +1075,13 @@
         function getCurrentFilteredReviews() {
             let filteredReviews = mediaReviews;
             
+            console.log('Filtering with:', { currentFilter, currentSearchTerm }); // Debug log
+            
             if (currentFilter !== 'all') {
-                filteredReviews = filteredReviews.filter(media => media.type === currentFilter);
+                filteredReviews = filteredReviews.filter(media => {
+                    console.log(`Checking ${media.title}: type=${media.type}, matches=${media.type === currentFilter}`); // Debug log
+                    return media.type === currentFilter;
+                });
             }
             
             if (currentSearchTerm) {
@@ -1085,6 +1090,7 @@
                 );
             }
             
+            console.log('Filtered results:', filteredReviews.length); // Debug log
             return filteredReviews;
         }
 
@@ -1115,16 +1121,30 @@
                 });
             }
             
-            // Filter functionality
-            const filterBtns = document.querySelectorAll('.filter-btn');
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    filterBtns.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    currentFilter = btn.getAttribute('data-filter');
-                    applyFiltersAndSearch();
+            // Filter functionality - Initialize after DOM is ready
+            setTimeout(() => {
+                const filterBtns = document.querySelectorAll('.filter-btn');
+                console.log('Found filter buttons:', filterBtns.length); // Debug log
+                
+                filterBtns.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        console.log('Filter clicked:', btn.getAttribute('data-filter')); // Debug log
+                        
+                        // Remove active class from all buttons
+                        filterBtns.forEach(b => b.classList.remove('active'));
+                        
+                        // Add active class to clicked button
+                        btn.classList.add('active');
+                        
+                        // Update current filter
+                        currentFilter = btn.getAttribute('data-filter');
+                        console.log('Current filter set to:', currentFilter); // Debug log
+                        
+                        // Apply filters
+                        applyFiltersAndSearch();
+                    });
                 });
-            });
+            }, 100);
             
             // Add media button
             const addButton = document.querySelector('.add-media-btn');
@@ -1156,6 +1176,3 @@
     </script>
 </body>
 </html>
-
-
-
