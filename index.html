@@ -1087,25 +1087,33 @@
             }
         }
 
-        // GitHub Issues API for comments
+        // GitHub Issues API for comments (Fine-grained token compatible)
         const GITHUB_CONFIG = {
-            owner: 'willemson',  // Replace with your GitHub username
+            owner: 'willemson',             // Your GitHub username
             repo: 'whatiswill',         // Replace with your repository name
-            token: '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'      // Replace with your GitHub Personal Access Token
+            token: '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' // Replace with your fine-grained token (starts with github_pat_)
         };
+
+        // Helper function to get headers for fine-grained token
+        function getGitHubHeaders() {
+            return {
+                'Authorization': `Bearer ${GITHUB_CONFIG.token}`,
+                'Accept': 'application/vnd.github+json',
+                'X-GitHub-Api-Version': '2022-11-28'
+            };
+        }
 
         // Load comments from GitHub Issues
         async function loadCommentsFromGitHub() {
             try {
                 // Get all issues (each media item has its own issue)
                 const response = await fetch(`https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/issues?state=all&labels=comment`, {
-                    headers: {
-                        'Authorization': `token ${GITHUB_CONFIG.token}`,
-                        'Accept': 'application/vnd.github.v3+json'
-                    }
+                    headers: getGitHubHeaders()
                 });
                 
                 if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('GitHub API response:', response.status, errorText);
                     throw new Error(`GitHub API error: ${response.status}`);
                 }
                 
@@ -1116,10 +1124,7 @@
                     const issue = issues.find(issue => issue.title === `Comments for: ${review.title}`);
                     if (issue) {
                         const commentsResponse = await fetch(issue.comments_url, {
-                            headers: {
-                                'Authorization': `token ${GITHUB_CONFIG.token}`,
-                                'Accept': 'application/vnd.github.v3+json'
-                            }
+                            headers: getGitHubHeaders()
                         });
                         
                         if (commentsResponse.ok) {
@@ -1149,10 +1154,7 @@
             try {
                 // First, try to find existing issue
                 const searchResponse = await fetch(`https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/issues?state=all&labels=comment`, {
-                    headers: {
-                        'Authorization': `token ${GITHUB_CONFIG.token}`,
-                        'Accept': 'application/vnd.github.v3+json'
-                    }
+                    headers: getGitHubHeaders()
                 });
                 
                 if (searchResponse.ok) {
@@ -1167,8 +1169,7 @@
                 const createResponse = await fetch(`https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/issues`, {
                     method: 'POST',
                     headers: {
-                        'Authorization': `token ${GITHUB_CONFIG.token}`,
-                        'Accept': 'application/vnd.github.v3+json',
+                        ...getGitHubHeaders(),
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
@@ -1179,6 +1180,8 @@
                 });
                 
                 if (!createResponse.ok) {
+                    const errorText = await createResponse.text();
+                    console.error('Failed to create issue:', createResponse.status, errorText);
                     throw new Error(`Failed to create issue: ${createResponse.status}`);
                 }
                 
@@ -1197,8 +1200,7 @@
                 const response = await fetch(`https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/issues/${issue.number}/comments`, {
                     method: 'POST',
                     headers: {
-                        'Authorization': `token ${GITHUB_CONFIG.token}`,
-                        'Accept': 'application/vnd.github.v3+json',
+                        ...getGitHubHeaders(),
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
@@ -1207,6 +1209,8 @@
                 });
                 
                 if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('Failed to add comment:', response.status, errorText);
                     throw new Error(`Failed to add comment: ${response.status}`);
                 }
                 
@@ -1405,5 +1409,3 @@
     </script>
 </body>
 </html>
-
-
