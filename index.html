@@ -356,9 +356,137 @@
             display: block;
         }
         
-        .giscus-container {
+        .comment {
+            background: rgba(255, 255, 255, 0.3);
+            border: 1px solid;
+            padding: 8px;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        
+        .comment-author {
+            font-weight: bold;
+            color: #2c2416;
+            margin-bottom: 3px;
+            text-transform: uppercase;
+        }
+        
+        .comment-text {
+            color: #2c2416;
+        }
+        
+        .comment-form {
             margin-top: 10px;
-            min-height: 100px;
+        }
+        
+        .comment-input {
+            width: 100%;
+            padding: 5px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 6px;
+            border: 1px solid;
+            background: rgba(255, 255, 255, 0.5);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        
+        .comment-textarea {
+            width: 100%;
+            height: 40px;
+            padding: 5px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 6px;
+            border: 1px solid;
+            background: rgba(255, 255, 255, 0.5);
+            margin-bottom: 5px;
+            resize: none;
+        }
+        
+        .comment-submit {
+            width: 100%;
+            padding: 6px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 6px;
+            border: 1px solid;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        
+        .comment-submit:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+        
+        .comment-submit:disabled {
+            background: rgba(0, 0, 0, 0.5);
+            cursor: not-allowed;
+        }
+        
+        /* Color-coded comment sections for each media type */
+        .media-card[data-type="book"] .comment {
+            border-color: #8b4513;
+        }
+        
+        .media-card[data-type="book"] .comment-input,
+        .media-card[data-type="book"] .comment-textarea {
+            border-color: #8b4513;
+        }
+        
+        .media-card[data-type="book"] .comment-submit {
+            border-color: #8b4513;
+        }
+        
+        .media-card[data-type="game"] .comment {
+            border-color: #2e5984;
+        }
+        
+        .media-card[data-type="game"] .comment-input,
+        .media-card[data-type="game"] .comment-textarea {
+            border-color: #2e5984;
+        }
+        
+        .media-card[data-type="game"] .comment-submit {
+            border-color: #2e5984;
+        }
+        
+        .media-card[data-type="movie"] .comment {
+            border-color: #663366;
+        }
+        
+        .media-card[data-type="movie"] .comment-input,
+        .media-card[data-type="movie"] .comment-textarea {
+            border-color: #663366;
+        }
+        
+        .media-card[data-type="movie"] .comment-submit {
+            border-color: #663366;
+        }
+        
+        .media-card[data-type="tv"] .comment {
+            border-color: #8b4545;
+        }
+        
+        .media-card[data-type="tv"] .comment-input,
+        .media-card[data-type="tv"] .comment-textarea {
+            border-color: #8b4545;
+        }
+        
+        .media-card[data-type="tv"] .comment-submit {
+            border-color: #8b4545;
+        }
+        
+        .media-card[data-type="album"] .comment {
+            border-color: #4a6741;
+        }
+        
+        .media-card[data-type="album"] .comment-input,
+        .media-card[data-type="album"] .comment-textarea {
+            border-color: #4a6741;
+        }
+        
+        .media-card[data-type="album"] .comment-submit {
+            border-color: #4a6741;
         }
         
         @keyframes slideDown {
@@ -731,7 +859,7 @@
     </div>
     
     <script>
-        // Media reviews data (simplified for Giscus)
+        // Media reviews data (with sample comments)
         const mediaReviews = [
             {
                 title: "Hitchhiker's Guide to Galaxy",
@@ -740,7 +868,10 @@
                 review: "Absolutely hilarious and mind-bending! Adams' wit is unmatched and the absurdist humor had me laughing out loud. Perfect blend of sci-fi and comedy that never takes itself too seriously.",
                 date: "Watched: Jul 15th",
                 dateObj: new Date(2025, 6, 15),
-                type: "book"
+                type: "book",
+                comments: [
+                    { author: "SciFiFan42", text: "Totally agree! The humor is timeless." }
+                ]
             },
             {
                 title: "Super Metroid",
@@ -749,7 +880,8 @@
                 review: "Masterpiece of game design! Atmospheric exploration, tight controls, and incredible soundtrack. One of the best games ever made that still holds up perfectly today.",
                 date: "Finished: Jul 22nd",
                 dateObj: new Date(2025, 6, 22),
-                type: "game"
+                type: "game",
+                comments: []
             },
             {
                 title: "The Matrix",
@@ -758,7 +890,11 @@
                 review: "Revolutionary filmmaking that changed action movies forever. Deep philosophical themes and groundbreaking effects make this a classic. Minor pacing issues in the middle act.",
                 date: "Watched: Jul 28th",
                 dateObj: new Date(2025, 6, 28),
-                type: "movie"
+                type: "movie",
+                comments: [
+                    { author: "MovieBuff", text: "Classic! Changed everything about action films." },
+                    { author: "CinemaLover", text: "The sequels don't hold up as well though." }
+                ]
             },
             {
                 title: "OK Computer",
@@ -767,7 +903,8 @@
                 review: "Haunting meditation on technology and alienation. Every track perfectly crafted from the paranoid 'Paranoid Android' to the ethereal 'No Surprises'. Gets better with every listen.",
                 date: "Listened: Aug 1st",
                 dateObj: new Date(2025, 7, 1),
-                type: "album"
+                type: "album",
+                comments: []
             },
             {
                 title: "Neuromancer",
@@ -776,7 +913,8 @@
                 review: "The cyberpunk bible! Gibson's vision feels incredibly prescient with today's digital landscape. Dense prose takes some getting used to but the phenomenal world-building makes it worth the effort.",
                 date: "Finished: Aug 3rd",
                 dateObj: new Date(2025, 7, 3),
-                type: "book"
+                type: "book",
+                comments: []
             },
             {
                 title: "Chrono Trigger",
@@ -785,7 +923,8 @@
                 review: "Pure JRPG perfection! Engaging time travel story with memorable characters and multiple endings for great replay value. Akira Toriyama's gorgeous art style combined with an incredible soundtrack.",
                 date: "Finished: Aug 4th",
                 dateObj: new Date(2025, 7, 4),
-                type: "game"
+                type: "game",
+                comments: []
             }
         ];
 
@@ -883,52 +1022,144 @@
                     </div>`;
         }
 
-        // Giscus comments using GitHub Discussions (secure, no tokens needed)
-        function createGiscusCommentsSection(media, mediaIndex) {
+        // Simple server-based comment system
+        const API_BASE = 'http://localhost:3000/api';
+
+        // Load comments from server for each media item
+        async function loadCommentsFromServer() {
+            try {
+                for (const review of mediaReviews) {
+                    const response = await fetch(`${API_BASE}/comments/${encodeURIComponent(review.title)}`);
+                    if (response.ok) {
+                        const comments = await response.json();
+                        review.comments = comments.map(comment => ({
+                            author: comment.author,
+                            text: comment.text,
+                            timestamp: comment.timestamp,
+                            id: comment.id
+                        }));
+                    } else {
+                        review.comments = [];
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to load comments:', error);
+                // Fallback to empty comments
+                mediaReviews.forEach(review => {
+                    review.comments = review.comments || [];
+                });
+            }
+        }
+
+        // Add comment to server
+        async function addCommentToServer(mediaTitle, author, text) {
+            try {
+                const response = await fetch(`${API_BASE}/comments`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        mediaTitle,
+                        author,
+                        text
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to add comment');
+                }
+                
+                return await response.json();
+            } catch (error) {
+                console.error('Failed to add comment:', error);
+                throw error;
+            }
+        }
+
+        // Simple comment system with server
+        function createCommentsSection(media, mediaIndex) {
+            const existingComments = media.comments || [];
+            const commentsHtml = existingComments.map(comment => `
+                <div class="comment">
+                    <div class="comment-author">${comment.author}</div>
+                    <div class="comment-text">${comment.text}</div>
+                </div>
+            `).join('');
+            
             return `
                 <div class="comments-toggle" onclick="toggleComments(${mediaIndex})">
-                    <div class="comments-toggle-text">Comments</div>
+                    <div class="comments-toggle-text">Comments (${existingComments.length})</div>
                     <div class="comments-arrow">▼</div>
                 </div>
                 <div class="comments-section" id="comments-${mediaIndex}">
-                    <div class="giscus-container" id="giscus-${mediaIndex}"></div>
+                    ${commentsHtml}
+                    <div class="comment-form">
+                        <input type="text" class="comment-input" placeholder="Your name..." maxlength="50" required>
+                        <textarea class="comment-textarea" placeholder="Leave a comment..." maxlength="500" required></textarea>
+                        <button type="button" class="comment-submit" onclick="addComment(${mediaIndex})">Post Comment</button>
+                    </div>
                 </div>
             `;
         }
 
-        // Initialize Giscus for a specific media item
-        function initializeGiscus(mediaIndex, mediaTitle) {
-            const container = document.getElementById(`giscus-${mediaIndex}`);
-            if (!container) return;
-
-            // Create unique discussion title for each media item
-            const discussionTitle = `Comments: ${mediaTitle}`;
+        // Add comment function
+        async function addComment(mediaIndex) {
+            const card = document.querySelectorAll('.media-card')[mediaIndex];
+            const nameInput = card.querySelector('.comment-input');
+            const textInput = card.querySelector('.comment-textarea');
             
-            // Create giscus script element
-            const script = document.createElement('script');
-            script.src = 'https://giscus.app/client.js';
-            script.setAttribute('data-repo', 'willemson/whatiswill'); // Replace with your actual repo
-            script.setAttribute('data-repo-id', 'R_kgDOPRIPVA'); // Get this from giscus.app
-            script.setAttribute('data-category', 'General'); // Or create a "Comments" category
-            script.setAttribute('data-category-id', 'DIC_kwDOPRIPVM4CuI4w'); // Get this from giscus.app
-            script.setAttribute('data-mapping', 'specific');
-            script.setAttribute('data-term', discussionTitle);
-            script.setAttribute('data-strict', '1');
-            script.setAttribute('data-reactions-enabled', '1');
-            script.setAttribute('data-emit-metadata', '0');
-            script.setAttribute('data-input-position', 'top');
-            script.setAttribute('data-theme', 'light');
-            script.setAttribute('data-lang', 'en');
-            script.setAttribute('data-loading', 'lazy');
-            script.crossOrigin = 'anonymous';
-            script.async = true;
-
-            // Clear container and add script
-            container.innerHTML = '';
-            container.appendChild(script);
+            const name = nameInput.value.trim();
+            const text = textInput.value.trim();
+            
+            if (name && text) {
+                try {
+                    // Show loading state
+                    const submitButton = card.querySelector('.comment-submit');
+                    const originalText = submitButton.textContent;
+                    submitButton.textContent = 'POSTING...';
+                    submitButton.disabled = true;
+                    
+                    // Get the media title
+                    const currentReviews = getCurrentFilteredReviews();
+                    const mediaTitle = currentReviews[mediaIndex].title;
+                    
+                    // Add to server
+                    const newComment = await addCommentToServer(mediaTitle, name, text);
+                    
+                    // Add to local data
+                    const actualMediaIndex = mediaReviews.findIndex(review => review.title === mediaTitle);
+                    mediaReviews[actualMediaIndex].comments.push({
+                        author: newComment.author,
+                        text: newComment.text,
+                        timestamp: newComment.timestamp,
+                        id: newComment.id
+                    });
+                    
+                    // Clear inputs
+                    nameInput.value = '';
+                    textInput.value = '';
+                    
+                    // Reset button
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                    
+                    // Re-render to show new comment
+                    applyFiltersAndSearch();
+                    
+                } catch (error) {
+                    alert('Failed to add comment. Make sure the server is running!');
+                    // Reset button on error
+                    const submitButton = card.querySelector('.comment-submit');
+                    submitButton.textContent = 'Post Comment';
+                    submitButton.disabled = false;
+                }
+            } else {
+                alert('Please enter both name and comment!');
+            }
         }
 
-        // Toggle comments dropdown (updated for Giscus)
+        // Toggle comments dropdown
         function toggleComments(mediaIndex) {
             const commentsSection = document.getElementById(`comments-${mediaIndex}`);
             const arrow = document.querySelectorAll('.comments-toggle')[mediaIndex].querySelector('.comments-arrow');
@@ -939,15 +1170,10 @@
             } else {
                 commentsSection.classList.add('expanded');
                 arrow.classList.add('expanded');
-                
-                // Initialize Giscus when first opened
-                const currentReviews = getCurrentFilteredReviews();
-                const mediaTitle = currentReviews[mediaIndex].title;
-                initializeGiscus(mediaIndex, mediaTitle);
             }
         }
 
-        // Create media card (updated for Giscus)
+        // Create media card (updated for simple comments)
         function createMediaCard(media, index) {
             return `
                 <div class="media-card" data-type="${media.type}">
@@ -971,7 +1197,7 @@
                             <div class="media-date">${media.date}</div>
                         </div>
                     </div>
-                    ${createGiscusCommentsSection(media, index)}
+                    ${createCommentsSection(media, index)}
                 </div>
             `;
         }
@@ -1063,8 +1289,9 @@
             });
         }
 
-        // Initialize everything (simplified)
-        function initializeApp() {
+        // Initialize everything
+        async function initializeApp() {
+            await loadCommentsFromServer(); // Load shared comments from server
             renderMediaCards();
             
             setTimeout(() => {
