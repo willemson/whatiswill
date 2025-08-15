@@ -1006,78 +1006,6 @@
             }
         }
 
-        /* iOS Safari specific optimizations */
-        @supports (-webkit-touch-callout: none) {
-            .video-element {
-                -webkit-playsinline: true;
-                playsinline: true;
-            }
-
-            .retro-controls {
-                -webkit-user-select: none;
-                user-select: none;
-                -webkit-touch-callout: none;
-                touch-action: manipulation;
-            }
-
-            .progress-container, .volume-slider {
-                -webkit-touch-callout: none;
-                touch-action: pan-x;
-            }
-
-            /* Enhanced iOS controls */
-            .ios-controls {
-                background: rgba(0, 0, 0, 0.8);
-                backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
-                border-radius: 8px;
-                margin: 8px;
-                padding: 8px 12px;
-            }
-
-            .ios-progress-track {
-                height: 6px;
-                background: rgba(255, 255, 255, 0.3);
-                border-radius: 3px;
-                overflow: hidden;
-            }
-
-            .ios-progress-fill {
-                height: 100%;
-                background: #ffffff;
-                border-radius: 3px;
-                transition: width 0.1s ease;
-            }
-
-            .ios-time-display {
-                color: #ffffff;
-                font-size: 12px;
-                font-weight: 500;
-            }
-
-            .ios-button {
-                background: rgba(255, 255, 255, 0.2);
-                border: none;
-                border-radius: 6px;
-                color: #ffffff;
-                padding: 8px 12px;
-                font-size: 12px;
-                font-weight: 500;
-                min-height: 44px;
-                min-width: 44px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                -webkit-tap-highlight-color: transparent;
-                touch-action: manipulation;
-            }
-
-            .ios-button:active {
-                background: rgba(255, 255, 255, 0.4);
-                transform: scale(0.95);
-            }
-        }
-
         /* Touch-friendly improvements */
         @media (hover: none) and (pointer: coarse) {
             .video-item:hover {
@@ -1128,22 +1056,6 @@
                 display: flex;
                 align-items: center;
             }
-
-            /* iOS specific touch improvements */
-            .retro-button, .ios-button {
-                -webkit-tap-highlight-color: transparent;
-                touch-action: manipulation;
-            }
-
-            .progress-container {
-                touch-action: pan-x;
-                -webkit-touch-callout: none;
-            }
-
-            .volume-slider {
-                touch-action: pan-x;
-                -webkit-touch-callout: none;
-            }
         }
 
         /* Landscape phone optimization */
@@ -1168,20 +1080,7 @@
             }
         }
 
-        /* Placeholder for logo */
-        .logo-placeholder {
-            width: 300px;
-            height: 80px;
-            background: #f0f0f0;
-            border: 2px dashed #cccccc;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto;
-            color: #999;
-            font-size: 12px;
-            text-align: center;
-        }
+        
     </style>
 </head>
 <body>
@@ -1189,14 +1088,11 @@
         <!-- Header with Logo -->
         <div class="header">
             <div class="logo">
-                <!-- Replace this placeholder with your WillTube PNG logo -->
-                <div class="logo-placeholder">
-                    WillTube Logo<br>
-                    <small>(Replace with your PNG)</small>
-                </div>
-                <!-- <img src="willtube-logo.png" alt="WillTube"> -->
+              
+               
+                <img src="willtube.png" alt="WillTube">
             </div>
-            <div class="subtitle">Will's Digital Video Repository - Now with 4K HLS Streaming</div>
+            <div class="subtitle">Will's Digital Video Repository</div>
         </div>
 
         <!-- Instructions Section -->
@@ -1225,11 +1121,7 @@
             <div class="player-container">
                 <div class="player-content">
                     <div class="video-player">
-                        <video class="video-element" id="mainPlayer" 
-                               controls 
-                               playsinline 
-                               webkit-playsinline
-                               preload="metadata">
+                        <video class="video-element" id="mainPlayer" controls>
                             <source id="videoSource" src="" type="application/x-mpegURL">
                             Your browser does not support HLS video playback.
                         </video>
@@ -1314,21 +1206,9 @@
             baseUrl: 'https://vz-8a765295-4d7.b-cdn.net'
         };
 
-        // Global variables
+        // HLS instance for quality control
         let hlsInstance = null;
         let currentVideoId = null;
-        let isIOS = false;
-        let isiOSSafari = false;
-
-        // Detect iOS and Safari
-        function detectIOSAndSafari() {
-            const userAgent = navigator.userAgent.toLowerCase();
-            isIOS = /iphone|ipad|ipod/.test(userAgent);
-            isiOSSafari = isIOS && /safari/.test(userAgent) && !/chrome|crios|fxios/.test(userAgent);
-            
-            console.log('Device detection:', { isIOS, isiOSSafari });
-            return { isIOS, isiOSSafari };
-        }
 
         // ============================================
         // VIDEO DATABASE - SIMPLIFIED FOR HLS
@@ -1336,65 +1216,63 @@
         
         // Define your collections/categories
         const COLLECTIONS = {
-            tutorials: { name: 'Tutorials', color: '#4080ff' },
-            projects: { name: 'Projects', color: '#cc0000' },
-            ani101: { name: 'Ani101', color: '#ff8040' },
-            creative: { name: 'Creative', color: '#40ff80' },
-            demos: { name: 'Demos', color: '#8040ff' }
+            lu: { name: 'Laker Update', color: '#4080ff' },
+            fs: { name: 'Film School', color: '#cc0000' },
+            whm: { name: 'Wills Home Movies', color: '#ff8040' },
+            cin: { name: 'Cinema', color: '#40ff80' },
         };
 
         // Video database - simplified for HLS (no resolution arrays needed)
         const VIDEO_DATABASE = {
-            // Your existing video
+       
             'e9ce8e87-763b-48f4-8c70-b19dff16be49': {
                 title: 'CTA Parallax Animation',
                 description: 'Fun homework assignment. Play it on a loop and pretend like you\'re forever stuck on the best line in all of Chicago!',
-                collection: 'ani101',
+                collection: 'fs',
                 views: 654,
                 uploadDate: '2024-11-20',
                 featured: true
             },
             
-            // Sample videos for demonstration
             'b3840759-4bb3-4fb5-818b-4b0e5760c98a': {
-                title: 'React Component Tutorial',
+                title: 'Bully Maguire VS The Red Line',
                 description: 'Learn how to build reusable React components with modern hooks and TypeScript.',
-                collection: 'tutorials',
+                collection: 'fs',
                 views: 1243,
                 uploadDate: '2024-12-15',
                 featured: true
             },
             
-            'sample-video-3': {
-                title: 'Portfolio Website Build',
+            'f38ba416-bf6a-4aa8-8a30-b730054621a7': {
+                title: 'iPod OG Ad Rotoscope',
                 description: 'Complete walkthrough of building a modern portfolio website from scratch.',
-                collection: 'projects',
+                collection: 'fs',
                 views: 892,
                 uploadDate: '2024-12-10',
                 featured: false
             },
             
-            'sample-video-4': {
-                title: 'Creative Coding Experiments',
-                description: 'Exploring generative art and creative coding techniques with p5.js.',
-                collection: 'creative',
+            '19a6cf39-f345-4b03-92a9-3466fdddc186': {
+                title: 'Is Tik Tok Taking Over WBHS?',
+                description: 'I couldnt stop it... no one could',
+                collection: 'lu',
                 views: 567,
-                uploadDate: '2024-12-05',
+                uploadDate: '2019-01-07',
                 featured: true
             },
             
-            'sample-video-5': {
-                title: 'API Integration Demo',
-                description: 'Demonstrating how to integrate third-party APIs into your web applications.',
+            'cb5672f4-1437-4dbd-97e1-f41da5431586': {
+                title: 'Is Mr Watson Leaving WBHS?',
+                description: 'He transfered two months later...',
                 collection: 'demos',
                 views: 734,
                 uploadDate: '2024-11-28',
                 featured: false
             },
             
-            'sample-video-6': {
-                title: 'Advanced CSS Animations',
-                description: 'Deep dive into CSS animations, transitions, and keyframe techniques.',
+            '66471047-e1a2-4148-9e39-fb2366c7d24b': {
+                title: 'Do Short People Face Discrimination at WBHS?',
+                description: 'This whole video was just a ploy to roll around in a chair during class and it worked perfectly.',
                 collection: 'tutorials',
                 views: 1456,
                 uploadDate: '2024-11-25',
@@ -1512,7 +1390,7 @@
         // ============================================
         
         /**
-         * Initialize HLS player with iOS optimizations
+         * Initialize HLS player with quality control
          * @param {string} hlsUrl - HLS playlist URL
          */
         function initializeHLSPlayer(hlsUrl) {
@@ -1528,63 +1406,17 @@
                 hlsInstance = null;
             }
 
-            // iOS-specific video setup
-            if (isIOS) {
-                video.setAttribute('playsinline', 'true');
-                video.setAttribute('webkit-playsinline', 'true');
-                video.setAttribute('preload', 'metadata');
-                
-                // Use native controls on iOS for better compatibility
-                video.controls = true;
-                
-                // Hide custom controls on iOS
-                const retroControls = document.getElementById('retroControls');
-                if (retroControls) {
-                    retroControls.style.display = 'none';
-                }
-                
-                // Hide quality selector on iOS (native HLS handles this)
-                const qualitySelector = document.querySelector('.quality-selector');
-                if (qualitySelector) {
-                    qualitySelector.style.display = 'none';
-                }
-            } else {
-                // Use custom controls on non-iOS devices
-                video.controls = false;
-                
-                const retroControls = document.getElementById('retroControls');
-                if (retroControls) {
-                    retroControls.style.display = 'flex';
-                }
-                
-                const qualitySelector = document.querySelector('.quality-selector');
-                if (qualitySelector) {
-                    qualitySelector.style.display = 'block';
-                }
-            }
-
-            // Check for native HLS support (iOS Safari and some others)
+            // Check for native HLS support
             if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                console.log('Using native HLS support');
+                // Native HLS support (Safari, iOS)
                 video.src = hlsUrl;
-                
-                if (isIOS) {
-                    setupIOSVideoHandling(video);
-                } else {
-                    setupNativeHLSQualityControl(video);
-                }
-                
-                loadingSpinner.style.display = 'none';
-                
-            } else if (Hls.isSupported() && !isIOS) {
-                console.log('Using HLS.js');
-                // Use HLS.js for non-iOS browsers
+                setupNativeHLSQualityControl(video);
+            } else if (Hls.isSupported()) {
+                // Use HLS.js for other browsers
                 hlsInstance = new Hls({
                     enableWorker: true,
                     lowLatencyMode: false,
-                    backBufferLength: 90,
-                    maxBufferLength: 30,
-                    maxMaxBufferLength: 600
+                    backBufferLength: 90
                 });
                 
                 hlsInstance.loadSource(hlsUrl);
@@ -1628,51 +1460,6 @@
             }
 
             // Setup common video events
-            setupCommonVideoEvents(video, loadingSpinner);
-        }
-
-        /**
-         * Setup iOS-specific video handling
-         * @param {HTMLVideoElement} video - Video element
-         */
-        function setupIOSVideoHandling(video) {
-            console.log('Setting up iOS video handling');
-            
-            // iOS handles quality switching natively
-            const qualityDropdown = document.getElementById('qualityDropdown');
-            qualityDropdown.innerHTML = '<div class="quality-option active">Auto (iOS Native)</div>';
-            document.getElementById('currentQuality').textContent = 'Auto';
-            
-            // Add iOS-specific event listeners
-            video.addEventListener('webkitbeginfullscreen', function() {
-                console.log('iOS: Entered fullscreen');
-            });
-            
-            video.addEventListener('webkitendfullscreen', function() {
-                console.log('iOS: Exited fullscreen');
-            });
-            
-            // Handle iOS playback ready
-            video.addEventListener('loadedmetadata', function() {
-                console.log('iOS: Video metadata loaded');
-            });
-            
-            // Better error handling for iOS
-            video.addEventListener('error', function(e) {
-                console.error('iOS video error:', e);
-                const error = video.error;
-                if (error) {
-                    console.error('Error code:', error.code, 'Message:', error.message);
-                }
-            });
-        }
-
-        /**
-         * Setup common video events for all platforms
-         * @param {HTMLVideoElement} video - Video element
-         * @param {HTMLElement} loadingSpinner - Loading spinner element
-         */
-        function setupCommonVideoEvents(video, loadingSpinner) {
             video.addEventListener('loadstart', function() {
                 loadingSpinner.style.display = 'block';
             });
@@ -1686,21 +1473,6 @@
             });
 
             video.addEventListener('playing', function() {
-                loadingSpinner.style.display = 'none';
-            });
-            
-            // Handle stalled playback
-            video.addEventListener('stalled', function() {
-                console.log('Video playback stalled');
-                loadingSpinner.style.display = 'block';
-            });
-            
-            video.addEventListener('suspend', function() {
-                console.log('Video loading suspended');
-            });
-            
-            video.addEventListener('abort', function() {
-                console.log('Video loading aborted');
                 loadingSpinner.style.display = 'none';
             });
         }
@@ -1907,7 +1679,7 @@
         // ============================================
         
         /**
-         * Play video using HLS with iOS optimizations
+         * Play video using HLS
          * @param {string} videoId - Video ID to play
          */
         function playVideo(videoId) {
@@ -1929,110 +1701,33 @@
             // Update player info
             currentTitle.textContent = video.title;
             currentDescription.textContent = video.description;
-            
-            // Different stats display for iOS vs other platforms
-            const platformInfo = isIOS ? 'HLS (iOS Native)' : 'HLS Streaming';
-            currentStats.textContent = `Views: ${video.views.toLocaleString()} | Added: ${formatDate(video.uploadDate)} | ${platformInfo}`;
+            currentStats.textContent = `Views: ${video.views.toLocaleString()} | Added: ${formatDate(video.uploadDate)} | HLS Streaming`;
             
             // Show player section
             playerSection.style.display = 'block';
             
-            // Initialize HLS player (handles iOS detection internally)
+            // Hide native controls and use custom ones
+            mainPlayer.controls = false;
+            
+            // Initialize HLS player
             initializeHLSPlayer(video.hlsUrl);
             
-            // Setup custom controls (only for non-iOS)
-            if (!isIOS) {
-                setupCustomControls();
-            } else {
-                console.log('Using native iOS controls');
-            }
+            // Setup custom controls
+            setupCustomControls();
             
-            // Handle autoplay differently on iOS
-            if (isIOS) {
-                // iOS requires user interaction for autoplay
-                console.log('iOS detected - autoplay disabled, user must manually start playback');
-                
-                // Add play button overlay for iOS
-                addIOSPlayButton(mainPlayer);
-            } else {
-                // Auto-play when video is ready on other platforms
-                mainPlayer.addEventListener('canplay', function() {
-                    mainPlayer.play().catch(function(error) {
-                        console.log('Autoplay prevented by browser:', error);
-                    });
-                }, { once: true });
-            }
+            // Auto-play when video is ready
+            mainPlayer.addEventListener('canplay', function() {
+                mainPlayer.play().catch(function(error) {
+                    console.log('Autoplay prevented by browser:', error);
+                    // Autoplay was prevented, user will need to click play
+                });
+            }, { once: true }); // Only run once per video load
             
             // Increment view count
             VIDEO_DATABASE[videoId].views++;
             
             // Scroll to player
             playerSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-        /**
-         * Add iOS-specific play button overlay
-         * @param {HTMLVideoElement} video - Video element
-         */
-        function addIOSPlayButton(video) {
-            // Remove existing play button if any
-            const existingButton = document.querySelector('.ios-play-overlay');
-            if (existingButton) {
-                existingButton.remove();
-            }
-            
-            const playOverlay = document.createElement('div');
-            playOverlay.className = 'ios-play-overlay';
-            playOverlay.style.cssText = `
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: rgba(0, 0, 0, 0.8);
-                border-radius: 50%;
-                width: 80px;
-                height: 80px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                z-index: 1000;
-                backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
-                border: 2px solid rgba(255, 255, 255, 0.3);
-                transition: all 0.3s ease;
-            `;
-            
-            const playIcon = document.createElement('div');
-            playIcon.style.cssText = `
-                width: 0;
-                height: 0;
-                border-left: 20px solid white;
-                border-top: 12px solid transparent;
-                border-bottom: 12px solid transparent;
-                margin-left: 4px;
-            `;
-            
-            playOverlay.appendChild(playIcon);
-            video.parentElement.appendChild(playOverlay);
-            
-            playOverlay.addEventListener('click', function() {
-                video.play();
-                playOverlay.style.opacity = '0';
-                setTimeout(() => playOverlay.remove(), 300);
-            });
-            
-            // Hide overlay when video starts playing
-            video.addEventListener('play', function() {
-                if (playOverlay) {
-                    playOverlay.style.opacity = '0';
-                    setTimeout(() => {
-                        if (playOverlay.parentElement) {
-                            playOverlay.remove();
-                        }
-                    }, 300);
-                }
-            });
         }
 
         // ============================================
@@ -2287,65 +1982,41 @@
         // MOBILE OPTIMIZATIONS
         // ============================================
         
-        /**
-         * Enhanced mobile controls with iOS optimizations
-         */
         function handleMobileControls() {
             if (window.innerWidth <= 768) {
                 const retroControls = document.getElementById('retroControls');
-                
-                // Only show custom controls on non-iOS devices
-                if (!isIOS && retroControls) {
+                if (retroControls) {
                     retroControls.style.opacity = '1';
-                    
-                    const progressContainer = document.querySelector('.progress-container');
-                    const volumeSlider = document.querySelector('.volume-slider');
+                }
 
-                    if (progressContainer) {
-                        // Enhanced touch handling for progress bar
-                        let isDragging = false;
-                        
-                        const handleProgressTouch = function(e) {
-                            e.preventDefault();
-                            const touch = e.touches ? e.touches[0] : e;
-                            const rect = progressContainer.getBoundingClientRect();
-                            const percent = Math.max(0, Math.min(1, (touch.clientX - rect.left) / rect.width));
-                            const video = document.getElementById('mainPlayer');
-                            if (video && video.duration) {
-                                video.currentTime = percent * video.duration;
-                            }
-                        };
-                        
-                        progressContainer.addEventListener('touchstart', function(e) {
-                            isDragging = true;
-                            handleProgressTouch(e);
-                        }, { passive: false });
-                        
-                        progressContainer.addEventListener('touchmove', function(e) {
-                            if (isDragging) {
-                                handleProgressTouch(e);
-                            }
-                        }, { passive: false });
-                        
-                        progressContainer.addEventListener('touchend', function() {
-                            isDragging = false;
-                        });
-                    }
+                const progressContainer = document.querySelector('.progress-container');
+                const volumeSlider = document.querySelector('.volume-slider');
 
-                    if (volumeSlider) {
-                        // Enhanced touch handling for volume
-                        volumeSlider.addEventListener('touchstart', function(e) {
-                            e.preventDefault();
-                            const touch = e.touches[0];
-                            const rect = this.getBoundingClientRect();
-                            const percent = Math.max(0, Math.min(1, (touch.clientX - rect.left) / rect.width));
-                            const video = document.getElementById('mainPlayer');
-                            if (video) {
-                                video.volume = percent;
-                                document.getElementById('volumeBar').style.width = (percent * 100) + '%';
-                            }
-                        }, { passive: false });
-                    }
+                if (progressContainer) {
+                    progressContainer.addEventListener('touchstart', function(e) {
+                        e.preventDefault();
+                        const touch = e.touches[0];
+                        const rect = this.getBoundingClientRect();
+                        const percent = (touch.clientX - rect.left) / rect.width;
+                        const video = document.getElementById('mainPlayer');
+                        if (video) {
+                            video.currentTime = percent * video.duration;
+                        }
+                    });
+                }
+
+                if (volumeSlider) {
+                    volumeSlider.addEventListener('touchstart', function(e) {
+                        e.preventDefault();
+                        const touch = e.touches[0];
+                        const rect = this.getBoundingClientRect();
+                        const percent = (touch.clientX - rect.left) / rect.width;
+                        const video = document.getElementById('mainPlayer');
+                        if (video) {
+                            video.volume = percent;
+                            document.getElementById('volumeBar').style.width = (percent * 100) + '%';
+                        }
+                    });
                 }
             }
         }
@@ -2402,308 +2073,11 @@
         // ============================================
         
         /**
-         * Initialize the entire page with iOS detection
+         * Initialize the entire page
          */
         function initializePage() {
-            // Detect iOS first
-            detectIOSAndSafari();
-            
             populateFeaturedVideos();
             populateCategoryFilters();
-            populateVideoGallery();
-            handleMobileControls();
-            setupKeyboardShortcuts();
-            
-            // Add iOS-specific optimizations
-            if (isIOS) {
-                document.body.classList.add('ios-device');
-                console.log('🍎 iOS optimizations enabled');
-                
-                // Disable custom video controls globally on iOS
-                const style = document.createElement('style');
-                style.textContent = `
-                    .retro-controls { display: none !important; }
-                    .quality-selector { display: none !important; }
-                    .video-element { 
-                        -webkit-playsinline: true !important;
-                        playsinline: true !important;
-                    }
-                `;
-                document.head.appendChild(style);
-                
-                // Add iOS-specific touch handling
-                document.addEventListener('touchstart', function() {}, { passive: true });
-                
-                // Prevent zoom on double tap for video controls
-                let lastTouchEnd = 0;
-                document.addEventListener('touchend', function(event) {
-                    const now = (new Date()).getTime();
-                    if (now - lastTouchEnd <= 300) {
-                        event.preventDefault();
-                    }
-                    lastTouchEnd = now;
-                }, { passive: false });
-            }
-        }
-
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            initializePage();
-            
-            // Add smooth scrolling for category filter on mobile
-            const categoryFilters = document.querySelector('.category-filters');
-            if (categoryFilters && window.innerWidth <= 480) {
-                categoryFilters.style.scrollBehavior = 'smooth';
-            }
-
-            // Add search functionality on Enter key
-            const searchInput = document.getElementById('searchInput');
-            searchInput.addEventListener('keypress', function(event) {
-                if (event.key === 'Enter') {
-                    searchVideos();
-                }
-            });
-
-            // Real-time search as user types (with debounce)
-            let searchTimeout;
-            searchInput.addEventListener('input', function() {
-                clearTimeout(searchTimeout);
-                searchTimeout = setTimeout(searchVideos, 300);
-            });
-
-            // iOS-specific initialization
-            if (isIOS) {
-                // Add viewport meta tag optimization for iOS
-                const viewportMeta = document.querySelector('meta[name="viewport"]');
-                if (viewportMeta) {
-                    viewportMeta.setAttribute('content', 
-                        'width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover'
-                    );
-                }
-
-                // Prevent iOS bounce scrolling on video player
-                document.addEventListener('touchmove', function(e) {
-                    const video = document.getElementById('mainPlayer');
-                    if (video && video.contains(e.target)) {
-                        e.preventDefault();
-                    }
-                }, { passive: false });
-
-                console.log('🍎 iOS-specific initialization complete');
-            }
-        });
-
-        // Handle window resize with iOS considerations
-        window.addEventListener('resize', function() {
-            handleMobileControls();
-            
-            // Handle iOS orientation change
-            if (isIOS) {
-                setTimeout(function() {
-                    const video = document.getElementById('mainPlayer');
-                    if (video && !video.paused) {
-                        // Force a repaint on iOS after orientation change
-                        video.style.transform = 'translateZ(0)';
-                        setTimeout(() => {
-                            video.style.transform = '';
-                        }, 100);
-                    }
-                }, 500);
-            }
-        });
-
-        // Enhanced iOS orientation handling
-        if (isIOS) {
-            window.addEventListener('orientationchange', function() {
-                setTimeout(function() {
-                    // Recalculate video dimensions after orientation change
-                    const video = document.getElementById('mainPlayer');
-                    const playerSection = document.getElementById('playerSection');
-                    
-                    if (video && playerSection.style.display !== 'none') {
-                        video.style.width = '100%';
-                        video.style.height = 'auto';
-                        
-                        // Force iOS to recalculate video layout
-                        video.load();
-                    }
-                }, 100);
-            });
-        }
-
-        // Cleanup HLS instance on page unload
-        window.addEventListener('beforeunload', function() {
-            if (hlsInstance) {
-                hlsInstance.destroy();
-            }
-        });
-
-        // ============================================
-        // iOS-SPECIFIC ENHANCEMENTS
-        // ============================================
-
-        /**
-         * iOS-specific video error recovery
-         */
-        function handleIOSVideoError(video) {
-            console.log('Handling iOS video error');
-            
-            const currentSrc = video.src;
-            if (currentSrc) {
-                // Try to reload the video on iOS
-                setTimeout(function() {
-                    video.load();
-                    console.log('Attempted iOS video reload');
-                }, 1000);
-            }
-        }
-
-        /**
-         * Detect iOS Safari specifically for special handling
-         */
-        function checkiOSSafari() {
-            const ua = navigator.userAgent;
-            const iOS = /iPad|iPhone|iPod/.test(ua);
-            const webkit = /WebKit/.test(ua);
-            const iOSSafariCheck = iOS && webkit && !/CriOS|FxiOS|OPiOS|mercury/.test(ua);
-            return iOSSafariCheck;
-        }
-
-        /**
-         * Add iOS-specific video performance optimizations
-         */
-        function optimizeForIOS() {
-            if (!isIOS) return;
-
-            const video = document.getElementById('mainPlayer');
-            if (video) {
-                // Set iOS-specific attributes
-                video.setAttribute('webkit-playsinline', 'true');
-                video.setAttribute('playsinline', 'true');
-                video.setAttribute('preload', 'metadata');
-                
-                // Optimize for iOS memory management
-                video.addEventListener('loadstart', function() {
-                    // Clear any previous video data
-                    if (video.src && video.src !== window.location.href) {
-                        video.removeAttribute('src');
-                        video.load();
-                    }
-                });
-
-                // Handle iOS-specific events
-                video.addEventListener('webkitbeginfullscreen', function() {
-                    console.log('iOS fullscreen started');
-                });
-
-                video.addEventListener('webkitendfullscreen', function() {
-                    console.log('iOS fullscreen ended');
-                });
-
-                // iOS-specific error handling
-                video.addEventListener('error', function() {
-                    handleIOSVideoError(video);
-                });
-            }
-        }
-
-        // ============================================
-        // EASY MANAGEMENT HELPERS - ENHANCED FOR iOS
-        // ============================================
-        
-        /**
-         * Quick add video helper with iOS testing
-         */
-        window.quickAddVideo = function(videoId, title, description, collection, featured = false) {
-            addVideo(videoId, {
-                title: title,
-                description: description,
-                collection: collection,
-                featured: featured
-            });
-            console.log(`Added video: ${title} (${videoId})`);
-            console.log(`HLS URL: ${getBunnyHLSUrl(videoId)}`);
-            console.log(`Thumbnail URL: ${getBunnyThumbnailUrl(videoId)}`);
-            
-            if (isIOS) {
-                console.log('🍎 This video will use iOS native HLS playback');
-            }
-        };
-
-        /**
-         * Test HLS URL with iOS-specific checks
-         */
-        window.testHLSUrl = function(videoId) {
-            const hlsUrl = getBunnyHLSUrl(videoId);
-            console.log(`Testing HLS URL: ${hlsUrl}`);
-            
-            if (isIOS) {
-                console.log('🍎 Testing on iOS - using native HLS support');
-            }
-            
-            fetch(hlsUrl)
-                .then(response => {
-                    if (response.ok) {
-                        console.log('✅ HLS URL is accessible');
-                        return response.text();
-                    } else {
-                        console.log('❌ HLS URL returned error:', response.status);
-                    }
-                })
-                .then(data => {
-                    if (data) {
-                        console.log('✅ HLS playlist loaded successfully');
-                        console.log('Playlist preview:', data.substring(0, 200) + '...');
-                        
-                        if (isIOS) {
-                            console.log('🍎 iOS will handle quality switching automatically');
-                        }
-                    }
-                })
-                .catch(error => {
-                    console.log('❌ Error accessing HLS URL:', error);
-                    
-                    if (isIOS) {
-                        console.log('🍎 iOS troubleshooting: Check if video requires user interaction to load');
-                    }
-                });
-        };
-
-        /**
-         * iOS-specific diagnostics
-         */
-        window.iOSDiagnostics = function() {
-            const diagnostics = {
-                isIOS: isIOS,
-                isiOSSafari: isiOSSafari,
-                userAgent: navigator.userAgent,
-                videoSupport: {
-                    hls: document.createElement('video').canPlayType('application/vnd.apple.mpegurl'),
-                    mp4: document.createElement('video').canPlayType('video/mp4')
-                },
-                features: {
-                    pictureInPicture: document.pictureInPictureEnabled,
-                    fullscreen: document.fullscreenEnabled,
-                    touchEvents: 'ontouchstart' in window
-                }
-            };
-
-            console.log('🍎 iOS Diagnostics:', diagnostics);
-            return diagnostics;
-        };
-
-        // Log successful iOS optimization loading
-        if (isIOS) {
-            console.log('🍎 WillTube iOS optimizations loaded successfully!');
-            console.log('📱 Native iOS video controls will be used');
-            console.log('🔧 Use iOSDiagnostics() for device info');
-        }
-
-        console.log('🎬 WillTube HLS Edition with iOS Support loaded successfully!');
-        console.log('📹 Use quickAddVideo() to add new videos');
-        console.log('🔧 Use testHLSUrl() to test video connectivity');
-        console.log('📊 Use getVideoAnalytics() for statistics');
-        console.log('🍎 iOS devices will use native controls automatically');
             populateVideoGallery();
             handleMobileControls();
             setupKeyboardShortcuts();
