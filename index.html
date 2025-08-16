@@ -1418,72 +1418,103 @@
 }
 /* iPhone Specific Optimizations */
 @media (max-width: 768px) {
-    /* Rating Section Mobile */
+    /* Rating Section Mobile - Keep on same line */
+@media (max-width: 768px) {
     .rating-section {
         margin-bottom: 10px;
         padding-bottom: 6px;
     }
 
     .rating-row {
-        flex-direction: column;
-        gap: 8px;
-        align-items: flex-start;
+        display: flex;
+        flex-direction: row; /* Keep horizontal */
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: nowrap; /* Prevent wrapping */
     }
 
     .rating-display {
-        width: 100%;
-        justify-content: center;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex: 1;
+        min-width: 0; /* Allow shrinking */
+    }
+
+    .rating-stars {
+        display: flex;
+        gap: 1px; /* Tighter spacing */
+    }
+
+    .rating-text {
+        font-size: 9px; /* Smaller text */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .user-rating {
-        width: 100%;
-        justify-content: center;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-shrink: 0; /* Don't shrink */
+    }
+
+    .user-rating-label {
+        font-size: 9px;
+        white-space: nowrap;
     }
 
     .star {
-        font-size: 18px; /* Larger for touch */
+        font-size: 16px; /* Slightly smaller than before */
     }
 
     .rate-button {
-        font-size: 12px;
-        padding: 6px 12px;
-        min-height: 44px; /* Touch target */
-        min-width: 60px;
+        font-size: 10px;
+        padding: 4px 8px;
+        min-height: 32px; /* Smaller touch target */
+        min-width: 50px;
+    }
+}
+
+/* Very Small Screens - Even more compact */
+@media (max-width: 480px) {
+    .rating-row {
+        gap: 8px;
     }
 
-    /* Comments Section Mobile */
-    .comments-section {
-        min-height: 150px;
+    .rating-display {
+        gap: 4px;
     }
 
-    .comments-list {
-        max-height: 120px;
+    .rating-stars {
+        gap: 0px; /* No gap between stars */
     }
 
-    .comment {
-        padding: 6px;
-        margin-bottom: 6px;
+    .star {
+        font-size: 14px;
     }
 
-    .comment-avatar {
-        width: 28px;
-        height: 28px;
-        font-size: 12px;
+    .rating-text {
+        font-size: 8px;
     }
 
-    .comment-author {
-        font-size: 11px;
-        margin-bottom: 3px;
+    .user-rating {
+        gap: 4px;
     }
 
-    .comment-text {
-        font-size: 11px;
-        line-height: 1.4;
+    .user-rating-label {
+        font-size: 8px;
     }
 
-    .comment-date {
+    .rate-button {
         font-size: 9px;
+        padding: 3px 6px;
+        min-height: 30px;
+        min-width: 45px;
     }
+}
 
     /* Profile Selector Mobile */
     .profile-selector {
