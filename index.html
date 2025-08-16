@@ -893,192 +893,178 @@
         }
 
         /* Mobile video controls */
-        @media (max-width: 768px) {
-            .retro-controls {
-                padding: 6px 4px;
-                gap: 4px;
-                height: 32px;
-            }
+@media (max-width: 768px) {
+    .retro-controls {
+        padding: 4px 6px;
+        gap: 4px;
+        height: 36px; /* Fixed height */
+        box-sizing: border-box;
+    }
 
-            .retro-button {
-                width: 24px;
-                height: 20px;
-                font-size: 12px;
-            }
+    .retro-button {
+        width: 32px;
+        height: 28px;
+        font-size: 14px;
+        border-radius: 2px;
+        flex-shrink: 0;
+    }
 
-            .time-container {
-                gap: 1px;
-            }
+    .time-container {
+        gap: 2px;
+        min-width: 80px;
+    }
 
-            .time-display {
-                font-size: 8px;
-            }
+    .time-display {
+        font-size: 10px;
+        line-height: 28px; /* Match button height */
+    }
 
-            .volume-container {
-                gap: 2px;
-            }
+    .volume-container {
+        gap: 3px;
+        align-items: center;
+    }
 
-            .volume-icon {
-                width: 20px;
-                height: 18px;
-                font-size: 10px;
-            }
+    .volume-icon {
+        width: 24px;
+        height: 28px;
+        font-size: 12px;
+        flex-shrink: 0;
+    }
 
-            .volume-slider {
-                width: 30px;
-                height: 10px;
-            }
+    .volume-slider {
+        width: 40px;
+        height: 12px;
+        flex-shrink: 0;
+    }
 
-            .progress-container {
-                margin: 0 2px;
-                height: 16px;
-            }
+    .progress-container {
+        margin: 0 4px;
+        height: 16px;
+        flex: 1;
+        min-width: 60px;
+    }
 
-            .fullscreen-button {
-                width: 40px;
-                height: 20px;
-                font-size: 8px;
-            }
+    .fullscreen-button {
+        width: 60px;
+        height: 28px;
+        font-size: 10px;
+        flex-shrink: 0;
+    }
 
-            .quality-selector {
-                top: 5px;
-                right: 5px;
-            }
+    .quality-selector {
+        top: 8px;
+        right: 8px;
+    }
 
-            .quality-button {
-                padding: 6px 10px;
-                font-size: 10px;
-            }
-        }
+    .quality-button {
+        padding: 4px 8px;
+        font-size: 10px;
+        height: 28px;
+        box-sizing: border-box;
+    }
+}
 
-        /* Very small screens (phones in portrait) */
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 3px;
-            }
+/* Very small screens (phones in portrait) */
+@media (max-width: 480px) {
+    .retro-controls {
+        padding: 3px 4px;
+        gap: 3px;
+        height: 32px; /* Smaller for very small screens */
+    }
 
-            .search-box {
-                width: 200px;
-                height: 26px;
-            }
+    .retro-button {
+        width: 28px;
+        height: 24px;
+        font-size: 12px;
+    }
 
-            .search-button {
-                height: 30px;
-                padding: 0 8px;
-                font-size: 9px;
-            }
+    .time-display {
+        font-size: 9px;
+        line-height: 24px;
+    }
 
-            .featured-videos {
-                justify-content: flex-start;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-            }
+    .volume-icon {
+        width: 20px;
+        height: 24px;
+        font-size: 10px;
+    }
 
-            .featured-video {
-                width: 100px;
-                flex-shrink: 0;
-            }
+    .volume-slider {
+        width: 35px;
+        height: 10px;
+    }
 
-            .featured-thumbnail {
-                width: 92px;
-                height: 69px;
-            }
+    .progress-container {
+        margin: 0 3px;
+        height: 14px;
+    }
 
-            .video-grid {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-                gap: 8px;
-            }
+    .fullscreen-button {
+        width: 50px;
+        height: 24px;
+        font-size: 9px;
+    }
 
-            .video-player {
-                height: 180px;
-            }
+    .quality-button {
+        padding: 3px 6px;
+        font-size: 9px;
+        height: 24px;
+    }
+}
 
-            .category-filters {
-                justify-content: flex-start;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-                padding-bottom: 5px;
-            }
+/* Remove the conflicting touch-friendly rules for video controls */
+@media (hover: none) and (pointer: coarse) {
+    /* Keep touch targets for other elements but not video controls */
+    .star,
+    .avatar-choice,
+    .avatar-arrow,
+    .rate-button,
+    .comment-submit {
+        min-height: 44px;
+        min-width: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-            .category-button {
-                flex-shrink: 0;
-                white-space: nowrap;
-            }
-        }
+    /* Remove the min-height rule for video controls */
+    .retro-button,
+    .fullscreen-button,
+    .volume-icon {
+        min-height: unset !important;
+        min-width: unset !important;
+    }
 
-        /* Touch-friendly improvements */
-        @media (hover: none) and (pointer: coarse) {
-            .video-item:hover {
-                border: 1px solid #ffffff;
-                background: #ffffff;
-                transform: none;
-                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            }
+    .progress-container,
+    .volume-slider {
+        min-height: unset !important;
+    }
+}
+/* Fix video control alignment issues */
+.retro-controls {
+    align-items: center !important;
+    box-sizing: border-box;
+}
 
-            .featured-video:hover {
-                border-color: #dddddd;
-                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-                transform: none;
-            }
+.retro-controls > * {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
 
-            .category-button:hover {
-                background: linear-gradient(to bottom, #f8f8f8, #e0e0e0);
-                border-color: #d0d0d0;
-                color: #333333;
-                box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-            }
+.progress-container {
+    align-self: center;
+}
 
-            .retro-button:hover {
-                background: linear-gradient(to bottom, #f8f8f8, #e0e0e0);
-            }
+.volume-container {
+    align-items: center;
+}
 
-            .action-button:hover {
-                background: #f8f8f8;
-                border-color: #cccccc;
-            }
-
-            /* Make controls always visible on touch devices */
-            .retro-controls {
-                opacity: 1;
-            }
-
-            /* Larger touch targets */
-            .retro-button, .action-button, .category-button {
-                min-height: 44px;
-                min-width: 44px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .progress-container, .volume-slider {
-                min-height: 44px;
-                display: flex;
-                align-items: center;
-            }
-        }
-
-        /* Landscape phone optimization */
-        @media (max-width: 768px) and (orientation: landscape) {
-            .video-player {
-                height: 160px;
-            }
-
-            .player-content {
-                flex-direction: row;
-                gap: 12px;
-            }
-
-            .video-player {
-                flex: 0 0 280px;
-                height: 160px;
-            }
-
-            .video-info-panel {
-                flex: 1;
-                min-width: 200px;
-            }
-        }
+.time-container {
+    align-items: center;
+}
 		
 		/* Rating & Comment System Styles */
 .rating-section {
