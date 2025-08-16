@@ -1416,9 +1416,8 @@
     flex: 1; /* Let it take available space */
     margin: 0 4px; /* Small margin from arrows */
 }
-/* iPhone Specific Optimizations */
-@media (max-width: 768px) {
-/* Rating System - Compact single line design */
+
+/* Rating System - Absolute positioning to eliminate spacing issues */
 @media (max-width: 768px) {
     .rating-section {
         margin-bottom: 12px;
@@ -1431,129 +1430,169 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        gap: 4px;
-        flex-wrap: nowrap;
+        height: 30px; /* Fixed height */
+        position: relative;
     }
 
     .rating-display {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
         display: flex;
         align-items: center;
-        gap: 3px;
-        flex: 1;
-        min-width: 0;
+        height: 20px;
     }
 
     .rating-stars {
-        display: inline-flex;
-        gap: 0; /* No gap between stars */
+        position: relative;
+        display: block;
+        width: 60px; /* Fixed width for 5 stars */
+        height: 20px;
+        float: left;
     }
 
-    .star {
-        font-size: 12px; /* Smaller stars */
-        line-height: 1;
-        display: inline-block;
-        width: 14px; /* Compact width */
+    .rating-stars .star {
+        position: absolute;
+        font-size: 12px;
+        line-height: 20px;
+        width: 12px;
         text-align: center;
-        padding: 0;
+        top: 0;
         margin: 0;
+        padding: 0;
+        border: none;
+        background: none;
+        outline: none;
     }
+
+    /* Position each star exactly */
+    .rating-stars .star:nth-child(1) { left: 0px; }
+    .rating-stars .star:nth-child(2) { left: 12px; }
+    .rating-stars .star:nth-child(3) { left: 24px; }
+    .rating-stars .star:nth-child(4) { left: 36px; }
+    .rating-stars .star:nth-child(5) { left: 48px; }
 
     .rating-text {
-        font-size: 8px; /* Very small text */
-        margin-left: 2px;
+        position: absolute;
+        left: 65px; /* Right after stars */
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 8px;
         white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 80px; /* Limit width */
+        margin: 0;
+        padding: 0;
     }
 
     .user-rating {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
         display: flex;
         align-items: center;
-        gap: 2px; /* Minimal gap */
-        flex-shrink: 0;
+        height: 30px;
     }
 
     .user-rating-label {
-        font-size: 8px; /* Very small */
+        font-size: 8px;
         white-space: nowrap;
+        margin: 0;
+        padding: 0;
+        margin-right: 4px;
     }
 
     #userRatingStars {
-        display: inline-flex;
-        gap: 0;
+        position: relative;
+        display: block;
+        width: 60px; /* Fixed width for 5 stars */
+        height: 20px;
+        margin-right: 4px;
     }
 
     #userRatingStars .star {
-        font-size: 12px; /* Smaller stars */
-        width: 14px; /* Compact width */
+        position: absolute;
+        font-size: 12px;
+        line-height: 20px;
+        width: 12px;
         text-align: center;
+        top: 0;
         cursor: pointer;
+        margin: 0;
+        padding: 0;
+        border: none;
+        background: none;
+        outline: none;
     }
 
+    /* Position each user rating star exactly */
+    #userRatingStars .star:nth-child(1) { left: 0px; }
+    #userRatingStars .star:nth-child(2) { left: 12px; }
+    #userRatingStars .star:nth-child(3) { left: 24px; }
+    #userRatingStars .star:nth-child(4) { left: 36px; }
+    #userRatingStars .star:nth-child(5) { left: 48px; }
+
     .rate-button {
-        font-size: 9px; /* Smaller font */
-        padding: 3px 6px; /* Minimal padding */
-        min-height: 24px; /* Smaller height */
-        min-width: 35px; /* Smaller width */
+        font-size: 9px;
+        padding: 4px 8px;
+        min-height: 24px;
+        min-width: 40px;
         border-radius: 3px;
-        margin-left: 2px;
+        margin: 0;
+        flex-shrink: 0;
     }
 }
 
 @media (max-width: 480px) {
     .rating-row {
-        gap: 2px; /* Even smaller gap */
+        height: 28px;
     }
 
-    .rating-display {
-        gap: 2px;
+    .rating-stars,
+    #userRatingStars {
+        width: 55px; /* Slightly smaller on very small screens */
     }
 
-    .star {
-        font-size: 11px;
-        width: 12px;
-    }
-
+    .rating-stars .star,
     #userRatingStars .star {
         font-size: 11px;
-        width: 12px;
+        width: 11px;
     }
+
+    /* Reposition for smaller stars */
+    .rating-stars .star:nth-child(1),
+    #userRatingStars .star:nth-child(1) { left: 0px; }
+    .rating-stars .star:nth-child(2),
+    #userRatingStars .star:nth-child(2) { left: 11px; }
+    .rating-stars .star:nth-child(3),
+    #userRatingStars .star:nth-child(3) { left: 22px; }
+    .rating-stars .star:nth-child(4),
+    #userRatingStars .star:nth-child(4) { left: 33px; }
+    .rating-stars .star:nth-child(5),
+    #userRatingStars .star:nth-child(5) { left: 44px; }
 
     .rating-text {
-        font-size: 7px;
-        margin-left: 1px;
-        max-width: 60px;
-    }
-
-    .user-rating {
-        gap: 1px;
-    }
-
-    .user-rating-label {
+        left: 60px;
         font-size: 7px;
     }
 
     .rate-button {
         font-size: 8px;
-        padding: 2px 4px;
-        min-height: 20px;
-        min-width: 30px;
-        margin-left: 1px;
+        padding: 3px 6px;
+        min-height: 22px;
+        min-width: 35px;
     }
 }
 
-/* Ensure absolutely no spacing issues */
-.rating-stars .star,
-#userRatingStars .star {
+/* Override ANY inherited spacing */
+.rating-stars,
+#userRatingStars,
+.rating-stars *,
+#userRatingStars * {
     letter-spacing: 0 !important;
     word-spacing: 0 !important;
-    font-family: inherit !important;
-    vertical-align: baseline !important;
-    border: none !important;
-    background: none !important;
-    box-shadow: none !important;
-    outline: none !important;
+    text-indent: 0 !important;
+    font-kerning: none !important;
 }
     /* Profile Selector Mobile - Fix arrow alignment */
 /* Avatar Navigation - Fix right arrow positioning */
