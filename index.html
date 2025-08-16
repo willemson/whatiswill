@@ -1417,7 +1417,7 @@
     margin: 0 4px; /* Small margin from arrows */
 }
 
-/* Rating System - Absolute positioning to eliminate spacing issues */
+/* Rating System - Fixed alignment and smaller button */
 @media (max-width: 768px) {
     .rating-section {
         margin-bottom: 12px;
@@ -1466,16 +1466,16 @@
         outline: none;
     }
 
-    /* Position each star exactly */
+    /* Position each star exactly - closer together */
     .rating-stars .star:nth-child(1) { left: 0px; }
-    .rating-stars .star:nth-child(2) { left: 12px; }
-    .rating-stars .star:nth-child(3) { left: 24px; }
-    .rating-stars .star:nth-child(4) { left: 36px; }
-    .rating-stars .star:nth-child(5) { left: 48px; }
+    .rating-stars .star:nth-child(2) { left: 10px; }
+    .rating-stars .star:nth-child(3) { left: 20px; }
+    .rating-stars .star:nth-child(4) { left: 30px; }
+    .rating-stars .star:nth-child(5) { left: 40px; }
 
     .rating-text {
         position: absolute;
-        left: 65px; /* Right after stars */
+        left: 55px; /* Closer to stars */
         top: 50%;
         transform: translateY(-50%);
         font-size: 8px;
@@ -1505,7 +1505,7 @@
     #userRatingStars {
         position: relative;
         display: block;
-        width: 60px; /* Fixed width for 5 stars */
+        width: 50px; /* Smaller width */
         height: 20px;
         margin-right: 4px;
     }
@@ -1525,21 +1525,22 @@
         outline: none;
     }
 
-    /* Position each user rating star exactly */
+    /* Position each user rating star exactly - closer together */
     #userRatingStars .star:nth-child(1) { left: 0px; }
-    #userRatingStars .star:nth-child(2) { left: 12px; }
-    #userRatingStars .star:nth-child(3) { left: 24px; }
-    #userRatingStars .star:nth-child(4) { left: 36px; }
-    #userRatingStars .star:nth-child(5) { left: 48px; }
+    #userRatingStars .star:nth-child(2) { left: 10px; }
+    #userRatingStars .star:nth-child(3) { left: 20px; }
+    #userRatingStars .star:nth-child(4) { left: 30px; }
+    #userRatingStars .star:nth-child(5) { left: 40px; }
 
     .rate-button {
-        font-size: 9px;
-        padding: 4px 8px;
-        min-height: 24px;
-        min-width: 40px;
-        border-radius: 3px;
+        font-size: 8px;
+        padding: 2px 4px; /* Much smaller padding */
+        min-height: 18px; /* Smaller height */
+        min-width: 28px; /* Smaller width */
+        border-radius: 2px;
         margin: 0;
         flex-shrink: 0;
+        line-height: 1;
     }
 }
 
@@ -1548,9 +1549,12 @@
         height: 28px;
     }
 
-    .rating-stars,
+    .rating-stars {
+        width: 45px; /* Even smaller */
+    }
+
     #userRatingStars {
-        width: 55px; /* Slightly smaller on very small screens */
+        width: 45px; /* Even smaller */
     }
 
     .rating-stars .star,
@@ -1559,28 +1563,28 @@
         width: 11px;
     }
 
-    /* Reposition for smaller stars */
+    /* Reposition for smaller stars - even closer */
     .rating-stars .star:nth-child(1),
     #userRatingStars .star:nth-child(1) { left: 0px; }
     .rating-stars .star:nth-child(2),
-    #userRatingStars .star:nth-child(2) { left: 11px; }
+    #userRatingStars .star:nth-child(2) { left: 9px; }
     .rating-stars .star:nth-child(3),
-    #userRatingStars .star:nth-child(3) { left: 22px; }
+    #userRatingStars .star:nth-child(3) { left: 18px; }
     .rating-stars .star:nth-child(4),
-    #userRatingStars .star:nth-child(4) { left: 33px; }
+    #userRatingStars .star:nth-child(4) { left: 27px; }
     .rating-stars .star:nth-child(5),
-    #userRatingStars .star:nth-child(5) { left: 44px; }
+    #userRatingStars .star:nth-child(5) { left: 36px; }
 
     .rating-text {
-        left: 60px;
+        left: 50px;
         font-size: 7px;
     }
 
     .rate-button {
-        font-size: 8px;
-        padding: 3px 6px;
-        min-height: 22px;
-        min-width: 35px;
+        font-size: 7px;
+        padding: 1px 3px; /* Even smaller */
+        min-height: 16px;
+        min-width: 24px;
     }
 }
 
