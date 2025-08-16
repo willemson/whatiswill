@@ -1418,97 +1418,138 @@
 }
 /* iPhone Specific Optimizations */
 @media (max-width: 768px) {
-    /* Rating Section Mobile - Fix star spacing */
+    /* Rating System - Static redesign */
 @media (max-width: 768px) {
     .rating-section {
-        margin-bottom: 10px;
-        padding-bottom: 6px;
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #eeeeee;
     }
 
     .rating-row {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        gap: 8px;
-        flex-wrap: nowrap;
+        display: block; /* Stack vertically instead */
+        width: 100%;
     }
 
     .rating-display {
         display: flex;
         align-items: center;
-        gap: 4px;
-        flex: 1;
-        min-width: 0;
+        justify-content: center;
+        margin-bottom: 8px;
+        gap: 6px;
     }
 
     .rating-stars {
-        display: flex;
-        gap: 1px; /* Much smaller gap to prevent overlap */
-        flex-shrink: 0;
+        display: inline-flex;
+        gap: 0; /* No gap at all */
+    }
+
+    .star {
+        font-size: 18px;
+        line-height: 1;
+        display: inline-block;
+        width: 20px; /* Fixed width */
+        text-align: center;
+        padding: 0;
+        margin: 0;
+        position: relative;
     }
 
     .rating-text {
-        font-size: 9px;
+        font-size: 11px;
+        margin-left: 8px;
         white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        margin-left: 2px;
     }
 
     .user-rating {
         display: flex;
         align-items: center;
-        gap: 4px;
-        flex-shrink: 0;
+        justify-content: center;
+        gap: 8px;
     }
 
     .user-rating-label {
-        font-size: 9px;
+        font-size: 10px;
         white-space: nowrap;
     }
 
     #userRatingStars {
-        display: flex;
-        gap: 1px; /* Consistent small gap */
-        flex-shrink: 0;
+        display: inline-flex;
+        gap: 0; /* No gap */
     }
 
-    .star {
-        font-size: 14px; /* Smaller stars */
-        line-height: 1;
-        display: inline-block;
-        width: auto;
+    #userRatingStars .star {
+        font-size: 18px;
+        width: 20px; /* Fixed width */
         text-align: center;
+        cursor: pointer;
     }
 
     .rate-button {
-        font-size: 10px;
-        padding: 4px 8px;
-        min-height: 32px;
-        min-width: 50px;
-        flex-shrink: 0;
+        font-size: 11px;
+        padding: 6px 12px;
+        min-height: 36px;
+        min-width: 60px;
+        border-radius: 4px;
+        margin-left: 8px;
     }
 }
 
 @media (max-width: 480px) {
-    .rating-stars {
-        gap: 0px; /* No gap on very small screens */
-    }
-
-    #userRatingStars {
-        gap: 0px;
+    .rating-display {
+        margin-bottom: 6px;
+        gap: 4px;
     }
 
     .star {
-        font-size: 12px; /* Even smaller */
+        font-size: 16px;
+        width: 18px;
+    }
+
+    #userRatingStars .star {
+        font-size: 16px;
+        width: 18px;
+    }
+
+    .rating-text {
+        font-size: 10px;
+        margin-left: 6px;
+    }
+
+    .user-rating {
+        gap: 6px;
+    }
+
+    .user-rating-label {
+        font-size: 9px;
+    }
+
+    .rate-button {
+        font-size: 10px;
+        padding: 5px 10px;
+        min-height: 32px;
+        min-width: 55px;
+        margin-left: 6px;
     }
 }
+
+/* Ensure stars don't have any inherited spacing */
+.rating-stars .star,
+#userRatingStars .star {
+    letter-spacing: 0 !important;
+    word-spacing: 0 !important;
+    font-family: inherit !important;
+    vertical-align: baseline !important;
+    border: none !important;
+    background: none !important;
+    box-shadow: none !important;
+}
     /* Profile Selector Mobile - Fix arrow alignment */
+/* Avatar Navigation - Fix right arrow positioning */
 @media (max-width: 768px) {
     .profile-selector {
-        width: 100%; /* Full width */
-        margin-right: 0; /* Remove margin */
+        width: calc(100% - 8px);
+        margin-right: 8px;
         padding: 6px;
         box-sizing: border-box;
     }
@@ -1516,25 +1557,36 @@
     .avatar-navigation {
         display: flex;
         align-items: center;
-        justify-content: space-between; /* Space between arrows */
-        gap: 8px;
+        justify-content: flex-start;
+        gap: 6px;
         width: 100%;
+        position: relative;
     }
 
     .avatar-row {
         display: flex;
         gap: 4px;
         overflow: hidden;
-        flex: 1; /* Take available space */
-        margin: 0 8px; /* Space from arrows */
+        width: 200px;
+        margin: 0 6px;
         justify-content: flex-start;
     }
 
+    #avatarPrev {
+        position: relative;
+        left: 0;
+    }
+
+    #avatarNext {
+        position: absolute;
+        right: 0;
+    }
+
     .avatar-arrow {
-        width: 32px;
-        height: 32px;
-        font-size: 14px;
-        flex-shrink: 0; /* Don't shrink */
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+        flex-shrink: 0;
         background: #e0e0e0;
         border: 1px solid #cccccc;
         border-radius: 2px;
@@ -1543,28 +1595,6 @@
         align-items: center;
         justify-content: center;
         color: #666666;
-    }
-
-    /* Remove the order/positioning that was causing issues */
-    #avatarPrev {
-        order: unset;
-    }
-
-    #avatarNext {
-        order: unset;
-        margin-left: unset;
-    }
-}
-
-@media (max-width: 480px) {
-    .avatar-arrow {
-        width: 28px;
-        height: 28px;
-        font-size: 12px;
-    }
-
-    .avatar-row {
-        margin: 0 6px;
     }
 }
 
