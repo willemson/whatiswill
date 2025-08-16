@@ -1430,7 +1430,238 @@
     flex: 1; /* Let it take available space */
     margin: 0 4px; /* Small margin from arrows */
 }
+/* iPhone Specific Optimizations */
+@media (max-width: 768px) {
+    /* Rating Section Mobile */
+    .rating-section {
+        margin-bottom: 10px;
+        padding-bottom: 6px;
+    }
 
+    .rating-row {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+    }
+
+    .rating-display {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .user-rating {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .star {
+        font-size: 18px; /* Larger for touch */
+    }
+
+    .rate-button {
+        font-size: 12px;
+        padding: 6px 12px;
+        min-height: 44px; /* Touch target */
+        min-width: 60px;
+    }
+
+    /* Comments Section Mobile */
+    .comments-section {
+        min-height: 150px;
+    }
+
+    .comments-list {
+        max-height: 120px;
+    }
+
+    .comment {
+        padding: 6px;
+        margin-bottom: 6px;
+    }
+
+    .comment-avatar {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+    }
+
+    .comment-author {
+        font-size: 11px;
+        margin-bottom: 3px;
+    }
+
+    .comment-text {
+        font-size: 11px;
+        line-height: 1.4;
+    }
+
+    .comment-date {
+        font-size: 9px;
+    }
+
+    /* Profile Selector Mobile */
+    .profile-selector {
+        width: calc(100% - 5px);
+        margin-right: 5px;
+        padding: 6px;
+    }
+
+    .profile-selector-label {
+        font-size: 10px;
+    }
+
+    .avatar-navigation {
+        gap: 6px;
+    }
+
+    .avatar-arrow {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+        min-height: 44px; /* Touch target */
+        min-width: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Move right arrow to the left on mobile */
+    .avatar-navigation {
+        justify-content: flex-start;
+        gap: 8px;
+    }
+
+    .avatar-row {
+        order: 2; /* Middle */
+        margin: 0 8px;
+        flex: none;
+        width: auto;
+        max-width: calc(100vw - 140px); /* Account for arrows and padding */
+    }
+
+    #avatarPrev {
+        order: 1; /* Left */
+    }
+
+    #avatarNext {
+        order: 3; /* Right, but closer to content */
+        margin-left: auto;
+    }
+
+    .avatar-choice {
+        width: 28px;
+        height: 28px;
+        font-size: 11px;
+        min-height: 44px; /* Touch target */
+        min-width: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Form Elements Mobile */
+    .comment-input,
+    .comment-textarea {
+        font-size: 16px; /* Prevents zoom on iOS */
+        padding: 8px 10px;
+        border-radius: 4px;
+        min-height: 44px; /* Touch target */
+    }
+
+    .comment-textarea {
+        height: 60px;
+        resize: none;
+    }
+
+    .comment-submit {
+        font-size: 14px;
+        padding: 12px;
+        min-height: 44px; /* Touch target */
+        border-radius: 4px;
+    }
+}
+
+/* Very Small Screens (iPhone SE, etc.) */
+@media (max-width: 480px) {
+    .rating-row {
+        gap: 6px;
+    }
+
+    .star {
+        font-size: 16px;
+    }
+
+    .profile-selector {
+        width: calc(100% - 3px);
+        margin-right: 3px;
+        padding: 4px;
+    }
+
+    .avatar-arrow {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+        min-height: 40px;
+        min-width: 40px;
+    }
+
+    .avatar-choice {
+        width: 24px;
+        height: 24px;
+        font-size: 10px;
+        min-height: 40px;
+        min-width: 40px;
+    }
+
+    .avatar-row {
+        max-width: calc(100vw - 120px);
+    }
+
+    .comment-input,
+    .comment-textarea,
+    .comment-submit {
+        font-size: 16px; /* Prevents zoom */
+    }
+}
+
+/* Touch-specific improvements */
+@media (hover: none) and (pointer: coarse) {
+    /* Ensure all interactive elements have proper touch targets */
+    .star,
+    .avatar-choice,
+    .avatar-arrow,
+    .rate-button,
+    .comment-submit {
+        min-height: 44px;
+        min-width: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Remove hover effects that don't work on touch */
+    .avatar-choice:hover,
+    .avatar-arrow:hover,
+    .rate-button:hover {
+        transform: none;
+        background: inherit;
+    }
+
+    /* Add active states for touch feedback */
+    .avatar-choice:active {
+        transform: scale(0.95);
+        background-color: rgba(64, 128, 255, 0.1);
+    }
+
+    .avatar-arrow:active {
+        transform: scale(0.95);
+    }
+
+    .rate-button:active,
+    .comment-submit:active {
+        transform: scale(0.98);
+    }
+}
         
     </style>
 </head>
@@ -3155,33 +3386,37 @@ function calculateAvatarsPerPage() {
     const avatarRow = document.getElementById('avatarRow');
     const arrows = document.querySelectorAll('.avatar-arrow');
     
-    // Use default width of 366 if elements aren't ready or width is 0
+    // Check if we're on mobile
+    const isMobile = window.innerWidth <= 768;
+    
+    // Use different default widths for mobile vs desktop
+    const defaultWidth = isMobile ? 300 : 366;
+    
     const totalWidth = (avatarNavigation && avatarNavigation.offsetWidth > 0) 
         ? avatarNavigation.offsetWidth 
-        : 414;
+        : defaultWidth;
     
-    if (!avatarRow || arrows.length < 2) return 9; // fallback
+    if (!avatarRow || arrows.length < 2) return isMobile ? 6 : 9; // Different fallbacks
     
-    // Subtract arrow widths and gaps more precisely
-    const arrowWidth = arrows.length >= 2 ? arrows[0].offsetWidth * 2 : 40; // fallback to 40px for 2 arrows
-    const navigationGaps = 8; // gaps in avatar-navigation (4px each side)
+    // Adjust calculations for mobile
+    const arrowWidth = arrows.length >= 2 ? arrows[0].offsetWidth * 2 : (isMobile ? 80 : 40);
+    const navigationGaps = isMobile ? 16 : 8; // More spacing on mobile
+    const safetyMargin = isMobile ? 16 : 0; // Extra margin on mobile
     
     // Available width for avatars
-    const availableWidth = totalWidth - arrowWidth - navigationGaps;
+    const availableWidth = totalWidth - arrowWidth - navigationGaps - safetyMargin;
     
-    // Each avatar takes 24px width + 4px gap, but last avatar has no gap
-    const avatarWidth = 24;
+    // Avatar dimensions adjust for mobile
+    const avatarWidth = isMobile ? 28 : 24;
     const avatarGap = 4;
     
-    // Calculate: if we have N avatars, we need N*24 + (N-1)*4 pixels
-    // So: availableWidth = N*24 + (N-1)*4 = N*28 - 4
-    // Therefore: N = (availableWidth + 4) / 28
     const avatarsPerPage = Math.floor((availableWidth + avatarGap) / (avatarWidth + avatarGap));
     
-    // Make sure we have at least 1 and not more than total avatars
-    const result = Math.max(1, Math.min(avatarsPerPage, 29));
+    // Different limits for mobile vs desktop
+    const maxAvatars = isMobile ? 8 : 29;
+    const result = Math.max(1, Math.min(avatarsPerPage, maxAvatars));
     
-    console.log('Total width:', totalWidth, 'Available width:', availableWidth, 'Calculated avatars:', result);
+    console.log('Mobile:', isMobile, 'Total width:', totalWidth, 'Available width:', availableWidth, 'Calculated avatars:', result);
     return result;
 }
 
