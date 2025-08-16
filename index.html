@@ -893,12 +893,15 @@
         }
 
         /* Mobile video controls */
+/* Mobile video controls - Fixed timeline */
 @media (max-width: 768px) {
     .retro-controls {
         padding: 4px 6px;
         gap: 4px;
-        height: 36px; /* Fixed height */
+        height: 36px;
         box-sizing: border-box;
+        display: flex;
+        align-items: center;
     }
 
     .retro-button {
@@ -907,21 +910,31 @@
         font-size: 14px;
         border-radius: 2px;
         flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .time-container {
         gap: 2px;
         min-width: 80px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
     }
 
     .time-display {
         font-size: 10px;
-        line-height: 28px; /* Match button height */
+        line-height: 1;
+        display: block;
+        height: auto;
     }
 
     .volume-container {
         gap: 3px;
         align-items: center;
+        flex-shrink: 0;
+        display: flex;
     }
 
     .volume-icon {
@@ -929,12 +942,20 @@
         height: 28px;
         font-size: 12px;
         flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .volume-slider {
         width: 40px;
         height: 12px;
         flex-shrink: 0;
+        position: relative;
+        cursor: pointer;
+        background: linear-gradient(to bottom, #ffffff, #f0f0f0);
+        border: 1px inset #d0d0d0;
+        border-radius: 1px;
     }
 
     .progress-container {
@@ -942,6 +963,46 @@
         height: 16px;
         flex: 1;
         min-width: 60px;
+        position: relative;
+        cursor: pointer;
+        background: linear-gradient(to bottom, #ffffff, #f0f0f0);
+        border: 1px inset #d0d0d0;
+        border-radius: 1px;
+        display: flex;
+        align-items: center;
+    }
+
+    .progress-bar {
+        height: 100%;
+        background: linear-gradient(to bottom, #4080ff, #2060df);
+        width: 0%;
+        transition: width 0.1s linear;
+        position: relative;
+        border-radius: 1px;
+    }
+
+    .progress-handle {
+        position: absolute;
+        right: -2px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 4px;
+        height: 8px;
+        background: linear-gradient(to bottom, #ffffff, #e0e0e0);
+        border: 1px solid #a0a0a0;
+        cursor: grab;
+        border-radius: 1px;
+    }
+
+    .buffer-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background: linear-gradient(to bottom, #d0d0d0, #c0c0c0);
+        width: 0%;
+        transition: width 0.3s;
+        border-radius: 1px;
     }
 
     .fullscreen-button {
@@ -949,6 +1010,10 @@
         height: 28px;
         font-size: 10px;
         flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 2px;
     }
 
     .quality-selector {
@@ -964,12 +1029,12 @@
     }
 }
 
-/* Very small screens (phones in portrait) */
+/* Very small screens */
 @media (max-width: 480px) {
     .retro-controls {
         padding: 3px 4px;
         gap: 3px;
-        height: 32px; /* Smaller for very small screens */
+        height: 32px;
     }
 
     .retro-button {
@@ -978,9 +1043,12 @@
         font-size: 12px;
     }
 
+    .time-container {
+        min-width: 70px;
+    }
+
     .time-display {
         font-size: 9px;
-        line-height: 24px;
     }
 
     .volume-icon {
@@ -1012,32 +1080,15 @@
     }
 }
 
-/* Remove the conflicting touch-friendly rules for video controls */
+/* Remove conflicting touch rules for video controls */
 @media (hover: none) and (pointer: coarse) {
-    /* Keep touch targets for other elements but not video controls */
-    .star,
-    .avatar-choice,
-    .avatar-arrow,
-    .rate-button,
-    .comment-submit {
-        min-height: 44px;
-        min-width: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /* Remove the min-height rule for video controls */
     .retro-button,
     .fullscreen-button,
-    .volume-icon {
-        min-height: unset !important;
-        min-width: unset !important;
-    }
-
+    .volume-icon,
     .progress-container,
     .volume-slider {
         min-height: unset !important;
+        min-width: unset !important;
     }
 }
 /* Fix video control alignment issues */
