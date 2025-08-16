@@ -1418,7 +1418,7 @@
 }
 /* iPhone Specific Optimizations */
 @media (max-width: 768px) {
-    /* Rating System - Static redesign */
+/* Rating System - Compact single line design */
 @media (max-width: 768px) {
     .rating-section {
         margin-bottom: 12px;
@@ -1427,113 +1427,123 @@
     }
 
     .rating-row {
-        display: block; /* Stack vertically instead */
-        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 4px;
+        flex-wrap: nowrap;
     }
 
     .rating-display {
         display: flex;
         align-items: center;
-        justify-content: center;
-        margin-bottom: 8px;
-        gap: 6px;
+        gap: 3px;
+        flex: 1;
+        min-width: 0;
     }
 
     .rating-stars {
         display: inline-flex;
-        gap: 0; /* No gap at all */
+        gap: 0; /* No gap between stars */
     }
 
     .star {
-        font-size: 18px;
+        font-size: 12px; /* Smaller stars */
         line-height: 1;
         display: inline-block;
-        width: 20px; /* Fixed width */
+        width: 14px; /* Compact width */
         text-align: center;
         padding: 0;
         margin: 0;
-        position: relative;
     }
 
     .rating-text {
-        font-size: 11px;
-        margin-left: 8px;
+        font-size: 8px; /* Very small text */
+        margin-left: 2px;
         white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 80px; /* Limit width */
     }
 
     .user-rating {
         display: flex;
         align-items: center;
-        justify-content: center;
-        gap: 8px;
+        gap: 2px; /* Minimal gap */
+        flex-shrink: 0;
     }
 
     .user-rating-label {
-        font-size: 10px;
+        font-size: 8px; /* Very small */
         white-space: nowrap;
     }
 
     #userRatingStars {
         display: inline-flex;
-        gap: 0; /* No gap */
+        gap: 0;
     }
 
     #userRatingStars .star {
-        font-size: 18px;
-        width: 20px; /* Fixed width */
+        font-size: 12px; /* Smaller stars */
+        width: 14px; /* Compact width */
         text-align: center;
         cursor: pointer;
     }
 
     .rate-button {
-        font-size: 11px;
-        padding: 6px 12px;
-        min-height: 36px;
-        min-width: 60px;
-        border-radius: 4px;
-        margin-left: 8px;
+        font-size: 9px; /* Smaller font */
+        padding: 3px 6px; /* Minimal padding */
+        min-height: 24px; /* Smaller height */
+        min-width: 35px; /* Smaller width */
+        border-radius: 3px;
+        margin-left: 2px;
     }
 }
 
 @media (max-width: 480px) {
+    .rating-row {
+        gap: 2px; /* Even smaller gap */
+    }
+
     .rating-display {
-        margin-bottom: 6px;
-        gap: 4px;
+        gap: 2px;
     }
 
     .star {
-        font-size: 16px;
-        width: 18px;
+        font-size: 11px;
+        width: 12px;
     }
 
     #userRatingStars .star {
-        font-size: 16px;
-        width: 18px;
+        font-size: 11px;
+        width: 12px;
     }
 
     .rating-text {
-        font-size: 10px;
-        margin-left: 6px;
+        font-size: 7px;
+        margin-left: 1px;
+        max-width: 60px;
     }
 
     .user-rating {
-        gap: 6px;
+        gap: 1px;
     }
 
     .user-rating-label {
-        font-size: 9px;
+        font-size: 7px;
     }
 
     .rate-button {
-        font-size: 10px;
-        padding: 5px 10px;
-        min-height: 32px;
-        min-width: 55px;
-        margin-left: 6px;
+        font-size: 8px;
+        padding: 2px 4px;
+        min-height: 20px;
+        min-width: 30px;
+        margin-left: 1px;
     }
 }
 
-/* Ensure stars don't have any inherited spacing */
+/* Ensure absolutely no spacing issues */
 .rating-stars .star,
 #userRatingStars .star {
     letter-spacing: 0 !important;
@@ -1543,6 +1553,7 @@
     border: none !important;
     background: none !important;
     box-shadow: none !important;
+    outline: none !important;
 }
     /* Profile Selector Mobile - Fix arrow alignment */
 /* Avatar Navigation - Fix right arrow positioning */
@@ -1567,7 +1578,7 @@
         display: flex;
         gap: 4px;
         overflow: hidden;
-        width: 200px;
+        width: 128px; /* Width for exactly 4 avatars: 4*28px + 3*4px gaps */
         margin: 0 6px;
         justify-content: flex-start;
     }
@@ -3562,34 +3573,27 @@ function calculateAvatarsPerPage() {
     // Check if we're on mobile
     const isMobile = window.innerWidth <= 768;
     
-    // Use different default widths for mobile vs desktop
-    const defaultWidth = isMobile ? 300 : 366;
+    // Force 4 avatars on mobile, calculate for desktop
+    if (isMobile) {
+        return 4; // Fixed 4 avatars on mobile
+    }
     
+    // Desktop calculation (existing logic)
+    const defaultWidth = 366;
     const totalWidth = (avatarNavigation && avatarNavigation.offsetWidth > 0) 
         ? avatarNavigation.offsetWidth 
         : defaultWidth;
     
-    if (!avatarRow || arrows.length < 2) return isMobile ? 6 : 9; // Different fallbacks
+    if (!avatarRow || arrows.length < 2) return 9;
     
-    // Adjust calculations for mobile
-    const arrowWidth = arrows.length >= 2 ? arrows[0].offsetWidth * 2 : (isMobile ? 80 : 40);
-    const navigationGaps = isMobile ? 16 : 8; // More spacing on mobile
-    const safetyMargin = isMobile ? 16 : 0; // Extra margin on mobile
-    
-    // Available width for avatars
-    const availableWidth = totalWidth - arrowWidth - navigationGaps - safetyMargin;
-    
-    // Avatar dimensions adjust for mobile
-    const avatarWidth = isMobile ? 28 : 24;
+    const arrowWidth = arrows.length >= 2 ? arrows[0].offsetWidth * 2 : 40;
+    const navigationGaps = 8;
+    const availableWidth = totalWidth - arrowWidth - navigationGaps;
+    const avatarWidth = 24;
     const avatarGap = 4;
-    
     const avatarsPerPage = Math.floor((availableWidth + avatarGap) / (avatarWidth + avatarGap));
+    const result = Math.max(1, Math.min(avatarsPerPage, 29));
     
-    // Different limits for mobile vs desktop
-    const maxAvatars = isMobile ? 8 : 29;
-    const result = Math.max(1, Math.min(avatarsPerPage, maxAvatars));
-    
-    console.log('Mobile:', isMobile, 'Total width:', totalWidth, 'Available width:', availableWidth, 'Calculated avatars:', result);
     return result;
 }
 
