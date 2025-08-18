@@ -2,3706 +2,857 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0">
-    <title>WillTube - Will's Digital Video Repository</title>
-    <meta name="description" content="Will's personal video collection featuring high-quality content up to 4K resolution">
-    <meta name="keywords" content="videos, 4K, streaming, portfolio, tutorials">
-    
-    <!-- HLS.js for broader browser compatibility -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.4.12/hls.min.js"></script>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Guestbook</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 11px;
-            background: linear-gradient(135deg, #f8f8f8 0%, #e8e8e8 100%);
-            color: #333333;
-            line-height: 1.4;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 10px;
-            background: #ffffff;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            border-left: 1px solid #dddddd;
-            border-right: 1px solid #dddddd;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+            font-family: "Courier New", monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             min-height: 100vh;
         }
 
-        /* Header Section */
-        .header {
-            text-align: center;
-            padding: 20px 0 15px 0;
-        }
-
-        .logo {
-            margin-bottom: 8px;
-        }
-
-        .logo img {
-            max-width: 300px;
-            height: auto;
-        }
-
-        .subtitle {
-            font-size: 13px;
-            color: #666666;
-            margin-bottom: 20px;
-        }
-
-        /* Instructions Section */
-        .instructions {
-            background: linear-gradient(to bottom, #f0f8ff, #e6f3ff);
-            border: 2px solid #4080ff;
-            border-radius: 3px;
-            padding: 12px;
-            margin-bottom: 15px;
-            font-size: 11px;
-            text-align: left;
-            box-shadow: 0 2px 5px rgba(64,128,255,0.1);
-        }
-
-        .instructions h3 {
-            font-size: 12px;
-            margin-bottom: 8px;
-            color: #004080;
-            border-bottom: 1px solid #cce6ff;
-            padding-bottom: 4px;
-        }
-
-        /* Search Section */
-        .search-section {
-            text-align: center;
-            margin-bottom: 20px;
-            padding: 15px 0;
-        }
-
-        .search-box {
-            width: 300px;
-            height: 22px;
-            border: 2px inset #e0e0e0;
-            padding: 2px 5px;
-            font-size: 11px;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #ffffff;
-        }
-
-        .search-box:focus {
-            border-color: #4080ff;
-            outline: none;
-            box-shadow: 0 0 5px rgba(64,128,255,0.3);
-        }
-
-        .search-button {
-            height: 26px;
-            padding: 0 12px;
-            margin-left: 5px;
-            background: linear-gradient(to bottom, #4080ff, #2060df);
-            border: 1px outset #4080ff;
-            font-size: 11px;
-            cursor: pointer;
-            font-family: Arial, Helvetica, sans-serif;
-            color: #ffffff;
-            font-weight: bold;
-        }
-
-        .search-button:hover {
-            background: linear-gradient(to bottom, #5090ff, #3070ef);
-        }
-
-        .search-button:active {
-            border: 1px inset #2060df;
-            background: linear-gradient(to bottom, #2060df, #4080ff);
-        }
-
-        /* Featured Section */
-        .featured-section {
-            margin-bottom: 20px;
-        }
-
-        .section-title {
-            background: linear-gradient(to bottom, #cc0000, #990000);
-            border: 1px solid #660000;
-            padding: 6px 12px;
-            font-size: 12px;
-            font-weight: bold;
-            color: #ffffff;
-            margin-bottom: 10px;
-            text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-            border-radius: 2px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .featured-videos {
-            display: flex;
-            gap: 22px;
-            overflow-x: auto;
-            padding: 15px;
-            background: linear-gradient(to bottom, #f8f8f8, #f0f0f0);
-            border: 1px solid #dddddd;
-            border-radius: 3px;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .featured-video {
-            flex: 0 0 auto;
-            width: 210px;
-            text-align: center;
-            cursor: pointer;
-            background: #ffffff;
-            border: 1px solid #dddddd;
-            border-radius: 2px;
-            padding: 8px;
-            transition: all 0.2s;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .featured-video:hover {
-            border-color: #4080ff;
-            box-shadow: 0 2px 8px rgba(64,128,255,0.3);
-            transform: translateY(-2px);
-        }
-
-        .featured-thumbnail {
-            width: 194px;
-            height: 146px;
-            border: 1px solid #cccccc;
-            background: #f5f5f5;
-            margin-bottom: 5px;
+        .notebook-container {
             position: relative;
-            overflow: hidden;
-            border-radius: 2px;
+            width: 600px;
+            height: 400px;
+            perspective: 1000px;
         }
 
-        .featured-thumbnail img {
+        .notebook {
+            position: relative;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            background: linear-gradient(45deg, #8B4513 0%, #A0522D 50%, #8B4513 100%);
+            border: 3px solid #654321;
+            border-radius: 8px;
+            box-shadow: 
+                0 8px 16px rgba(0,0,0,0.3),
+                inset 0 2px 4px rgba(255,255,255,0.1);
         }
 
-        .featured-title {
-            font-size: 10px;
-            color: #cc0000;
-            text-decoration: none;
-            margin-bottom: 3px;
-            line-height: 1.2;
-            font-weight: bold;
-        }
-
-        .featured-info {
-            font-size: 9px;
-            color: #666666;
-        }
-
-        /* Video Player Section */
-        .player-section {
-            margin-bottom: 25px;
-            display: none;
-        }
-
-        .player-container {
-            border: 1px solid #cccccc;
-            background: #ffffff;
-            overflow: hidden;
-        }
-
-        .player-content {
-            display: flex;
-            gap: 30px;
-            padding: 18px;
-        }
-
-        .video-player {
-            flex: 0 0 640px;
-            height: 480px;
-            background: #000000;
-            border: 1px solid #999999;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .video-element {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            image-rendering: high-quality;
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: optimize-quality;
-        }
-
-        /* Custom retro video controls */
-        .video-element::-webkit-media-controls-panel {
-            background: linear-gradient(to bottom, #f0f0f0, #d0d0d0);
-            border-top: 1px solid #999999;
-        }
-
-        .video-element::-webkit-media-controls-current-time-display,
-        .video-element::-webkit-media-controls-time-remaining-display {
-            font-family: 'Courier New', monospace;
-            font-size: 10px;
-            color: #333333;
-        }
-
-        /* Quality selector */
-        .quality-selector {
+        .spiral-binding {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            z-index: 100;
+            left: 295px;
+            top: 20px;
+            width: 10px;
+            height: 360px;
+            background: linear-gradient(to bottom, 
+                #C0C0C0 0%, #C0C0C0 8%, 
+                transparent 8%, transparent 12%);
+            background-size: 100% 25px;
+            border: 1px solid #999;
+            border-radius: 5px;
+            z-index: 10;
         }
 
-        .quality-button {
-            background: linear-gradient(to bottom, rgba(240,240,240,0.9), rgba(220,220,220,0.9));
-            border: 1px outset #d0d0d0;
-            padding: 4px 8px;
-            font-size: 9px;
-            cursor: pointer;
-            color: #333333;
-            border-radius: 2px;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        .quality-button:hover {
-            background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(240,240,240,0.9));
-        }
-
-        .quality-dropdown {
+        .spiral-rings {
             position: absolute;
-            top: 100%;
-            right: 0;
-            background: #ffffff;
-            border: 1px solid #cccccc;
-            border-radius: 2px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            display: none;
-            min-width: 80px;
-        }
-
-        .quality-option {
-            padding: 4px 8px;
-            font-size: 9px;
-            cursor: pointer;
-            border-bottom: 1px solid #eeeeee;
-        }
-
-        .quality-option:last-child {
-            border-bottom: none;
-        }
-
-        .quality-option:hover {
-            background: #f0f0f0;
-        }
-
-        .quality-option.active {
-            background: #e0e8ff;
-            color: #0066cc;
-        }
-
-        /* Retro overlay controls for cross-browser compatibility */
-        .retro-controls {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to bottom, #f5f5f5, #e8e8e8);
-            border-top: 1px solid #cccccc;
-            padding: 4px 6px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 10px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            height: 24px;
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
-        }
-
-        .video-player:hover .retro-controls {
-            opacity: 1;
-        }
-
-        .retro-button {
-            width: 20px;
-            height: 16px;
-            background: linear-gradient(to bottom, #f8f8f8, #e0e0e0);
-            border: 1px outset #d0d0d0;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            color: #333333;
-            transition: all 0.1s;
-            border-radius: 1px;
-        }
-
-        .retro-button:hover {
-            background: linear-gradient(to bottom, #ffffff, #f0f0f0);
-            border-color: #b0b0b0;
-        }
-
-        .retro-button:active {
-            border: 1px inset #d0d0d0;
-            background: linear-gradient(to bottom, #e0e0e0, #f0f0f0);
-        }
-
-        .progress-container {
-            flex: 1;
-            height: 12px;
-            background: linear-gradient(to bottom, #ffffff, #f0f0f0);
-            border: 1px inset #d0d0d0;
-            margin: 0 4px;
-            position: relative;
-            cursor: pointer;
-            border-radius: 1px;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(to bottom, #4080ff, #2060df);
-            width: 0%;
-            transition: width 0.1s linear;
-            position: relative;
-            border-radius: 1px;
-        }
-
-        .progress-handle {
-            position: absolute;
-            right: -2px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 4px;
-            height: 8px;
-            background: linear-gradient(to bottom, #ffffff, #e0e0e0);
-            border: 1px solid #a0a0a0;
-            cursor: grab;
-            border-radius: 1px;
-        }
-
-        .progress-handle:active {
-            cursor: grabbing;
-        }
-
-        .time-display {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 9px;
-            color: #333333;
-            background: transparent;
-            padding: 0;
-            line-height: 14px;
-            white-space: nowrap;
-        }
-
-        .time-container {
-            display: flex;
-            align-items: center;
-            gap: 1px;
-            min-width: fit-content;
-        }
-
-        .volume-container {
-            display: flex;
-            align-items: center;
-            gap: 3px;
-        }
-
-        .volume-icon {
+            left: 292px;
+            top: 25px;
             width: 16px;
-            height: 14px;
-            background: linear-gradient(to bottom, #f8f8f8, #e0e0e0);
-            border: 1px outset #d0d0d0;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 8px;
-            color: #333333;
-            border-radius: 1px;
+            height: 370px;
+            z-index: 11;
         }
 
-        .volume-icon:hover {
-            background: linear-gradient(to bottom, #ffffff, #f0f0f0);
-        }
-
-        .volume-slider {
-            width: 50px;
-            height: 8px;
-            background: linear-gradient(to bottom, #ffffff, #f0f0f0);
-            border: 1px inset #d0d0d0;
-            position: relative;
-            cursor: pointer;
-            border-radius: 1px;
-        }
-
-        .volume-bar {
-            height: 100%;
-            background: linear-gradient(to bottom, #40c040, #20a020);
-            width: 80%;
-            position: relative;
-            border-radius: 1px;
-        }
-
-        .volume-handle {
-            position: absolute;
-            right: -1px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 3px;
-            height: 6px;
-            background: linear-gradient(to bottom, #ffffff, #e0e0e0);
-            border: 1px solid #a0a0a0;
-            cursor: grab;
-            border-radius: 1px;
-        }
-
-        .fullscreen-button {
-            width: 50px;
+        .ring {
+            width: 16px;
             height: 16px;
-            background: linear-gradient(to bottom, #f8f8f8, #e0e0e0);
-            border: 1px outset #d0d0d0;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 9px;
-            color: #333333;
-            border-radius: 1px;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        .fullscreen-button:hover {
-            background: linear-gradient(to bottom, #ffffff, #f0f0f0);
-            border-color: #b0b0b0;
-        }
-
-        .fullscreen-button:active {
-            border: 1px inset #d0d0d0;
-            background: linear-gradient(to bottom, #e0e0e0, #f0f0f0);
-        }
-
-        /* Buffer indicator */
-        .buffer-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            background: linear-gradient(to bottom, #d0d0d0, #c0c0c0);
-            width: 0%;
-            transition: width 0.3s;
-            border-radius: 1px;
-        }
-
-        /* Loading spinner */
-        .loading-spinner {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 32px;
-            height: 32px;
-            border: 3px solid #cccccc;
-            border-top: 3px solid #0066cc;
+            border: 2px solid #888;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
-            display: none;
+            background: linear-gradient(45deg, #C0C0C0, #E0E0E0);
+            margin-bottom: 8px;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
         }
 
-        @keyframes spin {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
-        /* Pixelated effect overlay */
-        .pixel-overlay {
+        .page {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            width: 280px;
+            height: 360px;
             background: 
-                linear-gradient(90deg, transparent 98%, rgba(0,0,0,0.1) 100%),
-                linear-gradient(180deg, transparent 98%, rgba(0,0,0,0.1) 100%);
-            background-size: 2px 2px;
-            pointer-events: none;
-            opacity: 0.3;
-        }
-
-        .video-info-panel {
-            flex: 1;
-            min-width: 330px;
-        }
-
-        .video-title-playing {
-            font-size: 13px;
-            font-weight: bold;
-            margin-bottom: 8px;
-            color: #333333;
-            line-height: 1.2;
-        }
-
-        .video-stats {
-            font-size: 10px;
-            color: #666666;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #eeeeee;
-        }
-
-        .video-description-playing {
-            font-size: 11px;
-            color: #666666;
-            line-height: 1.4;
-            margin-bottom: 12px;
-        }
-
-        .video-actions {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .action-button {
-            font-size: 10px;
-            padding: 3px 8px;
-            border: 1px solid #cccccc;
-            background: #f8f8f8;
-            color: #333333;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .action-button:hover {
-            background: #eeeeee;
-            border-color: #999999;
-        }
-
-        /* Responsive player */
-        @media (max-width: 600px) {
-            .player-content {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .video-player {
-                flex: none;
-                width: 100%;
-                height: 200px;
-            }
-        }
-
-        /* Gallery Section */
-        .gallery-section {
-            margin-bottom: 30px;
-        }
-
-        .category-filters {
-            display: flex;
-            gap: 8px;
-            margin: 10px 0 15px 0;
-            flex-wrap: wrap;
-        }
-
-        .category-button {
-            padding: 4px 12px;
-            background: linear-gradient(to bottom, #f8f8f8, #e0e0e0);
-            border: 1px outset #d0d0d0;
-            cursor: pointer;
-            font-size: 10px;
-            color: #333333;
-            font-family: Arial, Helvetica, sans-serif;
-            transition: all 0.1s;
-            border-radius: 1px;
-        }
-
-        .category-button:hover {
-            background: linear-gradient(to bottom, #ffffff, #f0f0f0);
-            border-color: #b0b0b0;
-        }
-
-        .category-button.active {
-            background: linear-gradient(to bottom, #4080ff, #2060df);
-            color: white;
-            border: 1px inset #2060df;
-        }
-
-        .category-button:active {
-            border: 1px inset #d0d0d0;
-            background: linear-gradient(to bottom, #e0e0e0, #f0f0f0);
-        }
-
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 10px;
-        }
-
-        .video-item {
-            cursor: pointer;
-            border: 1px solid #ffffff;
-            padding: 8px;
-            transition: border-color 0.2s;
-        }
-
-        .video-item:hover {
-            border: 1px solid #cccccc;
-            background: #fafafa;
-        }
-
-        .video-item.hidden {
-            display: none;
-        }
-
-        .video-thumbnail {
-            width: 100%;
-            height: 168px;
-            border: 1px solid #cccccc;
-            background: #f5f5f5;
-            margin-bottom: 8px;
+                linear-gradient(to right, #FF69B4 0px, #FF69B4 1px, transparent 1px),
+                linear-gradient(to bottom, transparent 19px, #87CEEB 20px, #87CEEB 21px, transparent 21px),
+                #FFFEF7;
+            background-size: 100% 100%, 100% 22px, 100% 100%;
+            border: 2px solid #DDD;
+            border-radius: 4px;
+            top: 20px;
+            padding: 20px 20px 20px 30px;
+            box-sizing: border-box;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.6s ease-in-out;
+            transform-origin: center;
             overflow: hidden;
+            line-height: 22px;
+        }
+
+        .page-left {
+            left: 20px;
+            transform-origin: right center;
+        }
+
+        .page-right {
+            right: 20px;
+            transform-origin: left center;
+        }
+
+        .page-content {
+            height: 100%;
+            overflow: hidden;
+            font-size: 14px;
+            line-height: 22px;
+            color: #333;
+            font-family: 'Caveat', cursive;
+            margin-top: -1px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .instructions {
+            text-align: center;
+            font-family: 'Caveat', cursive;
+        }
+
+        .instructions h2 {
+            color: #8B4513;
+            font-size: 18px;
+            margin: 0 0 22px 0;
+            text-decoration: underline;
+            line-height: 22px;
+            height: 22px;
+        }
+
+        .instructions p {
+            margin: 0 0 22px 0;
+            line-height: 22px;
+            text-align: left;
+        }
+
+        .form-container {
+            height: 100%;
+        }
+
+        .form-container h2 {
+            color: #8B4513;
+            font-size: 18px;
+            margin: 0 0 22px 0;
+            text-align: center;
+            text-decoration: underline;
+            font-family: 'Caveat', cursive;
+            line-height: 22px;
+            height: 22px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
             position: relative;
         }
 
-        .video-thumbnail img {
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0;
+            color: #654321;
+            font-size: 13px;
+            font-family: 'Caveat', cursive;
+            line-height: 22px;
+            height: 22px;
+        }
+
+        .form-group input,
+        .form-group textarea {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            padding: 0;
+            margin: 0;
+            border: none;
+            background: transparent;
+            font-family: 'Caveat', cursive;
+            font-size: 14px;
+            color: #333;
+            line-height: 22px;
+            outline: none;
+            box-sizing: border-box;
+            resize: none;
+            vertical-align: baseline;
         }
 
-        .video-info h4 {
-            font-size: 11px;
-            color: #0066cc;
+        .form-group input {
+            height: 22px;
+            border-bottom: 1px dotted transparent;
+        }
+
+        .form-group input:focus {
+            border-bottom: 1px dotted #999;
+        }
+
+        .form-group textarea {
+            height: 176px;
+            overflow: hidden;
+            border-bottom: 1px dotted transparent;
+        }
+
+        .form-group textarea:focus {
+            border-bottom: 1px dotted #999;
+        }
+
+        .submit-link {
+            color: #8B4513;
             text-decoration: underline;
-            margin-bottom: 4px;
-            line-height: 1.2;
+            cursor: pointer;
+            font-family: 'Caveat', cursive;
+            font-size: 14px;
+            font-weight: bold;
+            background: none;
+            border: none;
+            padding: 0;
+            margin: 0;
+            line-height: 22px;
+            display: inline;
         }
 
-        .video-description {
+        .submit-link:hover {
+            color: #654321;
+        }
+
+        .submit-link:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .navigation {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            background: linear-gradient(45deg, #8B4513, #A0522D);
+            color: #FFFEF7;
+            border: 2px solid #654321;
+            padding: 8px 12px;
+            font-family: "Courier New", monospace;
             font-size: 10px;
-            color: #666666;
-            line-height: 1.3;
+            cursor: pointer;
+            border-radius: 3px;
+            font-weight: bold;
         }
 
-        .video-meta {
-            font-size: 9px;
-            color: #999999;
-            margin-top: 4px;
+        .nav-btn:hover {
+            background: linear-gradient(45deg, #A0522D, #8B4513);
         }
 
-        .category-tag {
-            display: inline-block;
-            background: #f0f0f0;
-            border: 1px solid #cccccc;
-            padding: 1px 4px;
-            font-size: 8px;
-            color: #666666;
-            margin-top: 2px;
-            border-radius: 1px;
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
-        /* Footer */
-        .footer {
-            border-top: 1px solid #cccccc;
-            padding: 15px 0;
+        .page-number {
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            font-size: 10px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .guest-entries {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .guest-entries h2 {
+            color: #8B4513;
+            font-size: 18px;
+            margin: 0 0 22px 0;
             text-align: center;
-            font-size: 10px;
-            color: #666666;
-            margin-top: 30px;
+            text-decoration: underline;
+            font-family: 'Caveat', cursive;
+            line-height: 22px;
+            height: 22px;
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 5px;
-            }
-
-            .header {
-                padding: 15px 0 10px 0;
-            }
-
-            .logo-placeholder {
-                width: 250px;
-                height: 60px;
-                font-size: 10px;
-            }
-
-            .subtitle {
-                font-size: 12px;
-                margin-bottom: 15px;
-            }
-
-            .instructions {
-                padding: 10px;
-                font-size: 10px;
-                margin-bottom: 10px;
-            }
-
-            .instructions h3 {
-                font-size: 11px;
-                margin-bottom: 6px;
-            }
-
-            .search-section {
-                padding: 10px 0;
-                margin-bottom: 15px;
-            }
-
-            .search-box {
-                width: 250px;
-                height: 28px;
-                font-size: 12px;
-            }
-
-            .search-button {
-                height: 32px;
-                padding: 0 10px;
-                font-size: 10px;
-            }
-
-            .section-title {
-                padding: 4px 8px;
-                font-size: 11px;
-                margin-bottom: 8px;
-            }
-
-            .featured-videos {
-                padding: 8px;
-                gap: 10px;
-            }
-
-            .featured-video {
-                width: 120px;
-                padding: 4px;
-            }
-
-            .featured-thumbnail {
-                width: 112px;
-                height: 84px;
-            }
-
-            .featured-title {
-                font-size: 9px;
-                margin-bottom: 2px;
-            }
-
-            .featured-info {
-                font-size: 8px;
-            }
-
-            .category-filters {
-                gap: 5px;
-                margin: 8px 0 10px 0;
-            }
-
-            .category-button {
-                padding: 3px 8px;
-                font-size: 9px;
-            }
-
-            .video-grid {
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-                gap: 10px;
-            }
-
-            .video-item {
-                padding: 6px;
-            }
-
-            .video-thumbnail {
-                height: 80px;
-            }
-
-            .video-info h4 {
-                font-size: 10px;
-                margin-bottom: 3px;
-            }
-
-            .video-description {
-                font-size: 9px;
-                line-height: 1.2;
-            }
-
-            .video-meta {
-                font-size: 8px;
-                margin-top: 3px;
-            }
-
-            .category-tag {
-                font-size: 7px;
-                padding: 1px 3px;
-                margin-top: 2px;
-            }
-
-            .footer {
-                padding: 10px 0;
-                font-size: 9px;
-                margin: 20px -5px 0 -5px;
-            }
+        .entries-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
         }
 
-        /* Mobile player optimizations */
-        @media (max-width: 768px) {
-            .player-content {
-                flex-direction: column;
-                gap: 10px;
-                padding: 8px;
-            }
-            
-            .video-player {
-                flex: none;
-                width: 100%;
-                height: 220px;
-            }
-
-            .video-info-panel {
-                min-width: auto;
-            }
-
-            .video-title-playing {
-                font-size: 12px;
-                margin-bottom: 6px;
-            }
-
-            .video-stats {
-                font-size: 9px;
-                margin-bottom: 8px;
-                padding-bottom: 6px;
-            }
-
-            .video-description-playing {
-                font-size: 10px;
-                margin-bottom: 8px;
-            }
-
-            .video-actions {
-                gap: 6px;
-            }
-
-            .action-button {
-                font-size: 9px;
-                padding: 4px 8px;
-            }
+        .entry {
+            font-family: 'Caveat', cursive;
+            font-size: 14px;
+            line-height: 22px;
         }
 
-        /* Mobile video controls */
-/* Mobile video controls - Fixed timeline */
-@media (max-width: 768px) {
-    .retro-controls {
-        padding: 4px 6px;
-        gap: 4px;
-        height: 36px;
-        box-sizing: border-box;
-        display: flex;
-        align-items: center;
-    }
-
-    .retro-button {
-        width: 32px;
-        height: 28px;
-        font-size: 14px;
-        border-radius: 2px;
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .time-container {
-        gap: 2px;
-        min-width: 80px;
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-    }
-
-    .time-display {
-        font-size: 10px;
-        line-height: 1;
-        display: block;
-        height: auto;
-    }
-
-    .volume-container {
-        gap: 3px;
-        align-items: center;
-        flex-shrink: 0;
-        display: flex;
-    }
-
-    .volume-icon {
-        width: 24px;
-        height: 28px;
-        font-size: 12px;
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .volume-slider {
-        width: 40px;
-        height: 12px;
-        flex-shrink: 0;
-        position: relative;
-        cursor: pointer;
-        background: linear-gradient(to bottom, #ffffff, #f0f0f0);
-        border: 1px inset #d0d0d0;
-        border-radius: 1px;
-    }
-
-    .progress-container {
-        margin: 0 4px;
-        height: 16px;
-        flex: 1;
-        min-width: 60px;
-        position: relative;
-        cursor: pointer;
-        background: linear-gradient(to bottom, #ffffff, #f0f0f0);
-        border: 1px inset #d0d0d0;
-        border-radius: 1px;
-        display: flex;
-        align-items: center;
-    }
-
-    .progress-bar {
-        height: 100%;
-        background: linear-gradient(to bottom, #4080ff, #2060df);
-        width: 0%;
-        transition: width 0.1s linear;
-        position: relative;
-        border-radius: 1px;
-    }
-
-    .progress-handle {
-        position: absolute;
-        right: -2px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 4px;
-        height: 8px;
-        background: linear-gradient(to bottom, #ffffff, #e0e0e0);
-        border: 1px solid #a0a0a0;
-        cursor: grab;
-        border-radius: 1px;
-    }
-
-    .buffer-bar {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        background: linear-gradient(to bottom, #d0d0d0, #c0c0c0);
-        width: 0%;
-        transition: width 0.3s;
-        border-radius: 1px;
-    }
-
-    .fullscreen-button {
-        width: 60px;
-        height: 28px;
-        font-size: 10px;
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 2px;
-    }
-
-    .quality-selector {
-        top: 8px;
-        right: 8px;
-    }
-
-    .quality-button {
-        padding: 4px 8px;
-        font-size: 10px;
-        height: 28px;
-        box-sizing: border-box;
-    }
-}
-
-/* Very small screens */
-@media (max-width: 480px) {
-    .retro-controls {
-        padding: 3px 4px;
-        gap: 3px;
-        height: 32px;
-    }
-
-    .retro-button {
-        width: 28px;
-        height: 24px;
-        font-size: 12px;
-    }
-
-    .time-container {
-        min-width: 70px;
-    }
-
-    .time-display {
-        font-size: 9px;
-    }
-
-    .volume-icon {
-        width: 20px;
-        height: 24px;
-        font-size: 10px;
-    }
-
-    .volume-slider {
-        width: 35px;
-        height: 10px;
-    }
-
-    .progress-container {
-        margin: 0 3px;
-        height: 14px;
-    }
-
-    .fullscreen-button {
-        width: 50px;
-        height: 24px;
-        font-size: 9px;
-    }
-
-    .quality-button {
-        padding: 3px 6px;
-        font-size: 9px;
-        height: 24px;
-    }
-}
-
-/* Remove conflicting touch rules for video controls */
-@media (hover: none) and (pointer: coarse) {
-    .retro-button,
-    .fullscreen-button,
-    .volume-icon,
-    .progress-container,
-    .volume-slider {
-        min-height: unset !important;
-        min-width: unset !important;
-    }
-}
-/* Fix video control alignment issues */
-.retro-controls {
-    align-items: center !important;
-    box-sizing: border-box;
-}
-
-.retro-controls > * {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-}
-
-.progress-container {
-    align-self: center;
-}
-
-.volume-container {
-    align-items: center;
-}
-
-.time-container {
-    align-items: center;
-}
-		
-		/* Rating & Comment System Styles */
-.rating-section {
-    margin-bottom: 12px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #eeeeee;
-}
-
-.rating-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 15px;
-    flex-wrap: wrap;
-}
-
-.rating-display {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.rating-stars {
-    display: flex;
-    gap: 2px;
-}
-
-.star {
-    font-size: 14px;
-    color: #ddd;
-    cursor: pointer;
-    transition: color 0.1s;
-}
-
-.star.filled {
-    color: #ffd700;
-}
-
-.star:hover {
-    color: #ffed4e;
-}
-
-.rating-text {
-    font-size: 11px;
-    color: #666666;
-}
-
-.user-rating {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.user-rating-label {
-    font-size: 10px;
-    color: #666666;
-}
-
-.rate-button {
-    font-size: 9px;
-    padding: 2px 6px;
-    border: 1px solid #cccccc;
-    background: #f8f8f8;
-    color: #333333;
-    cursor: pointer;
-    border-radius: 2px;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.rate-button:hover {
-    background: #eeeeee;
-}
-
-.rate-button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-/* Comments Section Styles */
-.comments-section {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-height: 200px;
-}
-
-.comments-header {
-    font-size: 11px;
-    font-weight: bold;
-    margin-bottom: 8px;
-    color: #333333;
-    padding-bottom: 4px;
-    border-bottom: 1px solid #eeeeee;
-}
-
-.comments-list {
-    flex: 1;
-    overflow-y: auto;
-    margin-bottom: 12px;
-    max-height: 200px;
-    padding-right: 4px;
-}
-
-.comment {
-    background: #f8f8f8;
-    border: 1px solid #dddddd;
-    border-radius: 3px;
-    padding: 8px;
-    margin-bottom: 8px;
-    display: flex;
-    gap: 8px;
-    animation: slideIn 0.3s ease-out;
-}
-
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.comment-avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 2px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
-    flex-shrink: 0;
-    overflow: hidden;
-}
-
-.comment-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.comment-content {
-    flex: 1;
-}
-
-.comment-author {
-    font-size: 10px;
-    font-weight: bold;
-    color: #333333;
-    margin-bottom: 2px;
-}
-
-.comment-text {
-    font-size: 10px;
-    color: #666666;
-    line-height: 1.3;
-    margin-bottom: 3px;
-}
-
-.comment-date {
-    font-size: 8px;
-    color: #999999;
-}
-
-.comment-form {
-    border-top: 1px solid #eeeeee;
-    padding-top: 8px;
-}
-
-/* Profile Picture Selector */
-.profile-selector {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 6px;
-    padding: 4px;
-    border: 1px solid #eeeeee;
-    border-radius: 3px;
-    background: #fafafa;
-    width: calc(100% - 10px);
-    margin-right: 10px;
-}
-
-.profile-selector-label {
-    font-size: 9px;
-    color: #666666;
-    white-space: nowrap;
-}
-
-.avatar-navigation {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    flex: 1;
-    justify-content: space-between;
-}
-
-.avatar-arrow {
-    width: 20px;
-    height: 24px;
-    background: #e0e0e0;
-    border: 1px solid #cccccc;
-    border-radius: 2px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    color: #666666;
-    transition: all 0.2s;
-    user-select: none;
-}
-
-.avatar-arrow:hover {
-    background: #d0d0d0;
-    border-color: #aaaaaa;
-}
-
-.avatar-arrow:active {
-    background: #c0c0c0;
-}
-
-.avatar-arrow:disabled,
-.avatar-arrow.disabled {
-    background: #f0f0f0;
-    color: #cccccc;
-    cursor: not-allowed;
-    border-color: #e0e0e0;
-}
-
-.avatar-row {
-    display: flex;
-    gap: 4px;
-    width: 290px;
-    overflow: hidden;
-}
-
-.avatar-choice {
-    width: 24px;
-    height: 24px;
-    border-radius: 2px;
-    cursor: pointer;
-    border: 2px solid transparent;
-    transition: all 0.2s;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    font-weight: bold;
-    color: white;
-}
-
-.avatar-choice:hover {
-    border-color: #4080ff;
-    transform: scale(1.1);
-}
-
-.avatar-choice.selected {
-    border-color: #4080ff;
-    box-shadow: 0 0 4px rgba(64, 128, 255, 0.5);
-}
-
-.comment-input {
-    width: 100%;
-    padding: 4px 6px;
-    border: 1px solid #cccccc;
-    font-size: 10px;
-    font-family: Arial, Helvetica, sans-serif;
-    margin-bottom: 6px;
-    border-radius: 2px;
-    box-sizing: border-box;
-}
-
-.comment-input:focus {
-    border-color: #4080ff;
-    outline: none;
-}
-
-.comment-textarea {
-    width: 100%;
-    height: 50px;
-    padding: 4px 6px;
-    border: 1px solid #cccccc;
-    font-size: 10px;
-    font-family: Arial, Helvetica, sans-serif;
-    resize: none;
-    margin-bottom: 6px;
-    border-radius: 2px;
-    box-sizing: border-box;
-}
-
-.comment-textarea:focus {
-    border-color: #4080ff;
-    outline: none;
-}
-
-.comment-submit {
-    width: 100%;
-    padding: 6px;
-    background: linear-gradient(to bottom, #4080ff, #2060df);
-    border: 1px outset #4080ff;
-    color: white;
-    font-size: 10px;
-    cursor: pointer;
-    border-radius: 2px;
-    font-family: Arial, Helvetica, sans-serif;
-    box-sizing: border-box;
-}
-
-.comment-submit:hover {
-    background: linear-gradient(to bottom, #5090ff, #3070ef);
-}
-
-.comment-submit:active {
-    border: 1px inset #2060df;
-}
-
-.comment-submit:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-.comments-list::-webkit-scrollbar {
-    width: 6px;
-}
-
-.comments-list::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 3px;
-}
-
-.comments-list::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
-    border-radius: 3px;
-}
-
-.comments-list::-webkit-scrollbar-thumb:hover {
-    background: #a1a1a1;
-}
-.avatar-row {
-    display: flex;
-    gap: 4px;
-    overflow: hidden;
-    flex: 1; /* Let it take available space */
-    margin: 0 4px; /* Small margin from arrows */
-}
-
-/* Rating System - Fixed alignment and smaller button */
-@media (max-width: 768px) {
-    .rating-section {
-        margin-bottom: 12px;
-        padding-bottom: 8px;
-        border-bottom: 1px solid #eeeeee;
-    }
-
-    .rating-row {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        height: 30px; /* Fixed height */
-        position: relative;
-    }
-
-    .rating-display {
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        display: flex;
-        align-items: center;
-        height: 20px;
-    }
-
-    .rating-stars {
-        position: relative;
-        display: block;
-        width: 60px; /* Fixed width for 5 stars */
-        height: 20px;
-        float: left;
-    }
-
-    .rating-stars .star {
-        position: absolute;
-        font-size: 12px;
-        line-height: 20px;
-        width: 12px;
-        text-align: center;
-        top: 0;
-        margin: 0;
-        padding: 0;
-        border: none;
-        background: none;
-        outline: none;
-    }
-
-    /* Position each star exactly - closer together */
-    .rating-stars .star:nth-child(1) { left: 0px; }
-    .rating-stars .star:nth-child(2) { left: 10px; }
-    .rating-stars .star:nth-child(3) { left: 20px; }
-    .rating-stars .star:nth-child(4) { left: 30px; }
-    .rating-stars .star:nth-child(5) { left: 40px; }
-
-    .rating-text {
-        position: absolute;
-        left: 55px; /* Closer to stars */
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 8px;
-        white-space: nowrap;
-        margin: 0;
-        padding: 0;
-    }
-
-    .user-rating {
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        display: flex;
-        align-items: center;
-        height: 30px;
-    }
-
-    .user-rating-label {
-        font-size: 8px;
-        white-space: nowrap;
-        margin: 0;
-        padding: 0;
-        margin-right: 4px;
-    }
-
-    #userRatingStars {
-        position: relative;
-        display: block;
-        width: 50px; /* Smaller width */
-        height: 20px;
-        margin-right: 4px;
-    }
-
-    #userRatingStars .star {
-        position: absolute;
-        font-size: 12px;
-        line-height: 20px;
-        width: 12px;
-        text-align: center;
-        top: 0;
-        cursor: pointer;
-        margin: 0;
-        padding: 0;
-        border: none;
-        background: none;
-        outline: none;
-    }
-
-    /* Position each user rating star exactly - closer together */
-    #userRatingStars .star:nth-child(1) { left: 0px; }
-    #userRatingStars .star:nth-child(2) { left: 10px; }
-    #userRatingStars .star:nth-child(3) { left: 20px; }
-    #userRatingStars .star:nth-child(4) { left: 30px; }
-    #userRatingStars .star:nth-child(5) { left: 40px; }
-
-    .rate-button {
-        font-size: 8px;
-        padding: 2px 4px; /* Much smaller padding */
-        min-height: 18px; /* Smaller height */
-        min-width: 28px; /* Smaller width */
-        border-radius: 2px;
-        margin: 0;
-        flex-shrink: 0;
-        line-height: 1;
-    }
-}
-
-@media (max-width: 480px) {
-    .rating-row {
-        height: 28px;
-    }
-
-    .rating-stars {
-        width: 45px; /* Even smaller */
-    }
-
-    #userRatingStars {
-        width: 45px; /* Even smaller */
-    }
-
-    .rating-stars .star,
-    #userRatingStars .star {
-        font-size: 11px;
-        width: 11px;
-    }
-
-    /* Reposition for smaller stars - even closer */
-    .rating-stars .star:nth-child(1),
-    #userRatingStars .star:nth-child(1) { left: 0px; }
-    .rating-stars .star:nth-child(2),
-    #userRatingStars .star:nth-child(2) { left: 9px; }
-    .rating-stars .star:nth-child(3),
-    #userRatingStars .star:nth-child(3) { left: 18px; }
-    .rating-stars .star:nth-child(4),
-    #userRatingStars .star:nth-child(4) { left: 27px; }
-    .rating-stars .star:nth-child(5),
-    #userRatingStars .star:nth-child(5) { left: 36px; }
-
-    .rating-text {
-        left: 50px;
-        font-size: 7px;
-    }
-
-    .rate-button {
-        font-size: 7px;
-        padding: 1px 3px; /* Even smaller */
-        min-height: 16px;
-        min-width: 24px;
-    }
-}
-
-/* Override ANY inherited spacing */
-.rating-stars,
-#userRatingStars,
-.rating-stars *,
-#userRatingStars * {
-    letter-spacing: 0 !important;
-    word-spacing: 0 !important;
-    text-indent: 0 !important;
-    font-kerning: none !important;
-}
-    /* Profile Selector Mobile - Fix arrow alignment */
-/* Avatar Navigation - Fix right arrow positioning */
-@media (max-width: 768px) {
-    .profile-selector {
-        width: calc(100% - 8px);
-        margin-right: 8px;
-        padding: 6px;
-        box-sizing: border-box;
-    }
-
-    .avatar-navigation {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 6px;
-        width: 100%;
-        position: relative;
-    }
-
-    .avatar-row {
-        display: flex;
-        gap: 4px;
-        overflow: hidden;
-        width: 128px; /* Width for exactly 4 avatars: 4*28px + 3*4px gaps */
-        margin: 0 6px;
-        justify-content: flex-start;
-    }
-
-    #avatarPrev {
-        position: relative;
-        left: 0;
-    }
-
-    #avatarNext {
-        position: absolute;
-        right: 0;
-    }
-
-    .avatar-arrow {
-        width: 28px;
-        height: 28px;
-        font-size: 12px;
-        flex-shrink: 0;
-        background: #e0e0e0;
-        border: 1px solid #cccccc;
-        border-radius: 2px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #666666;
-    }
-}
-
-/* Comment Form Mobile - Scaled down version */
-@media (max-width: 768px) {
-    .comment-form {
-        border-top: 1px solid #eeeeee;
-        padding-top: 8px;
-    }
-
-    .comment-input {
-        width: 100%;
-        padding: 8px 12px; /* Reduced padding */
-        border: 2px solid #cccccc;
-        font-size: 16px;
-        font-family: Arial, Helvetica, sans-serif;
-        margin-bottom: 8px; /* Reduced margin */
-        border-radius: 6px; /* Smaller radius */
-        box-sizing: border-box;
-        min-height: 40px; /* Smaller height */
-        background: #ffffff;
-        transition: border-color 0.2s ease;
-        -webkit-appearance: none;
-        appearance: none;
-    }
-
-    .comment-input:focus {
-        border-color: #4080ff;
-        outline: none;
-        box-shadow: 0 0 0 2px rgba(64, 128, 255, 0.1);
-    }
-
-    .comment-textarea {
-        width: 100%;
-        height: 60px; /* Smaller height */
-        padding: 8px 12px; /* Reduced padding */
-        border: 2px solid #cccccc;
-        font-size: 16px;
-        font-family: Arial, Helvetica, sans-serif;
-        resize: none;
-        margin-bottom: 8px; /* Reduced margin */
-        border-radius: 6px; /* Smaller radius */
-        box-sizing: border-box;
-        background: #ffffff;
-        transition: border-color 0.2s ease;
-        -webkit-appearance: none;
-        appearance: none;
-        line-height: 1.4;
-    }
-
-    .comment-textarea:focus {
-        border-color: #4080ff;
-        outline: none;
-        box-shadow: 0 0 0 2px rgba(64, 128, 255, 0.1);
-    }
-
-    .comment-submit {
-        width: 100%;
-        padding: 10px 16px; /* Reduced padding */
-        background: linear-gradient(to bottom, #4080ff, #2060df);
-        border: none;
-        color: white;
-        font-size: 14px; /* Smaller font */
-        font-weight: bold;
-        cursor: pointer;
-        border-radius: 6px; /* Smaller radius */
-        font-family: Arial, Helvetica, sans-serif;
-        box-sizing: border-box;
-        min-height: 42px; /* Smaller height */
-        transition: all 0.2s ease;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        box-shadow: 0 2px 4px rgba(64, 128, 255, 0.2);
-    }
-
-    .comment-submit:hover {
-        background: linear-gradient(to bottom, #5090ff, #3070ef);
-        transform: translateY(-1px);
-        box-shadow: 0 4px 8px rgba(64, 128, 255, 0.3);
-    }
-
-    .comment-submit:active {
-        transform: translateY(0);
-        box-shadow: 0 2px 4px rgba(64, 128, 255, 0.2);
-    }
-
-    .comment-submit:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-        transform: none;
-        box-shadow: none;
-    }
-}
-
-@media (max-width: 480px) {
-    .comment-input {
-        padding: 6px 10px;
-        margin-bottom: 6px;
-        min-height: 36px;
-    }
-
-    .comment-textarea {
-        height: 50px;
-        padding: 6px 10px;
-        margin-bottom: 6px;
-    }
-
-    .comment-submit {
-        padding: 8px 14px;
-        font-size: 13px;
-        min-height: 38px;
-    }
-}
-
-/* Very Small Screens (iPhone SE, etc.) */
-@media (max-width: 480px) {
-    .comment-form {
-        padding-top: 10px;
-    }
-
-    .comment-input {
-        padding: 10px 14px;
-        margin-bottom: 10px;
-        border-radius: 6px;
-        min-height: 44px;
-    }
-
-    .comment-textarea {
-        height: 70px;
-        padding: 10px 14px;
-        margin-bottom: 10px;
-        border-radius: 6px;
-    }
-
-    .comment-submit {
-        padding: 14px 18px;
-        font-size: 15px;
-        border-radius: 6px;
-        min-height: 48px;
-    }
-}
-
-/* Touch device specific optimizations */
-@media (hover: none) and (pointer: coarse) {
-    .comment-input,
-    .comment-textarea {
-        /* Ensure proper touch targets */
-        min-height: 48px;
-    }
-
-    .comment-submit {
-        min-height: 52px;
-        /* Remove hover effects on touch devices */
-    }
-
-    .comment-submit:hover {
-        background: linear-gradient(to bottom, #4080ff, #2060df);
-        transform: none;
-        box-shadow: 0 2px 4px rgba(64, 128, 255, 0.2);
-    }
-
-    /* Add touch feedback */
-    .comment-submit:active {
-        background: linear-gradient(to bottom, #3070ef, #1050cf);
-        transform: scale(0.98);
-    }
-
-    .comment-input:focus,
-    .comment-textarea:focus {
-        /* Enhanced focus styles for touch */
-        border-color: #4080ff;
-        box-shadow: 0 0 0 3px rgba(64, 128, 255, 0.15);
-    }
-}
-
-/* Landscape orientation adjustments */
-@media (max-width: 768px) and (orientation: landscape) {
-    .comment-textarea {
-        height: 60px; /* Shorter in landscape */
-    }
-
-    .comment-submit {
-        padding: 12px 16px;
-        min-height: 44px;
-    }
-}
-/* Touch-specific improvements */
-@media (hover: none) and (pointer: coarse) {
-    /* Ensure all interactive elements have proper touch targets */
-    .star,
-    .avatar-choice,
-    .avatar-arrow,
-    .rate-button,
-    .comment-submit {
-        min-height: 44px;
-        min-width: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /* Remove hover effects that don't work on touch */
-    .avatar-choice:hover,
-    .avatar-arrow:hover,
-    .rate-button:hover {
-        transform: none;
-        background: inherit;
-    }
-
-    /* Add active states for touch feedback */
-    .avatar-choice:active {
-        transform: scale(0.95);
-        background-color: rgba(64, 128, 255, 0.1);
-    }
-
-    .avatar-arrow:active {
-        transform: scale(0.95);
-    }
-
-    .rate-button:active,
-    .comment-submit:active {
-        transform: scale(0.98);
-    }
-}
-
-/* iOS Safari specific fixes */
-@supports (-webkit-touch-callout: none) {
-    .comment-input,
-    .comment-textarea {
-        /* Fix iOS input zoom issues */
-        font-size: 16px !important;
-        -webkit-text-size-adjust: 100%;
-    }
-
-    .comment-input:focus,
-    .comment-textarea:focus {
-        /* Prevent iOS from zooming */
-        transform: translateZ(0);
-    }
-}
-        
+        .entry-header {
+            color: #8B4513;
+            font-weight: bold;
+            margin-bottom: 0;
+            line-height: 22px;
+        }
+
+        .entry-message {
+            margin: 0;
+            line-height: 22px;
+            word-wrap: break-word;
+            overflow: hidden;
+        }
+
+        .entry-date {
+            font-size: 12px;
+            color: #666;
+            font-style: italic;
+            margin: 0;
+            line-height: 22px;
+        }
+
+        .loading {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            padding: 44px 0;
+        }
+
+        .error {
+            text-align: center;
+            color: #8B4513;
+            font-style: italic;
+            padding: 44px 0;
+        }
+
+        .end-message {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            padding: 44px 0;
+        }
+
+        /* Page flip animations */
+        .page-right.flipping-forward {
+            transform: rotateY(-90deg);
+            z-index: 5;
+        }
+
+        .page-right.flipping-backward {
+            transform: rotateY(90deg);
+            z-index: 5;
+        }
+
+        .blank-page {
+            position: absolute;
+            width: 280px;
+            height: 360px;
+            background: 
+                linear-gradient(to right, #FF69B4 0px, #FF69B4 1px, transparent 1px),
+                linear-gradient(to bottom, transparent 19px, #87CEEB 20px, #87CEEB 21px, transparent 21px),
+                #FFFEF7;
+            background-size: 100% 100%, 100% 22px, 100% 100%;
+            border: 2px solid #DDD;
+            border-radius: 4px;
+            top: 20px;
+            right: 20px;
+            padding: 20px 20px 20px 30px;
+            box-sizing: border-box;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .page-right {
+            z-index: 3;
+        }
+
+        .page-right.flipping-forward,
+        .page-right.flipping-backward {
+            z-index: 5;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header with Logo -->
-        <div class="header">
-            <div class="logo">
-              
-               
-                <img src="willtube.png" alt="WillTube">
+    <div class="notebook-container">
+        <div class="notebook">
+            <!-- Spiral binding -->
+            <div class="spiral-binding"></div>
+            <div class="spiral-rings">
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
             </div>
-            <div class="subtitle">Will's Digital Video Repository </div>
-        </div>
 
-        <!-- Instructions Section -->
-        <div class="instructions">
-            <h3>Welcome to WillTube - HLS Edition</h3>
-            <p>Browse my collection of high-quality videos powered by adaptive HLS streaming. Videos automatically adjust quality based on your connection, delivering crystal-clear playback up to 4K resolution. Click on any video thumbnail to watch it in the player below. Use the search function to quickly find specific content.</p>
-        </div>
-
-        <!-- Search Section -->
-        <div class="search-section">
-            <input type="text" class="search-box" placeholder="Search Videos" id="searchInput">
-            <button class="search-button" onclick="searchVideos()">Search Videos</button>
-        </div>
-
-        <!-- Featured Releases Section -->
-        <div class="featured-section">
-            <div class="section-title">Featured Releases</div>
-            <div class="featured-videos" id="featuredVideos">
-                <!-- Featured videos will be populated here -->
-            </div>
-        </div>
-
-        <!-- Video Player Section -->
-        <div class="player-section" id="playerSection">
-            <div class="section-title">Now Playing</div>
-            <div class="player-container">
-                <div class="player-content">
-                    <div class="video-player">
-                        <video class="video-element" id="mainPlayer" controls>
-                            <source id="videoSource" src="" type="application/x-mpegURL">
-                            Your browser does not support HLS video playback.
-                        </video>
-                        <div class="pixel-overlay"></div>
-                        <div class="loading-spinner" id="loadingSpinner"></div>
-                        
-                        <!-- Quality Selector -->
-                        <div class="quality-selector">
-                            <div class="quality-button" onclick="toggleQualityDropdown()">
-                                Quality: <span id="currentQuality">Auto</span>
-                            </div>
-                            <div class="quality-dropdown" id="qualityDropdown">
-                                <!-- Quality options will be populated dynamically -->
-                            </div>
-                        </div>
-                        
-                        <div class="retro-controls" id="retroControls">
-                            <div class="retro-button" id="playPauseBtn" onclick="togglePlayPause()">▶</div>
-                            <div class="retro-button" onclick="stopVideo()">■</div>
-                            <div class="time-container">
-                                <div class="time-display" id="currentTime">00:00</div>
-                                <div class="time-display">/</div>
-                                <div class="time-display" id="duration">00:00</div>
-                            </div>
-                            <div class="volume-container">
-                                <div class="volume-icon" onclick="toggleMute()">🔊</div>
-                                <div class="volume-slider" onclick="setVolume(event)">
-                                    <div class="volume-bar" id="volumeBar">
-                                        <div class="volume-handle"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="progress-container" onclick="seekVideo(event)">
-                                <div class="buffer-bar" id="bufferBar"></div>
-                                <div class="progress-bar" id="progressBar">
-                                    <div class="progress-handle"></div>
-                                </div>
-                            </div>
-                            <div class="fullscreen-button" onclick="toggleFullscreen()">Fullscreen</div>
-                        </div>
-                    </div>
-                    <div class="video-info-panel">
-                        <div class="video-title-playing" id="currentTitle">Video Title</div>
-                        <div class="video-stats" id="currentStats">Views: 0 | Added: Today</div>
-                        <div class="video-description-playing" id="currentDescription">Video description will appear here when you select a video to play.</div>
-                        <div class="video-actions">
-                            <button class="action-button" onclick="shareVideo()">Share</button>
-                            <button class="action-button" onclick="toggleFavorite()">Favorite</button>
-                            <button class="action-button" onclick="downloadVideo()">Download</button>
-                        </div>
-						<div class="rating-section">
-        <div class="rating-row">
-            <div class="rating-display">
-                <div class="rating-stars" id="avgRatingStars">
-                    <span class="star">☆</span>
-                    <span class="star">☆</span>
-                    <span class="star">☆</span>
-                    <span class="star">☆</span>
-                    <span class="star">☆</span>
+            <!-- Left page -->
+            <div class="page page-left" id="leftPage">
+                <div class="page-content" id="leftPageContent">
+                    <!-- Content will be populated by JavaScript -->
                 </div>
-                <div class="rating-text" id="ratingText">No ratings yet</div>
+                <div class="page-number" id="leftPageNumber"></div>
             </div>
-            <div class="user-rating">
-                <div class="user-rating-label">Your rating:</div>
-                <div class="rating-stars" id="userRatingStars">
-                    <span class="star" data-rating="1" onclick="setUserRating(1)">☆</span>
-                    <span class="star" data-rating="2" onclick="setUserRating(2)">☆</span>
-                    <span class="star" data-rating="3" onclick="setUserRating(3)">☆</span>
-                    <span class="star" data-rating="4" onclick="setUserRating(4)">☆</span>
-                    <span class="star" data-rating="5" onclick="setUserRating(5)">☆</span>
+
+            <!-- Right page -->
+            <div class="page page-right" id="rightPage">
+                <div class="page-content" id="rightPageContent">
+                    <!-- Content will be populated by JavaScript -->
                 </div>
-                <button class="rate-button" id="submitRating" onclick="submitRating()" disabled>Rate</button>
+                <div class="page-number" id="rightPageNumber"></div>
             </div>
-        </div>
-    
-    <div class="comments-section">
-        <div class="comments-header" id="commentsHeader">Comments (0)</div>
-        <div class="comments-list" id="commentsList">
-            <!-- Comments will appear here -->
-        </div>
-        <div class="comment-form">
-            <div class="profile-selector">
-                <div class="profile-selector-label">Avatar:</div>
-                <div class="avatar-navigation">
-                    <div class="avatar-arrow" id="avatarPrev" onclick="previousAvatarPage()">◀</div>
-                    <div class="avatar-row" id="avatarRow">
-                        <!-- Avatar options will be populated here -->
-                    </div>
-                    <div class="avatar-arrow" id="avatarNext" onclick="nextAvatarPage()">▶</div>
-                </div>
-            </div>
-            <input type="text" class="comment-input" id="commentName" placeholder="Your name..." maxlength="50">
-            <textarea class="comment-textarea" id="commentMessage" placeholder="Leave a comment..." maxlength="500"></textarea>
-            <button class="comment-submit" id="submitComment" onclick="submitComment()">Post Comment</button>
-        </div>
-    </div>
-</div>
-                    </div>
-                </div>
+
+            <!-- Blank page behind right page for animation -->
+            <div class="blank-page" id="blankPage">
+                <div class="page-content" id="blankPageContent"></div>
+                <div class="page-number" id="blankPageNumber"></div>
             </div>
         </div>
 
-        <!-- Gallery Section -->
-        <div class="gallery-section">
-            <div class="section-title">Video Gallery</div>
-            <div class="category-filters" id="categoryFilters">
-                <!-- Category buttons will be populated here -->
-            </div>
-            <div class="video-grid" id="videoGrid">
-                <!-- Video items will be populated here -->
-            </div>
-        </div>
-
-        <!-- Footer -->
-        <div class="footer">
-            <p>&copy; 2024 WillTube | Powered by <a href="#">Bunny CDN</a> | HLS Adaptive Streaming up to 4K</p>
-            <p style="margin-top: 5px; font-size: 9px;">Relive the golden age of video sharing with modern streaming technology</p>
+        <!-- Navigation buttons -->
+        <div class="navigation">
+            <button class="nav-btn" id="prevBtn" onclick="previousPage()">◀ Previous</button>
+            <button class="nav-btn" id="nextBtn" onclick="nextPage()">Next ▶</button>
+            <button class="nav-btn" id="newEntryBtn" onclick="goToForm()">New Entry</button>
         </div>
     </div>
 
     <script>
-        // ============================================
-        // WILLTUBE HLS BUNNY CDN INTEGRATION SYSTEM
-        // ============================================
-        
         // Configuration
-        const BUNNY_CONFIG = {
-            pullZone: 'vz-8a765295-4d7', // Your Bunny pull zone
-            baseUrl: 'https://vz-8a765295-4d7.b-cdn.net'
-        };
-
-        // HLS instance for quality control
-        let hlsInstance = null;
-        let currentVideoId = null;
-
-        // ============================================
-        // VIDEO DATABASE - SIMPLIFIED FOR HLS
-        // ============================================
+        const API_BASE_URL = window.location.origin; // Use same domain as the page
         
-        // Define your collections/categories
-        const COLLECTIONS = {
-            lu: { name: 'Laker Update', color: '#4080ff' },
-            fs: { name: 'Film School', color: '#cc0000' },
-            whm: { name: 'Wills Home Movies', color: '#ff8040' },
-            cin: { name: 'Cinema', color: '#40ff80' },
-        };
+        // State variables
+        let currentPageSpread = 1;
+        let totalPageSpreads = 1;
+        let guestbookEntries = [];
+        let isLoading = false;
+        let hasError = false;
 
-        // Video database - simplified for HLS (no resolution arrays needed)
-        const VIDEO_DATABASE = {
-       
-            'e9ce8e87-763b-48f4-8c70-b19dff16be49': {
-                title: 'CTA Parallax Animation',
-                description: 'Fun homework assignment. Play it on a loop and pretend like you\'re forever stuck on the best line in all of Chicago!',
-                collection: 'fs',
-                views: 654,
-                uploadDate: '2024-11-20',
-                featured: true
-            },
-            
-            'b3840759-4bb3-4fb5-818b-4b0e5760c98a': {
-                title: 'Bully Maguire VS The Red Line',
-                description: 'Learn how to build reusable React components with modern hooks and TypeScript.',
-                collection: 'fs',
-                views: 1243,
-                uploadDate: '2024-12-15',
-                featured: true
-            },
-            
-            'f38ba416-bf6a-4aa8-8a30-b730054621a7': {
-                title: 'iPod OG Ad Rotoscope',
-                description: 'Complete walkthrough of building a modern portfolio website from scratch.',
-                collection: 'fs',
-                views: 892,
-                uploadDate: '2024-12-10',
-                featured: false
-            },
-            
-            '19a6cf39-f345-4b03-92a9-3466fdddc186': {
-                title: 'Is Tik Tok Taking Over WBHS?',
-                description: 'I couldnt stop it... no one could',
-                collection: 'lu',
-                views: 567,
-                uploadDate: '2019-01-07',
-                featured: true
-            },
-            
-            'cb5672f4-1437-4dbd-97e1-f41da5431586': {
-                title: 'Is Mr Watson Leaving WBHS?',
-                description: 'He transfered two months later...',
-                collection: 'demos',
-                views: 734,
-                uploadDate: '2024-11-28',
-                featured: false
-            },
-            
-            '66471047-e1a2-4148-9e39-fb2366c7d24b': {
-                title: 'Do Short People Face Discrimination at WBHS?',
-                description: 'This whole video was just a ploy to roll around in a chair during class and it worked perfectly.',
-                collection: 'tutorials',
-                views: 1456,
-                uploadDate: '2024-11-25',
-                featured: false
+        // Fetch entries from server
+        async function fetchGuestbookEntries() {
+            try {
+                isLoading = true;
+                hasError = false;
+                updatePageSpread(); // Show loading state
+                
+                console.log('Fetching guestbook entries from:', `${API_BASE_URL}/api/guestbook`);
+                const response = await fetch(`${API_BASE_URL}/api/guestbook`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const entries = await response.json();
+                console.log('Fetched entries:', entries);
+                
+                guestbookEntries = entries;
+                isLoading = false;
+                calculateTotalPageSpreads();
+                updatePageSpread();
+                
+            } catch (error) {
+                console.error('Error fetching guestbook entries:', error);
+                isLoading = false;
+                hasError = true;
+                guestbookEntries = [];
+                calculateTotalPageSpreads();
+                updatePageSpread();
             }
-        };
-
-        // ============================================
-        // HLS URL GENERATORS
-        // ============================================
-        
-        /**
-         * Generate Bunny CDN HLS URL
-         * @param {string} videoId - The video ID
-         * @returns {string} Complete HLS playlist URL
-         */
-        function getBunnyHLSUrl(videoId) {
-            return `${BUNNY_CONFIG.baseUrl}/${videoId}/playlist.m3u8`;
         }
 
-        /**
-         * Generate Bunny CDN thumbnail URL
-         * @param {string} videoId - The video ID
-         * @returns {string} Complete thumbnail URL
-         */
-        function getBunnyThumbnailUrl(videoId) {
-            return `${BUNNY_CONFIG.baseUrl}/${videoId}/thumbnail.jpg`;
+        // Submit new entry to server
+        async function submitEntry(name, message) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/guestbook`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ name, message })
+                });
+                
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+                }
+                
+                const newEntry = await response.json();
+                console.log('New entry added:', newEntry);
+                
+                // Refresh entries from server
+                await fetchGuestbookEntries();
+                
+                return newEntry;
+            } catch (error) {
+                console.error('Error submitting entry:', error);
+                throw error;
+            }
         }
 
-        /**
-         * Get video metadata with generated URLs
-         * @param {string} videoId - The video ID
-         * @returns {object} Video metadata with URLs
-         */
-        function getVideoData(videoId) {
-            const video = VIDEO_DATABASE[videoId];
-            if (!video) return null;
+        function calculateEntryLines(entry) {
+            const nameLines = 1;
+            const dateLines = 1;
+            const spacingLines = 1;
+            
+            const charsPerLine = 35;
+            const messageLines = Math.ceil(entry.message.length / charsPerLine);
+            
+            return nameLines + messageLines + dateLines + spacingLines;
+        }
+
+        function calculateEntriesForPage(startIndex) {
+            const maxLinesPerPage = 14;
+            let currentLines = 0;
+            let entriesOnPage = [];
+            let index = startIndex;
+            
+            while (index < guestbookEntries.length) {
+                const entry = guestbookEntries[index];
+                const entryLines = calculateEntryLines(entry);
+                
+                if (currentLines + entryLines <= maxLinesPerPage) {
+                    entriesOnPage.push(entry);
+                    currentLines += entryLines;
+                    index++;
+                } else {
+                    break;
+                }
+            }
             
             return {
-                id: videoId,
-                ...video,
-                thumbnailUrl: getBunnyThumbnailUrl(videoId),
-                hlsUrl: getBunnyHLSUrl(videoId)
+                entries: entriesOnPage,
+                nextIndex: index
             };
         }
 
-        // ============================================
-        // EASY VIDEO MANAGEMENT FUNCTIONS
-        // ============================================
-        
-        /**
-         * Add a new video to the database
-         * @param {string} videoId - Bunny video ID
-         * @param {object} metadata - Video metadata
-         */
-        function addVideo(videoId, metadata) {
-            VIDEO_DATABASE[videoId] = {
-                featured: false,
-                views: 0,
-                uploadDate: new Date().toISOString().split('T')[0],
-                ...metadata
-            };
-            
-            // Refresh the page content
-            initializePage();
-        }
-
-        /**
-         * Set featured videos (max 4)
-         * @param {array} videoIds - Array of video IDs to feature
-         */
-        function setFeaturedVideos(videoIds) {
-            // Reset all featured status
-            Object.keys(VIDEO_DATABASE).forEach(id => {
-                VIDEO_DATABASE[id].featured = false;
-            });
-            
-            // Set new featured videos
-            videoIds.slice(0, 4).forEach(id => {
-                if (VIDEO_DATABASE[id]) {
-                    VIDEO_DATABASE[id].featured = true;
-                }
-            });
-            
-            // Refresh featured section
-            populateFeaturedVideos();
-        }
-
-        /**
-         * Get videos by collection
-         * @param {string} collection - Collection name
-         * @returns {array} Array of video data
-         */
-        function getVideosByCollection(collection) {
-            return Object.keys(VIDEO_DATABASE)
-                .filter(id => VIDEO_DATABASE[id].collection === collection)
-                .map(id => getVideoData(id))
-                .filter(video => video !== null);
-        }
-
-        /**
-         * Get featured videos
-         * @returns {array} Array of featured video data
-         */
-        function getFeaturedVideos() {
-            return Object.keys(VIDEO_DATABASE)
-                .filter(id => VIDEO_DATABASE[id].featured)
-                .map(id => getVideoData(id))
-                .filter(video => video !== null)
-                .slice(0, 4);
-        }
-
-        // ============================================
-        // HLS PLAYER SETUP AND MANAGEMENT
-        // ============================================
-        
-        /**
-         * Initialize HLS player with quality control
-         * @param {string} hlsUrl - HLS playlist URL
-         */
-        function initializeHLSPlayer(hlsUrl) {
-            const video = document.getElementById('mainPlayer');
-            const loadingSpinner = document.getElementById('loadingSpinner');
-            
-            // Show loading spinner
-            loadingSpinner.style.display = 'block';
-            
-            // Destroy existing HLS instance
-            if (hlsInstance) {
-                hlsInstance.destroy();
-                hlsInstance = null;
-            }
-
-            // Check for native HLS support
-            if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                // Native HLS support (Safari, iOS)
-                video.src = hlsUrl;
-                setupNativeHLSQualityControl(video);
-            } else if (Hls.isSupported()) {
-                // Use HLS.js for other browsers
-                hlsInstance = new Hls({
-                    enableWorker: true,
-                    lowLatencyMode: false,
-                    backBufferLength: 90
-                });
-                
-                hlsInstance.loadSource(hlsUrl);
-                hlsInstance.attachMedia(video);
-                
-                hlsInstance.on(Hls.Events.MANIFEST_PARSED, function(event, data) {
-                    console.log('HLS manifest loaded, found ' + data.levels.length + ' quality levels');
-                    populateQualityDropdown(data.levels);
-                    loadingSpinner.style.display = 'none';
-                });
-                
-                hlsInstance.on(Hls.Events.LEVEL_SWITCHED, function(event, data) {
-                    const level = hlsInstance.levels[data.level];
-                    updateCurrentQuality(level);
-                });
-                
-                hlsInstance.on(Hls.Events.ERROR, function(event, data) {
-                    console.error('HLS error:', data);
-                    if (data.fatal) {
-                        switch (data.type) {
-                            case Hls.ErrorTypes.NETWORK_ERROR:
-                                console.log('Network error, trying to recover...');
-                                hlsInstance.startLoad();
-                                break;
-                            case Hls.ErrorTypes.MEDIA_ERROR:
-                                console.log('Media error, trying to recover...');
-                                hlsInstance.recoverMediaError();
-                                break;
-                            default:
-                                hlsInstance.destroy();
-                                loadingSpinner.style.display = 'none';
-                                break;
-                        }
-                    }
-                });
-            } else {
-                console.error('HLS is not supported in this browser');
-                loadingSpinner.style.display = 'none';
-                alert('Your browser does not support HLS video playback. Please try a modern browser.');
-                return;
-            }
-
-            // Setup common video events
-            video.addEventListener('loadstart', function() {
-                loadingSpinner.style.display = 'block';
-            });
-
-            video.addEventListener('canplay', function() {
-                loadingSpinner.style.display = 'none';
-            });
-
-            video.addEventListener('waiting', function() {
-                loadingSpinner.style.display = 'block';
-            });
-
-            video.addEventListener('playing', function() {
-                loadingSpinner.style.display = 'none';
-            });
-        }
-
-        /**
-         * Setup quality control for native HLS (Safari)
-         * @param {HTMLVideoElement} video - Video element
-         */
-        function setupNativeHLSQualityControl(video) {
-            // For native HLS, we can't easily access quality levels
-            // Show a simplified quality selector
-            const qualityDropdown = document.getElementById('qualityDropdown');
-            qualityDropdown.innerHTML = '<div class="quality-option active">Auto</div>';
-            document.getElementById('currentQuality').textContent = 'Auto';
-        }
-
-        /**
-         * Populate quality dropdown with available levels
-         * @param {Array} levels - HLS quality levels
-         */
-        function populateQualityDropdown(levels) {
-            const qualityDropdown = document.getElementById('qualityDropdown');
-            qualityDropdown.innerHTML = '';
-
-            // Add auto quality option
-            const autoOption = document.createElement('div');
-            autoOption.className = 'quality-option active';
-            autoOption.textContent = 'Auto';
-            autoOption.onclick = () => setQuality(-1);
-            qualityDropdown.appendChild(autoOption);
-
-            // Add manual quality options
-            levels.forEach((level, index) => {
-                const option = document.createElement('div');
-                option.className = 'quality-option';
-                
-                // Format quality label
-                const height = level.height;
-                let qualityLabel = height + 'p';
-                if (height >= 2160) qualityLabel = '4K';
-                else if (height >= 1440) qualityLabel = '1440p';
-                else if (height >= 1080) qualityLabel = '1080p';
-                else if (height >= 720) qualityLabel = '720p';
-                else if (height >= 480) qualityLabel = '480p';
-                
-                option.textContent = qualityLabel;
-                option.onclick = () => setQuality(index);
-                qualityDropdown.appendChild(option);
-            });
-        }
-
-        /**
-         * Set video quality
-         * @param {number} levelIndex - Quality level index (-1 for auto)
-         */
-        function setQuality(levelIndex) {
-            if (!hlsInstance) return;
-
-            const qualityOptions = document.querySelectorAll('.quality-option');
-            qualityOptions.forEach(option => option.classList.remove('active'));
-
-            if (levelIndex === -1) {
-                // Auto quality
-                hlsInstance.currentLevel = -1;
-                document.getElementById('currentQuality').textContent = 'Auto';
-                qualityOptions[0].classList.add('active');
-            } else {
-                // Manual quality
-                hlsInstance.currentLevel = levelIndex;
-                const level = hlsInstance.levels[levelIndex];
-                updateCurrentQuality(level);
-                qualityOptions[levelIndex + 1].classList.add('active');
-            }
-
-            // Hide dropdown
-            document.getElementById('qualityDropdown').style.display = 'none';
-        }
-
-        /**
-         * Update current quality display
-         * @param {object} level - HLS quality level
-         */
-        function updateCurrentQuality(level) {
-            const height = level.height;
-            let qualityLabel = height + 'p';
-            if (height >= 2160) qualityLabel = '4K';
-            else if (height >= 1440) qualityLabel = '1440p';
-            else if (height >= 1080) qualityLabel = '1080p';
-            else if (height >= 720) qualityLabel = '720p';
-            else if (height >= 480) qualityLabel = '480p';
-            
-            document.getElementById('currentQuality').textContent = qualityLabel;
-        }
-
-        /**
-         * Toggle quality dropdown visibility
-         */
-        function toggleQualityDropdown() {
-            const dropdown = document.getElementById('qualityDropdown');
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-        }
-
-        // Close quality dropdown when clicking outside
-        document.addEventListener('click', function(event) {
-            const qualitySelector = document.querySelector('.quality-selector');
-            const dropdown = document.getElementById('qualityDropdown');
-            
-            if (!qualitySelector.contains(event.target)) {
-                dropdown.style.display = 'none';
-            }
-        });
-
-        // ============================================
-        // DISPLAY FUNCTIONS
-        // ============================================
-        
-        /**
-         * Populate featured videos section
-         */
-        function populateFeaturedVideos() {
-            const featuredContainer = document.getElementById('featuredVideos');
-            const featuredVideos = getFeaturedVideos();
-            
-            featuredContainer.innerHTML = '';
-            
-            featuredVideos.forEach(video => {
-                const featuredDiv = document.createElement('div');
-                featuredDiv.className = 'featured-video';
-                featuredDiv.onclick = () => playVideo(video.id);
-                
-                featuredDiv.innerHTML = `
-                    <div class="featured-thumbnail">
-                        <img src="${video.thumbnailUrl}" alt="${video.title}" 
-                             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQwIiBoZWlnaHQ9IjEwNSIgdmlld0JveD0iMCAwIDE0MCAxMDUiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxNDAiIGhlaWdodD0iMTA1IiBmaWxsPSIjY2NjY2NjIi8+Cjx0ZXh0IHg9IjcwIiB5PSI1MiIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjNjY2NjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+VmlkZW88L3RleHQ+Cjwvc3ZnPg=='">
-                    </div>
-                    <div class="featured-title">${video.title}</div>
-                    <div class="featured-info">Added: ${formatDate(video.uploadDate)}<br>Views: ${video.views.toLocaleString()}</div>
-                `;
-                
-                featuredContainer.appendChild(featuredDiv);
-            });
-        }
-
-        /**
-         * Populate category filters
-         */
-        function populateCategoryFilters() {
-            const filtersContainer = document.getElementById('categoryFilters');
-            filtersContainer.innerHTML = '';
-            
-            // Add "All Videos" button
-            const allButton = document.createElement('div');
-            allButton.className = 'category-button active';
-            allButton.textContent = 'All Videos';
-            allButton.onclick = () => filterByCategory('all');
-            filtersContainer.appendChild(allButton);
-            
-            // Add collection buttons
-            Object.keys(COLLECTIONS).forEach(collectionKey => {
-                const collection = COLLECTIONS[collectionKey];
-                const button = document.createElement('div');
-                button.className = 'category-button';
-                button.textContent = collection.name;
-                button.onclick = () => filterByCategory(collectionKey);
-                filtersContainer.appendChild(button);
-            });
-        }
-
-        /**
-         * Populate video gallery
-         */
-        function populateVideoGallery() {
-            const gridContainer = document.getElementById('videoGrid');
-            gridContainer.innerHTML = '';
-            
-            Object.keys(VIDEO_DATABASE).forEach(videoId => {
-                const video = getVideoData(videoId);
-                if (!video) return;
-                
-                const videoDiv = document.createElement('div');
-                videoDiv.className = 'video-item';
-                videoDiv.setAttribute('data-category', video.collection);
-                videoDiv.onclick = () => playVideo(video.id);
-                
-                videoDiv.innerHTML = `
-                    <div class="video-thumbnail">
-                        <img src="${video.thumbnailUrl}" alt="${video.title}"
-                             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDIwMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMTIwIiBmaWxsPSIjY2NjY2NjIi8+Cjx0ZXh0IHg9IjEwMCIgeT0iNjAiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzY2NjY2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIEltYWdlPC90ZXh0Pgo8L3N2Zz4='">
-                    </div>
-                    <div class="video-info">
-                        <h4>${video.title}</h4>
-                        <div class="video-description">${video.description}</div>
-                        <div class="video-meta">Views: ${video.views.toLocaleString()} | ${formatDate(video.uploadDate)} | HLS</div>
-                        <div class="category-tag">${COLLECTIONS[video.collection]?.name || 'General'}</div>
-                    </div>
-                `;
-                
-                gridContainer.appendChild(videoDiv);
-            });
-        }
-
-        // ============================================
-        // VIDEO PLAYER FUNCTIONS
-        // ============================================
-        
-        /**
-         * Play video using HLS
-         * @param {string} videoId - Video ID to play
-         */
-        async function playVideo(videoId) {
-            const video = getVideoData(videoId);
-            if (!video) {
-                console.error('Video not found:', videoId);
-                return;
-            }
-
-            const playerSection = document.getElementById('playerSection');
-            const mainPlayer = document.getElementById('mainPlayer');
-            const currentTitle = document.getElementById('currentTitle');
-            const currentDescription = document.getElementById('currentDescription');
-            const currentStats = document.getElementById('currentStats');
-
-            // Store current video ID
-            currentVideoId = videoId;
-
-            // Update player info
-            currentTitle.textContent = video.title;
-            currentDescription.textContent = video.description;
-            currentStats.textContent = `Views: ${video.views.toLocaleString()} | Added: ${formatDate(video.uploadDate)} | HLS Streaming`;
-            
-            // Show player section
-            playerSection.style.display = 'block';
-            
-            // Hide native controls and use custom ones
-            mainPlayer.controls = false;
-            
-            // Initialize HLS player
-            initializeHLSPlayer(video.hlsUrl);
-            
-            // Setup custom controls
-            setupCustomControls();
-            
-            // Auto-play when video is ready
-            mainPlayer.addEventListener('canplay', function() {
-                mainPlayer.play().catch(function(error) {
-                    console.log('Autoplay prevented by browser:', error);
-                    // Autoplay was prevented, user will need to click play
-                });
-            }, { once: true }); // Only run once per video load
-            
-            // Increment view count
-            VIDEO_DATABASE[videoId].views++;
-            
-            // Scroll to player
-            playerSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-			
-			await loadVideoRatingData(videoId);
-    updateRatingDisplay();
-    updateCommentsDisplay();
-    resetUserRatingStars();
-        }
-
-        // ============================================
-        // UTILITY FUNCTIONS
-        // ============================================
-        
-        /**
-         * Format date for display
-         * @param {string} dateString - ISO date string
-         * @returns {string} Formatted date
-         */
         function formatDate(dateString) {
             const date = new Date(dateString);
-            return date.toLocaleDateString('en-US', { 
-                year: 'numeric', 
-                month: 'short', 
-                day: 'numeric' 
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
             });
         }
 
-        /**
-         * Filter videos by category
-         * @param {string} category - Category to filter by
-         */
-        function filterByCategory(category) {
-            const videoItems = document.querySelectorAll('.video-item');
-            const categoryButtons = document.querySelectorAll('.category-button');
-            
-            // Update active button
-            categoryButtons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            // Filter videos
-            videoItems.forEach(item => {
-                const itemCategory = item.getAttribute('data-category');
-                if (category === 'all' || itemCategory === category) {
-                    item.classList.remove('hidden');
-                } else {
-                    item.classList.add('hidden');
-                }
-            });
-            
-            // Update search if there's an active search term
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            if (searchTerm) {
-                searchVideos();
+        function getInstructionsContent() {
+            return `
+                <div class="instructions">
+                    <h2>Welcome to the Guestbook!</h2>
+                    <p>This is a nostalgic throwback to the classic web guestbooks of the 1990s and early 2000s.</p>
+                    <p>Feel free to sign the guestbook on the next page and leave your mark on this digital notebook.</p>
+                    <p>Use the navigation buttons below to browse through all the entries from fellow visitors.</p>
+                    <p>Turn the page to get started, or click "New Entry" to jump straight to the signing form.</p>
+                    <p>Thanks for visiting!</p>
+                </div>
+            `;
+        }
+
+        function getFormContent() {
+            return `
+                <div class="form-container">
+                    <h2>Sign the Guestbook</h2>
+                    <form id="guestbookForm" onsubmit="submitForm(event)">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="name" required maxlength="50">
+                        </div>
+                        <div class="form-group" style="margin-top: -22px; margin-bottom: -22px;">
+                            <label for="message">Message:</label>
+                            <textarea id="message" name="message" required maxlength="300" placeholder="Write your message here..."></textarea>
+                        </div>
+                        <div style="margin-top: 22px; line-height: 22px;">
+                            <button type="submit" class="submit-link" id="submitBtn">Sign the guestbook</button>
+                        </div>
+                    </form>
+                </div>
+            `;
+        }
+
+        function getLoadingContent() {
+            return `<div class="loading">Loading guestbook entries...</div>`;
+        }
+
+        function getErrorContent() {
+            return `<div class="error">Unable to load guestbook entries. Please check your connection and try again.</div>`;
+        }
+
+        function getEndContent() {
+            return `<div class="end-message">You've reached the end of the guestbook. Thank you for reading all the entries!</div>`;
+        }
+
+        function getEntriesContent(startIndex, pageTitle) {
+            if (isLoading) {
+                return getLoadingContent();
             }
+            
+            if (hasError) {
+                return getErrorContent();
+            }
+            
+            const pageData = calculateEntriesForPage(startIndex);
+            const entries = pageData.entries;
+            
+            if (entries.length === 0) {
+                return getEndContent();
+            }
+
+            let entriesHTML = `
+                <div class="guest-entries">
+                    <div class="entries-container">
+            `;
+
+            entries.forEach(entry => {
+                entriesHTML += `
+                    <div class="entry">
+                        <div class="entry-header">${escapeHtml(entry.name)}</div>
+                        <div class="entry-message">${escapeHtml(entry.message)}</div>
+                        <div class="entry-date">${formatDate(entry.date)}</div>
+                    </div>
+                `;
+            });
+
+            entriesHTML += `
+                    </div>
+                </div>
+            `;
+
+            return entriesHTML;
         }
 
-        /**
-         * Search videos
-         */
-        function searchVideos() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            const videoItems = document.querySelectorAll('.video-item');
-            const activeCategory = document.querySelector('.category-button.active').textContent.toLowerCase();
-            
-            videoItems.forEach(item => {
-                const title = item.querySelector('h4').textContent.toLowerCase();
-                const description = item.querySelector('.video-description').textContent.toLowerCase();
-                const itemCategory = item.getAttribute('data-category');
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function updatePageSpread() {
+            const leftPage = document.getElementById('leftPageContent');
+            const rightPage = document.getElementById('rightPageContent');
+            const leftPageNum = document.getElementById('leftPageNumber');
+            const rightPageNum = document.getElementById('rightPageNumber');
+
+            if (currentPageSpread === 1) {
+                // First spread: Instructions on left, form on right
+                leftPage.innerHTML = getInstructionsContent();
+                rightPage.innerHTML = getFormContent();
+                leftPageNum.textContent = '';
+                rightPageNum.textContent = '1';
+            } else {
+                // Entry spreads: entries on both pages
+                let currentIndex = 0;
+                let pageNumber = 2;
                 
-                const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
-                const matchesCategory = activeCategory === 'all videos' || itemCategory === getCategoryKeyFromName(activeCategory);
-                
-                if (matchesSearch && matchesCategory) {
-                    item.classList.remove('hidden');
-                } else {
-                    item.classList.add('hidden');
-                }
-            });
-
-            // Scroll to results on mobile after search
-            if (window.innerWidth <= 768 && searchTerm) {
-                document.querySelector('.gallery-section').scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'start' 
-                });
-            }
-        }
-
-        /**
-         * Get category key from display name
-         * @param {string} name - Category display name
-         * @returns {string} Category key
-         */
-        function getCategoryKeyFromName(name) {
-            for (let key in COLLECTIONS) {
-                if (COLLECTIONS[key].name.toLowerCase() === name) {
-                    return key;
-                }
-            }
-            return null;
-        }
-
-        // ============================================
-        // CUSTOM VIDEO CONTROLS
-        // ============================================
-        
-        function setupCustomControls() {
-            const video = document.getElementById('mainPlayer');
-            const playPauseBtn = document.getElementById('playPauseBtn');
-            const progressBar = document.getElementById('progressBar');
-            const currentTimeDisplay = document.getElementById('currentTime');
-            const durationDisplay = document.getElementById('duration');
-            const volumeBar = document.getElementById('volumeBar');
-            const bufferBar = document.getElementById('bufferBar');
-            const loadingSpinner = document.getElementById('loadingSpinner');
-
-            // Update time displays
-            video.addEventListener('loadedmetadata', function() {
-                durationDisplay.textContent = formatTime(video.duration);
-                loadingSpinner.style.display = 'none';
-            });
-
-            video.addEventListener('timeupdate', function() {
-                const progress = (video.currentTime / video.duration) * 100;
-                progressBar.style.width = progress + '%';
-                currentTimeDisplay.textContent = formatTime(video.currentTime);
-            });
-
-            video.addEventListener('progress', function() {
-                if (video.buffered.length > 0) {
-                    const buffered = (video.buffered.end(0) / video.duration) * 100;
-                    bufferBar.style.width = buffered + '%';
-                }
-            });
-
-            video.addEventListener('waiting', function() {
-                loadingSpinner.style.display = 'block';
-            });
-
-            video.addEventListener('canplay', function() {
-                loadingSpinner.style.display = 'none';
-            });
-
-            video.addEventListener('play', function() {
-                playPauseBtn.textContent = '⏸';
-            });
-
-            video.addEventListener('pause', function() {
-                playPauseBtn.textContent = '▶';
-            });
-        }
-
-        function togglePlayPause() {
-            const video = document.getElementById('mainPlayer');
-            if (video.paused) {
-                video.play();
-            } else {
-                video.pause();
-            }
-        }
-
-        function stopVideo() {
-            const video = document.getElementById('mainPlayer');
-            video.pause();
-            video.currentTime = 0;
-            document.getElementById('playPauseBtn').textContent = '▶';
-        }
-
-        function seekVideo(event) {
-            const video = document.getElementById('mainPlayer');
-            const progressContainer = event.currentTarget;
-            const rect = progressContainer.getBoundingClientRect();
-            const percent = (event.clientX - rect.left) / rect.width;
-            video.currentTime = percent * video.duration;
-        }
-
-        function toggleMute() {
-            const video = document.getElementById('mainPlayer');
-            const volumeIcon = event.currentTarget;
-            video.muted = !video.muted;
-            volumeIcon.textContent = video.muted ? '🔇' : '🔊';
-        }
-
-        function setVolume(event) {
-            const video = document.getElementById('mainPlayer');
-            const volumeSlider = event.currentTarget;
-            const rect = volumeSlider.getBoundingClientRect();
-            const percent = (event.clientX - rect.left) / rect.width;
-            video.volume = percent;
-            document.getElementById('volumeBar').style.width = (percent * 100) + '%';
-        }
-
-        function toggleFullscreen() {
-            const video = document.getElementById('mainPlayer');
-            if (document.fullscreenElement) {
-                document.exitFullscreen();
-            } else {
-                video.requestFullscreen();
-            }
-        }
-
-        function formatTime(seconds) {
-            if (isNaN(seconds) || seconds < 0) return '00:00';
-            
-            const mins = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            
-            // For videos longer than an hour, show hours
-            if (seconds >= 3600) {
-                const hours = Math.floor(seconds / 3600);
-                const remainingMins = Math.floor((seconds % 3600) / 60);
-                return hours + ':' + (remainingMins < 10 ? '0' : '') + remainingMins + ':' + (secs < 10 ? '0' : '') + secs;
-            }
-            
-            // For videos under an hour, just show minutes:seconds
-            return (mins < 10 ? '0' : '') + mins + ':' + (secs < 10 ? '0' : '') + secs;
-        }
-
-        // ============================================
-        // ACTION BUTTON FUNCTIONS
-        // ============================================
-        
-        function shareVideo() {
-            const currentTitle = document.getElementById('currentTitle').textContent;
-            if (navigator.share) {
-                navigator.share({
-                    title: currentTitle,
-                    url: window.location.href
-                });
-            } else {
-                navigator.clipboard.writeText(window.location.href);
-                alert('Video link copied to clipboard!');
-            }
-        }
-
-        function toggleFavorite() {
-            alert('Added to favorites! (Feature coming soon)');
-        }
-
-        function downloadVideo() {
-            if (currentVideoId) {
-                const video = getVideoData(currentVideoId);
-                if (video) {
-                    // For HLS streams, we can't directly download
-                    // Instead, provide the HLS URL for external download tools
-                    const downloadInfo = `To download this video, use an HLS-compatible downloader with this URL:\n\n${video.hlsUrl}`;
-                    
-                    if (navigator.clipboard) {
-                        navigator.clipboard.writeText(video.hlsUrl);
-                        alert('HLS URL copied to clipboard! Use an HLS downloader tool to save this video.');
+                // Calculate starting index for left page
+                const targetLeftPage = (currentPageSpread - 1) * 2;
+                while (pageNumber < targetLeftPage && currentIndex < guestbookEntries.length) {
+                    const pageData = calculateEntriesForPage(currentIndex);
+                    if (pageData.entries.length === 0) {
+                        currentIndex++;
                     } else {
-                        alert(downloadInfo);
+                        currentIndex = pageData.nextIndex;
                     }
+                    pageNumber++;
                 }
+                
+                const leftPageIndex = currentIndex;
+                const leftPageData = calculateEntriesForPage(leftPageIndex);
+                const rightPageIndex = leftPageData.nextIndex;
+                
+                const leftPageNumber = targetLeftPage;
+                const rightPageNumber = leftPageNumber + 1;
+                
+                leftPage.innerHTML = getEntriesContent(leftPageIndex, `Page ${leftPageNumber}`);
+                rightPage.innerHTML = getEntriesContent(rightPageIndex, `Page ${rightPageNumber}`);
+                
+                leftPageNum.textContent = `${leftPageNumber}`;
+                rightPageNum.textContent = `${rightPageNumber}`;
+            }
+
+            preloadBlankPage();
+            updateNavigation();
+        }
+
+        function updateNavigation() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            prevBtn.disabled = currentPageSpread <= 1;
+            nextBtn.disabled = currentPageSpread >= totalPageSpreads;
+        }
+
+        function calculateTotalPageSpreads() {
+            if (guestbookEntries.length === 0) {
+                totalPageSpreads = 1; // Just the intro/form spread
+                return;
+            }
+            
+            let currentIndex = 0;
+            let pageCount = 0;
+            
+            while (currentIndex < guestbookEntries.length) {
+                const pageData = calculateEntriesForPage(currentIndex);
+                if (pageData.entries.length === 0) {
+                    currentIndex++;
+                } else {
+                    currentIndex = pageData.nextIndex;
+                }
+                pageCount++;
+            }
+            
+            // Add one more page for the "end" message
+            pageCount++;
+            
+            const entrySpreads = Math.ceil(pageCount / 2);
+            totalPageSpreads = 1 + entrySpreads;
+        }
+
+        function previousPage() {
+            if (currentPageSpread > 1) {
+                const rightPage = document.getElementById('rightPage');
+                
+                rightPage.classList.add('flipping-backward');
+                
+                setTimeout(() => {
+                    currentPageSpread--;
+                    updatePageSpread();
+                    rightPage.classList.remove('flipping-backward');
+                }, 300);
             }
         }
 
-        // ============================================
-        // MOBILE OPTIMIZATIONS
-        // ============================================
-        
-        function handleMobileControls() {
-            if (window.innerWidth <= 768) {
-                const retroControls = document.getElementById('retroControls');
-                if (retroControls) {
-                    retroControls.style.opacity = '1';
-                }
-
-                const progressContainer = document.querySelector('.progress-container');
-                const volumeSlider = document.querySelector('.volume-slider');
-
-                if (progressContainer) {
-                    progressContainer.addEventListener('touchstart', function(e) {
-                        e.preventDefault();
-                        const touch = e.touches[0];
-                        const rect = this.getBoundingClientRect();
-                        const percent = (touch.clientX - rect.left) / rect.width;
-                        const video = document.getElementById('mainPlayer');
-                        if (video) {
-                            video.currentTime = percent * video.duration;
-                        }
-                    });
-                }
-
-                if (volumeSlider) {
-                    volumeSlider.addEventListener('touchstart', function(e) {
-                        e.preventDefault();
-                        const touch = e.touches[0];
-                        const rect = this.getBoundingClientRect();
-                        const percent = (touch.clientX - rect.left) / rect.width;
-                        const video = document.getElementById('mainPlayer');
-                        if (video) {
-                            video.volume = percent;
-                            document.getElementById('volumeBar').style.width = (percent * 100) + '%';
-                        }
-                    });
-                }
+        function nextPage() {
+            if (currentPageSpread < totalPageSpreads) {
+                const rightPage = document.getElementById('rightPage');
+                
+                rightPage.classList.add('flipping-forward');
+                
+                setTimeout(() => {
+                    currentPageSpread++;
+                    updatePageSpread();
+                    rightPage.classList.remove('flipping-forward');
+                }, 300);
             }
         }
 
-        // ============================================
-        // KEYBOARD SHORTCUTS
-        // ============================================
-        
-        function setupKeyboardShortcuts() {
-            document.addEventListener('keydown', function(event) {
-                const video = document.getElementById('mainPlayer');
-                const playerSection = document.getElementById('playerSection');
+        function goToForm() {
+            if (currentPageSpread !== 1) {
+                const rightPage = document.getElementById('rightPage');
                 
-                // Only handle shortcuts if player is visible and focused
-                if (playerSection.style.display === 'none') return;
+                rightPage.classList.add('flipping-backward');
                 
-                switch(event.code) {
-                    case 'Space':
-                        event.preventDefault();
-                        togglePlayPause();
-                        break;
-                    case 'ArrowLeft':
-                        event.preventDefault();
-                        video.currentTime = Math.max(0, video.currentTime - 10);
-                        break;
-                    case 'ArrowRight':
-                        event.preventDefault();
-                        video.currentTime = Math.min(video.duration, video.currentTime + 10);
-                        break;
-                    case 'ArrowUp':
-                        event.preventDefault();
-                        video.volume = Math.min(1, video.volume + 0.1);
-                        document.getElementById('volumeBar').style.width = (video.volume * 100) + '%';
-                        break;
-                    case 'ArrowDown':
-                        event.preventDefault();
-                        video.volume = Math.max(0, video.volume - 0.1);
-                        document.getElementById('volumeBar').style.width = (video.volume * 100) + '%';
-                        break;
-                    case 'KeyF':
-                        event.preventDefault();
-                        toggleFullscreen();
-                        break;
-                    case 'KeyM':
-                        event.preventDefault();
-                        toggleMute();
-                        break;
+                setTimeout(() => {
+                    currentPageSpread = 1;
+                    updatePageSpread();
+                    rightPage.classList.remove('flipping-backward');
+                }, 300);
+            }
+        }
+
+        function getNextRightPageContent(pageSpread) {
+            if (pageSpread === 1) {
+                const leftPageData = calculateEntriesForPage(0);
+                const rightPageIndex = leftPageData.nextIndex;
+                return getEntriesContent(rightPageIndex, 'Page 3');
+            } else {
+                let currentIndex = 0;
+                let pageNumber = 2;
+                
+                const targetPage = (pageSpread - 1) * 2 + 1;
+                
+                while (pageNumber < targetPage && currentIndex < guestbookEntries.length) {
+                    const pageData = calculateEntriesForPage(currentIndex);
+                    if (pageData.entries.length === 0) {
+                        currentIndex++;
+                    } else {
+                        currentIndex = pageData.nextIndex;
+                    }
+                    pageNumber++;
                 }
-            });
+                
+                return getEntriesContent(currentIndex, `Page ${targetPage}`);
+            }
         }
 
-        // ============================================
-        // INITIALIZATION
-        // ============================================
-        
-        /**
-         * Initialize the entire page
-         */
-        function initializePage() {
-            populateFeaturedVideos();
-            populateCategoryFilters();
-            populateVideoGallery();
-            handleMobileControls();
-            setupKeyboardShortcuts();
+        function getNextRightPageNumber(pageSpread) {
+            if (pageSpread === 1) {
+                return '3';
+            } else {
+                return ((pageSpread - 1) * 2 + 3).toString();
+            }
         }
 
-        // Initialize on page load
+        function preloadBlankPage() {
+            const blankPageContent = document.getElementById('blankPageContent');
+            const blankPageNumber = document.getElementById('blankPageNumber');
+            
+            const nextContent = getNextRightPageContent(currentPageSpread);
+            const nextPageNumber = getNextRightPageNumber(currentPageSpread);
+            
+            blankPageContent.innerHTML = nextContent;
+            blankPageNumber.textContent = nextPageNumber;
+        }
+
+        async function submitForm(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.textContent;
+            
+            try {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Submitting...';
+                
+                const formData = new FormData(e.target);
+                const name = formData.get('name').trim();
+                const message = formData.get('message').trim();
+                
+                if (!name || !message) {
+                    throw new Error('Name and message are required');
+                }
+                
+                await submitEntry(name, message);
+                
+                // Clear form
+                e.target.reset();
+                
+                // Show success message
+                alert('Thank you for signing the guestbook!');
+                
+                // Go to first entry page to see the new entry
+                currentPageSpread = 2;
+                updatePageSpread();
+                
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                alert('Error: ' + error.message);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
+        }
+
+        // Initialize the guestbook
         document.addEventListener('DOMContentLoaded', function() {
-            initializePage();
-            
-            // Add smooth scrolling for category filter on mobile
-            const categoryFilters = document.querySelector('.category-filters');
-            if (categoryFilters && window.innerWidth <= 480) {
-                categoryFilters.style.scrollBehavior = 'smooth';
-            }
-
-            // Add search functionality on Enter key
-            const searchInput = document.getElementById('searchInput');
-            searchInput.addEventListener('keypress', function(event) {
-                if (event.key === 'Enter') {
-                    searchVideos();
-                }
-            });
-
-            // Real-time search as user types (with debounce)
-            let searchTimeout;
-            searchInput.addEventListener('input', function() {
-                clearTimeout(searchTimeout);
-                searchTimeout = setTimeout(searchVideos, 300);
-            });
+            console.log('Initializing guestbook...');
+            calculateTotalPageSpreads();
+            updatePageSpread();
+            fetchGuestbookEntries();
         });
-
-        // Handle window resize
-        window.addEventListener('resize', function() {
-            handleMobileControls();
-        });
-
-        // Cleanup HLS instance on page unload
-        window.addEventListener('beforeunload', function() {
-            if (hlsInstance) {
-                hlsInstance.destroy();
-            }
-        });
-
-        // ============================================
-        // EASY MANAGEMENT HELPERS - USE THESE TO ADD CONTENT
-        // ============================================
-        
-        /**
-         * Quick add video helper - use this in browser console
-         * Example: quickAddVideo('your-video-id', 'My Video Title', 'Description here', 'tutorials', true)
-         */
-        window.quickAddVideo = function(videoId, title, description, collection, featured = false) {
-            addVideo(videoId, {
-                title: title,
-                description: description,
-                collection: collection,
-                featured: featured
-            });
-            console.log(`Added video: ${title} (${videoId})`);
-            console.log(`HLS URL: ${getBunnyHLSUrl(videoId)}`);
-            console.log(`Thumbnail URL: ${getBunnyThumbnailUrl(videoId)}`);
-        };
-
-        /**
-         * Quick set featured videos helper
-         * Example: quickSetFeatured(['video-id-1', 'video-id-2', 'video-id-3'])
-         */
-        window.quickSetFeatured = function(videoIds) {
-            setFeaturedVideos(videoIds);
-            console.log('Featured videos updated:', videoIds);
-        };
-
-        /**
-         * Log current video database for export
-         */
-        window.exportVideoDatabase = function() {
-            console.log('Current Video Database:');
-            console.log(JSON.stringify(VIDEO_DATABASE, null, 2));
-        };
-
-        /**
-         * Test HLS URL connectivity
-         */
-        window.testHLSUrl = function(videoId) {
-            const hlsUrl = getBunnyHLSUrl(videoId);
-            console.log(`Testing HLS URL: ${hlsUrl}`);
-            
-            fetch(hlsUrl)
-                .then(response => {
-                    if (response.ok) {
-                        console.log('✅ HLS URL is accessible');
-                        return response.text();
-                    } else {
-                        console.log('❌ HLS URL returned error:', response.status);
-                    }
-                })
-                .then(data => {
-                    if (data) {
-                        console.log('✅ HLS playlist loaded successfully');
-                        console.log('Playlist preview:', data.substring(0, 200) + '...');
-                    }
-                })
-                .catch(error => {
-                    console.log('❌ Error accessing HLS URL:', error);
-                });
-        };
-
-        /**
-         * Get video analytics summary
-         */
-        window.getVideoAnalytics = function() {
-            const analytics = {
-                totalVideos: Object.keys(VIDEO_DATABASE).length,
-                totalViews: Object.values(VIDEO_DATABASE).reduce((sum, video) => sum + video.views, 0),
-                featuredVideos: Object.values(VIDEO_DATABASE).filter(video => video.featured).length,
-                collectionStats: {}
-            };
-
-            Object.keys(COLLECTIONS).forEach(collection => {
-                const videos = getVideosByCollection(collection);
-                analytics.collectionStats[collection] = {
-                    count: videos.length,
-                    totalViews: videos.reduce((sum, video) => sum + video.views, 0)
-                };
-            });
-
-            console.log('WillTube Analytics:', analytics);
-            return analytics;
-        };
-
-        // ============================================
-        // ADVANCED FEATURES
-        // ============================================
-
-        /**
-         * Picture-in-Picture mode support
-         */
-        function togglePictureInPicture() {
-            const video = document.getElementById('mainPlayer');
-            
-            if (document.pictureInPictureElement) {
-                document.exitPictureInPicture();
-            } else if (document.pictureInPictureEnabled) {
-                video.requestPictureInPicture().catch(error => {
-                    console.log('Picture-in-Picture failed:', error);
-                });
-            }
-        }
-
-        // Add Picture-in-Picture button to controls (if supported)
-        if (document.pictureInPictureEnabled) {
-            document.addEventListener('DOMContentLoaded', function() {
-                const retroControls = document.getElementById('retroControls');
-                const pipButton = document.createElement('div');
-                pipButton.className = 'retro-button';
-                pipButton.textContent = 'PiP';
-                pipButton.onclick = togglePictureInPicture;
-                pipButton.title = 'Picture-in-Picture';
-                
-                // Insert before fullscreen button
-                const fullscreenButton = document.querySelector('.fullscreen-button');
-                retroControls.insertBefore(pipButton, fullscreenButton);
-            });
-        }
-
-        /**
-         * Video quality bandwidth monitoring
-         */
-        function monitorBandwidth() {
-            if (hlsInstance && hlsInstance.levels) {
-                const currentLevel = hlsInstance.currentLevel;
-                const level = hlsInstance.levels[currentLevel];
-                
-                if (level) {
-                    console.log('Current quality:', level.height + 'p', 'Bitrate:', Math.round(level.bitrate / 1000) + 'kbps');
-                }
-            }
-        }
-
-        // Monitor bandwidth every 5 seconds during playback
-        setInterval(function() {
-            const video = document.getElementById('mainPlayer');
-            if (video && !video.paused && !video.ended) {
-                monitorBandwidth();
-            }
-        }, 5000);
-
-        console.log('🎬 WillTube HLS Edition loaded successfully!');
-        console.log('📹 Use quickAddVideo() to add new videos');
-        console.log('🔧 Use testHLSUrl() to test video connectivity');
-        console.log('📊 Use getVideoAnalytics() for statistics');
-		
-		// ============================================
-// RATING & COMMENT SYSTEM FOR WILLTUBE
-// ============================================
-const API_BASE = 'https://comment-server-cuos.onrender.com/api';
-// Rating & Comment System Variables
-let userCurrentRating = 0;
-let selectedAvatarIndex = 0;
-let currentAvatarPage = 0;
-let allAvatars = [];
-let videoRatingData = {
-    ratings: { total: 0, sum: 0, average: 0 },
-    comments: []
-};
-
-// ============================================
-// AVATAR SYSTEM
-// ============================================
-
-function createAvatarRow() {
-    const avatarRow = document.getElementById('avatarRow');
-    if (!avatarRow) return;
-    
-    allAvatars = [];
-    
-    const colors = [
-        'linear-gradient(135deg, #4080ff, #2060df)',
-        'linear-gradient(135deg, #ff4080, #df2060)',
-        'linear-gradient(135deg, #80ff40, #60df20)',
-        'linear-gradient(135deg, #ff8040, #df6020)',
-        'linear-gradient(135deg, #8040ff, #6020df)',
-        'linear-gradient(135deg, #40ff80, #20df60)',
-        'linear-gradient(135deg, #ff4040, #df2020)',
-        'linear-gradient(135deg, #4040ff, #2020df)',
-        'linear-gradient(135deg, #ff8080, #df6060)',
-        'linear-gradient(135deg, #80ff80, #60df60)',
-        'linear-gradient(135deg, #8080ff, #6060df)',
-        'linear-gradient(135deg, #ffff40, #dfdf20)',
-        'linear-gradient(135deg, #ff40ff, #df20df)',
-        'linear-gradient(135deg, #40ffff, #20dfdf)',
-        'linear-gradient(135deg, #ffaa40, #dfaa20)',
-        'linear-gradient(135deg, #aa40ff, #aa20df)',
-        'linear-gradient(135deg, #40aaff, #20aadf)',
-        'linear-gradient(135deg, #ffaa80, #dfaa60)',
-        'linear-gradient(135deg, #aa80ff, #aa60df)',
-        'linear-gradient(135deg, #80aaff, #60aadf)',
-        'linear-gradient(135deg, #ffccaa, #dfccaa)',
-        'linear-gradient(135deg, #aaccff, #aaccdf)',
-        'linear-gradient(135deg, #ccaaff, #ccaadf)',
-        'linear-gradient(135deg, #ffccff, #dfccdf)',
-        'linear-gradient(135deg, #ccffaa, #ccdfaa)',
-        'linear-gradient(135deg, #aaffcc, #aadfcc)',
-        'linear-gradient(135deg, #ffaacc, #dfaacc)',
-        'linear-gradient(135deg, #ccaaaa, #ccaaaa)',
-        'linear-gradient(135deg, #aaccaa, #aaccaa)'
-    ];
-    
-    for (let i = 0; i < 29; i++) {
-        const avatarDiv = document.createElement('div');
-        avatarDiv.className = 'avatar-choice';
-        avatarDiv.dataset.index = i;
-        
-        if (i === 0) {
-            avatarDiv.classList.add('selected');
-        }
-        
-        const avatarNumber = i + 1;
-        const avatarFile = `avatar${avatarNumber}.png`;
-        
-        const img = new Image();
-        img.onload = function() {
-            avatarDiv.style.backgroundImage = `url('avatars/${avatarFile}')`;
-            avatarDiv.style.backgroundSize = 'cover';
-            avatarDiv.style.backgroundPosition = 'center';
-            avatarDiv.textContent = '';
-            avatarDiv.style.color = 'transparent';
-        };
-        
-        img.onerror = function() {
-            avatarDiv.style.backgroundImage = 'none';
-            avatarDiv.style.background = colors[i % colors.length];
-            avatarDiv.textContent = String.fromCharCode(65 + (i % 26));
-            avatarDiv.style.color = 'white';
-            avatarDiv.style.fontSize = '10px';
-            avatarDiv.style.fontWeight = 'bold';
-        };
-        
-        img.src = `avatars/${avatarFile}`;
-        
-        avatarDiv.onclick = function() {
-            selectAvatarByIndex(i);
-        };
-        
-        avatarDiv.title = `Avatar ${avatarNumber}`;
-        allAvatars.push(avatarDiv);
-    }
-    
-    currentAvatarPage = 0;
-    
-    // Delay the display update until the DOM is fully rendered
-    setTimeout(() => {
-        updateAvatarDisplay();
-    }, 100);
-}
-
-function updateAvatarDisplay() {
-    const avatarRow = document.getElementById('avatarRow');
-    const prevBtn = document.getElementById('avatarPrev');
-    const nextBtn = document.getElementById('avatarNext');
-    
-    // Calculate how many avatars fit dynamically
-    const avatarsPerPage = calculateAvatarsPerPage();
-    
-    avatarRow.innerHTML = '';
-    
-    const startIndex = currentAvatarPage * avatarsPerPage;
-    const endIndex = Math.min(startIndex + avatarsPerPage, allAvatars.length);
-    
-    for (let i = startIndex; i < endIndex; i++) {
-        avatarRow.appendChild(allAvatars[i]);
-    }
-    
-    if (currentAvatarPage === 0) {
-        prevBtn.classList.add('disabled');
-    } else {
-        prevBtn.classList.remove('disabled');
-    }
-    
-    const maxPage = Math.ceil(allAvatars.length / avatarsPerPage) - 1;
-    if (currentAvatarPage >= maxPage) {
-        nextBtn.classList.add('disabled');
-    } else {
-        nextBtn.classList.remove('disabled');
-    }
-}
-
-function previousAvatarPage() {
-    if (currentAvatarPage > 0) {
-        currentAvatarPage--;
-        updateAvatarDisplay();
-    }
-}
-
-function nextAvatarPage() {
-    const avatarsPerPage = calculateAvatarsPerPage();
-    const maxPage = Math.ceil(allAvatars.length / avatarsPerPage) - 1;
-    if (currentAvatarPage < maxPage) {
-        currentAvatarPage++;
-        updateAvatarDisplay();
-    }
-}
-
-function selectAvatarByIndex(index) {
-    selectedAvatarIndex = index;
-    
-    allAvatars.forEach(avatar => {
-        avatar.classList.remove('selected');
-    });
-    
-    allAvatars[index].classList.add('selected');
-    
-    const avatarsPerPage = calculateAvatarsPerPage();
-    const avatarPage = Math.floor(index / avatarsPerPage);
-    if (avatarPage !== currentAvatarPage) {
-        currentAvatarPage = avatarPage;
-        updateAvatarDisplay();
-    }
-}
-
-function getAvatarForComment(index) {
-    const colors = [
-        'linear-gradient(135deg, #4080ff, #2060df)',
-        'linear-gradient(135deg, #ff4080, #df2060)',
-        'linear-gradient(135deg, #80ff40, #60df20)',
-        'linear-gradient(135deg, #ff8040, #df6020)',
-        'linear-gradient(135deg, #8040ff, #6020df)',
-        'linear-gradient(135deg, #40ff80, #20df60)',
-        'linear-gradient(135deg, #ff4040, #df2020)',
-        'linear-gradient(135deg, #4040ff, #2020df)',
-        'linear-gradient(135deg, #ff8080, #df6060)',
-        'linear-gradient(135deg, #80ff80, #60df60)',
-        'linear-gradient(135deg, #8080ff, #6060df)',
-        'linear-gradient(135deg, #ffff40, #dfdf20)',
-        'linear-gradient(135deg, #ff40ff, #df20df)',
-        'linear-gradient(135deg, #40ffff, #20dfdf)',
-        'linear-gradient(135deg, #ffaa40, #dfaa20)',
-        'linear-gradient(135deg, #aa40ff, #aa20df)',
-        'linear-gradient(135deg, #40aaff, #20aadf)',
-        'linear-gradient(135deg, #ffaa80, #dfaa60)',
-        'linear-gradient(135deg, #aa80ff, #aa60df)',
-        'linear-gradient(135deg, #80aaff, #60aadf)',
-        'linear-gradient(135deg, #ffccaa, #dfccaa)',
-        'linear-gradient(135deg, #aaccff, #aaccdf)',
-        'linear-gradient(135deg, #ccaaff, #ccaadf)',
-        'linear-gradient(135deg, #ffccff, #dfccdf)',
-        'linear-gradient(135deg, #ccffaa, #ccdfaa)',
-        'linear-gradient(135deg, #aaffcc, #aadfcc)',
-        'linear-gradient(135deg, #ffaacc, #dfaacc)',
-        'linear-gradient(135deg, #ccaaaa, #ccaaaa)',
-        'linear-gradient(135deg, #aaccaa, #aaccaa)'
-    ];
-    
-    const avatarNumber = index + 1;
-    const avatarFile = `avatar${avatarNumber}.png`;
-    
-    return {
-        avatarFile: avatarFile,
-        fallbackBackground: colors[index % colors.length],
-        fallbackLetter: String.fromCharCode(65 + (index % 26))
-    };
-}
-
-// ============================================
-// RATING SYSTEM
-// ============================================
-
-function updateRatingDisplay() {
-    const avgStars = document.getElementById('avgRatingStars');
-    const ratingText = document.getElementById('ratingText');
-    const ratings = videoRatingData.ratings;
-
-    const avgRating = ratings.average || 0;
-    const stars = avgStars.querySelectorAll('.star');
-    
-    stars.forEach((star, index) => {
-        if (index < Math.floor(avgRating)) {
-            star.textContent = '★';
-            star.style.color = '#ffd700';
-        } else if (index < avgRating) {
-            star.textContent = '★';
-            star.style.color = '#ffd700';
-            star.style.opacity = '0.5';
-        } else {
-            star.textContent = '☆';
-            star.style.color = '#ddd';
-            star.style.opacity = '1';
-        }
-    });
-
-    if (ratings.total > 0) {
-        ratingText.textContent = `${avgRating.toFixed(1)}/5 stars • ${ratings.total} rating${ratings.total !== 1 ? 's' : ''}`;
-    } else {
-        ratingText.textContent = 'No ratings yet';
-    }
-}
-
-function setUserRating(rating) {
-    userCurrentRating = rating;
-    const userStars = document.getElementById('userRatingStars');
-    const stars = userStars.querySelectorAll('.star');
-    const submitButton = document.getElementById('submitRating');
-
-    stars.forEach((star, index) => {
-        if (index < rating) {
-            star.textContent = '★';
-            star.style.color = '#ffd700';
-        } else {
-            star.textContent = '☆';
-            star.style.color = '#ddd';
-        }
-    });
-
-    submitButton.disabled = false;
-}
-
-async function submitRating() {
-    if (userCurrentRating === 0 || !currentVideoId) return;
-
-    const submitButton = document.getElementById('submitRating');
-    const originalText = submitButton.textContent;
-    
-    try {
-        submitButton.textContent = 'Rating...';
-        submitButton.disabled = true;
-
-        const response = await fetch(`${API_BASE}/ratings`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ videoId: currentVideoId, rating: userCurrentRating })
-        });
-        
-        if (response.ok) {
-            const result = await response.json();
-            videoRatingData.ratings = result.ratings;
-            updateRatingDisplay();
-            
-            submitButton.textContent = 'Rated!';
-            setTimeout(() => {
-                submitButton.textContent = originalText;
-                submitButton.disabled = true;
-                userCurrentRating = 0;
-                resetUserRatingStars();
-            }, 2000);
-        } else {
-            throw new Error('Failed to submit rating');
-        }
-
-    } catch (error) {
-        console.error('Rating error:', error);
-        submitButton.textContent = originalText;
-        submitButton.disabled = false;
-    }
-}
-
-function resetUserRatingStars() {
-    const userStars = document.getElementById('userRatingStars');
-    const stars = userStars.querySelectorAll('.star');
-    
-    stars.forEach(star => {
-        star.textContent = '☆';
-        star.style.color = '#ddd';
-    });
-}
-
-// ============================================
-// COMMENT SYSTEM
-// ============================================
-
-function updateCommentsDisplay() {
-    const commentsList = document.getElementById('commentsList');
-    const commentsHeader = document.getElementById('commentsHeader');
-    const comments = videoRatingData.comments || [];
-
-    commentsHeader.textContent = `Comments (${comments.length})`;
-    commentsList.innerHTML = '';
-
-    const sortedComments = [...comments].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-
-    sortedComments.forEach(comment => {
-        const commentDiv = document.createElement('div');
-        commentDiv.className = 'comment';
-        
-        const avatarIndex = comment.avatarIndex || 0;
-        const avatarInfo = getAvatarForComment(avatarIndex);
-        
-        const date = new Date(comment.timestamp).toLocaleString();
-        
-        const avatarElement = document.createElement('div');
-        avatarElement.className = 'comment-avatar';
-        
-        const img = new Image();
-        img.onload = function() {
-            avatarElement.style.backgroundImage = `url('avatars/${avatarInfo.avatarFile}')`;
-            avatarElement.style.backgroundSize = 'cover';
-            avatarElement.style.backgroundPosition = 'center';
-            avatarElement.textContent = '';
-        };
-        img.onerror = function() {
-            avatarElement.style.background = avatarInfo.fallbackBackground;
-            avatarElement.textContent = avatarInfo.fallbackLetter;
-            avatarElement.style.color = 'white';
-            avatarElement.style.fontSize = '14px';
-            avatarElement.style.fontWeight = 'bold';
-            avatarElement.style.display = 'flex';
-            avatarElement.style.alignItems = 'center';
-            avatarElement.style.justifyContent = 'center';
-        };
-        img.src = `avatars/${avatarInfo.avatarFile}`;
-        
-        commentDiv.innerHTML = `
-            <div class="comment-content">
-                <div class="comment-author">${escapeHtml(comment.author)}</div>
-                <div class="comment-text">${escapeHtml(comment.text)}</div>
-                <div class="comment-date">${date}</div>
-            </div>
-        `;
-        
-        commentDiv.insertBefore(avatarElement, commentDiv.firstChild);
-        commentsList.appendChild(commentDiv);
-    });
-
-    commentsList.scrollTop = 0;
-}
-
-async function submitComment() {
-    const nameInput = document.getElementById('commentName');
-    const messageInput = document.getElementById('commentMessage');
-    const submitButton = document.getElementById('submitComment');
-    
-    const name = nameInput.value.trim();
-    const message = messageInput.value.trim();
-    
-    if (!name || !message) {
-        alert('Please enter both name and message!');
-        return;
-    }
-
-    if (!currentVideoId) {
-        alert('Please select a video first!');
-        return;
-    }
-
-    const originalText = submitButton.textContent;
-    
-    try {
-        submitButton.textContent = 'Posting...';
-        submitButton.disabled = true;
-
-        const response = await fetch(`${API_BASE}/comments`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-                mediaTitle: currentVideoId, 
-                author: name, 
-                text: message,
-                avatarIndex: selectedAvatarIndex 
-            })
-        });
-        
-        if (response.ok) {
-            const result = await response.json();
-            
-            videoRatingData.comments.push({
-                author: result.author,
-                text: result.text,
-                timestamp: result.timestamp,
-                avatarIndex: selectedAvatarIndex,
-                id: result.id
-            });
-        } else {
-            throw new Error('Failed to submit comment');
-        }
-
-    } catch (error) {
-        console.error('Comment error:', error);
-    }
-
-    nameInput.value = '';
-    messageInput.value = '';
-    updateCommentsDisplay();
-    
-    submitButton.textContent = originalText;
-    submitButton.disabled = false;
-}
-
-function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-}
-
-// ============================================
-// INITIALIZATION FOR VIDEO PLAYBACK
-// ============================================
-
-async function loadVideoRatingData(videoId) {
-    try {
-        // Load comments
-        const commentsResponse = await fetch(`${API_BASE}/comments/${encodeURIComponent(videoId)}`);
-        if (commentsResponse.ok) {
-            const comments = await commentsResponse.json();
-            videoRatingData.comments = comments;
-        }
-
-        // Load ratings
-        const ratingsResponse = await fetch(`${API_BASE}/ratings/${encodeURIComponent(videoId)}`);
-        if (ratingsResponse.ok) {
-            const ratings = await ratingsResponse.json();
-            videoRatingData.ratings = ratings;
-        }
-    } catch (error) {
-        console.error('Failed to load video rating data:', error);
-        videoRatingData = {
-            ratings: { total: 0, sum: 0, average: 0 },
-            comments: []
-        };
-    }
-}
-
-// ============================================
-// INTEGRATION WITH EXISTING WILLTUBE
-// ============================================
-
-// Initialize the rating/comment system when page loads
-
-
-
-
-function calculateAvatarsPerPage() {
-    const avatarNavigation = document.querySelector('.avatar-navigation');
-    const avatarRow = document.getElementById('avatarRow');
-    const arrows = document.querySelectorAll('.avatar-arrow');
-    
-    // Check if we're on mobile
-    const isMobile = window.innerWidth <= 768;
-    
-    // Force 4 avatars on mobile, calculate for desktop
-    if (isMobile) {
-        return 4; // Fixed 4 avatars on mobile
-    }
-    
-    // Desktop calculation (existing logic)
-    const defaultWidth = 366;
-    const totalWidth = (avatarNavigation && avatarNavigation.offsetWidth > 0) 
-        ? avatarNavigation.offsetWidth 
-        : defaultWidth;
-    
-    if (!avatarRow || arrows.length < 2) return 9;
-    
-    const arrowWidth = arrows.length >= 2 ? arrows[0].offsetWidth * 2 : 40;
-    const navigationGaps = 8;
-    const availableWidth = totalWidth - arrowWidth - navigationGaps;
-    const avatarWidth = 24;
-    const avatarGap = 4;
-    const avatarsPerPage = Math.floor((availableWidth + avatarGap) / (avatarWidth + avatarGap));
-    const result = Math.max(1, Math.min(avatarsPerPage, 29));
-    
-    return result;
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    createAvatarRow();
-});
-
-// Handle window resize to recalculate avatar display
-document.addEventListener('DOMContentLoaded', function() {
-    // Wait for layout to be complete before creating avatar row
-    setTimeout(() => {
-        createAvatarRow();
-    }, 200);
-});
     </script>
 </body>
 </html>
