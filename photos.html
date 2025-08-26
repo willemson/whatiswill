@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @font-face {
+            font-family: 'BTTF';
+            src: url('fonts/BTTF.ttf') format('truetype');
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Jacquard12-Regular';
+            src: url('./fonts/Jacquard12-Regular.ttf') format('truetype'),
+                 url('fonts/Jacquard12-Regular.ttf') format('truetype');
+            font-display: swap;
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Tiny5-Regular';
+            src: url('./fonts/Tiny5-Regular.ttf') format('truetype'),
+                 url('fonts/Tiny5-Regular.ttf') format('truetype');
+            font-display: swap;
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'VCR';
+            src: url('./fonts/vcr.ttf') format('truetype'),
+                 url('fonts/vcr.ttf') format('truetype');
+            font-display: swap;
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'W95FA';
+            src: url('./fonts/W95FA.otf') format('opentype'),
+                 url('fonts/W95FA.otf') format('opentype');
+            font-display: swap;
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            background: #e6e6e6;
+            color: #333333;
+            overflow-x: hidden;
+        }
+
+        /* Header Section - Fresh Start */
+        .header {
+            background: white;
+            border-bottom: 3px outset #666666;
+        }
+
+        /* Slideshow Container */
+        .slideshow-section {
+            height: 200px;
+            padding: 20px;
+            position: relative;
+        }
+
+        .marquee-container {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border: 3px inset #666666;
+            background: #f8f8f8;
+        }
+
+        .marquee {
+            display: flex;
+            height: 100%;
+            animation: scroll 80s linear infinite;
+            will-change: transform;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .marquee img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+            border-right: 2px inset #555555;
+            background: white;
+            filter: saturate(0.9) contrast(0.95) grayscale(100%);
+            transition: filter 0.3s ease, transform 0.2s ease;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .marquee img:hover {
+            filter: saturate(1.1) contrast(1.05) grayscale(0%);
+            transform: scale(1.02);
+            z-index: 10;
+            position: relative;
+        }
+
+        /* Header Divider */
+        .header-divider {
+            width: 100%;
+            height: 2px;
+            background: #666666;
+            border-top: 1px solid #999999;
+            border-bottom: 1px solid #333333;
+        }
+
+        /* NEW HEADER SECTION - Fresh Start */
+        .new-header {
+            /* Placeholder for new design */
+            height: 120px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 3px solid #333;
+        }
+
+        .new-header-content {
+            font-family: 'Arial', sans-serif;
+            font-size: 24px;
+            color: #333;
+        }
+
+        /* Header Section */
+        .header {
+            background: white;
+            border-bottom: 3px outset #666666;
+        }
+
+        /* Slideshow Container */
+        .slideshow-section {
+            height: 200px;
+            padding: 20px;
+            position: relative;
+        }
+
+        .marquee-container {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border: 3px inset #666666;
+            background: #f8f8f8;
+        }
+
+        .marquee {
+            display: flex;
+            height: 100%;
+            animation: scroll 80s linear infinite;
+            will-change: transform;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .marquee img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+            border-right: 2px inset #555555;
+            background: white;
+            filter: saturate(0.9) contrast(0.95) grayscale(100%);
+            transition: filter 0.3s ease, transform 0.2s ease;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .marquee img:hover {
+            filter: saturate(1.1) contrast(1.05) grayscale(0%);
+            transform: scale(1.02);
+            z-index: 10;
+            position: relative;
+        }
+
+        /* Header Divider */
+        .header-divider {
+            width: 100%;
+            height: 2px;
+            background: #666666;
+            border-top: 1px solid #999999;
+            border-bottom: 1px solid #333333;
+        }
+
+        /* Title Section - now simplified */
+        .title-section {
+            display: none; /* Hide the original title section since it's now combined */
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            min-height: calc(100vh - 325px); /* Adjusted for new header */
+            background: #e6e6e6;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 200px;
+            padding: 20px;
+            background: #ffffff;
+            border-right: 3px outset #d3d3d3;
+            border-top: 2px inset #e8e8e8;
+        }
+
+        .sidebar h3 {
+            font-family: 'W95FA', 'Arial', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #000000;
+            text-align: center;
+            font-weight: bold;
+            padding: 0px 0;
+            background: transparent;
+            border: none;
+        }
+
+        .timeline-arrow {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #333333;
+            margin-bottom: 0rem;
+            font-family: 'W95FA', 'Arial', sans-serif;
+        }
+
+        .category-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .year-separator {
+            padding: 0.2rem 0 0.1rem 0;
+            background: transparent;
+            border: none;
+            color: #000000;
+            font-family: 'Jacquard12-Regular', 'Arial Black', sans-serif;
+            font-size: 4rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 0.2rem 0 0.1rem 0;
+            text-shadow: none;
+            background: none;
+            position: relative;
+            line-height: 1;
+        }
+
+        .year-separator::after {
+            content: '';
+            display: block;
+            width: 90%;
+            height: 2px;
+            background: #333333;
+            margin: 0.1rem auto 0.1rem auto;
+            border-radius: 1px;
+        }
+
+        .year-separator:first-child {
+            margin-top: 0;
+        }
+
+        .category-btn {
+            padding: 0.6rem 0.8rem;
+            background: #808080;
+            border: 2px solid #000000;
+            color: #000000;
+            font-family: 'Tiny5-Regular', 'Arial', sans-serif;
+            font-size: 0.8rem;
+            font-weight: normal;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            margin: 0.2rem 0;
+            border-radius: 0;
+        }
+
+        .category-btn:hover {
+            background: #999999;
+            border: 2px solid #000000;
+            color: #87CEEB;
+            transform: translateY(1px);
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .category-btn.active {
+            background: #606060;
+            border: 2px solid #000000;
+            color: #e8f7f8;
+            transform: translateY(1px);
+            box-shadow: inset 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        /* Gallery */
+        .gallery {
+            flex: 1;
+            padding: 20px;
+            background: #ffffff;
+            border-top: 2px inset #e0e0e0;
+        }
+
+        .gallery-header {
+            margin-bottom: 1rem;
+            text-align: center;
+            padding: 0.8rem;
+            background: transparent;
+            border: none;
+        }
+
+        .gallery-header h2 {
+            font-family: 'W95FA', 'Courier New', monospace;
+            font-size: 2.5rem;
+            color: #000000;
+            margin-bottom: 0.3rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .gallery-metadata {
+            font-family: 'W95FA', 'Arial', sans-serif;
+            font-size: 1rem;
+            color: #333333;
+            margin-bottom: 0.4rem;
+            line-height: 1.2;
+            text-align: center;
+        }
+
+        .gallery-metadata .separator {
+            margin: 0 0.5rem;
+            color: #666666;
+        }
+
+        .gallery-divider {
+            width: 100%;
+            height: 1px;
+            background: #999999;
+            margin: 0.3rem 0;
+            border: none;
+        }
+
+        .loading-message {
+            text-align: center;
+            padding: 2rem;
+            color: #666666;
+            font-style: italic;
+        }
+
+        .masonry-grid {
+            columns: 4;
+            column-gap: 15px;
+            width: 100%;
+        }
+
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 15px;
+            border: 2px inset #cccccc;
+            cursor: pointer;
+            background: white;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .masonry-item:hover {
+            border: 2px outset #cccccc;
+            transform: translateY(-2px);
+            box-shadow: 2px 4px 8px rgba(0,0,0,0.2);
+            animation: shake 0.3s ease-in-out;
+        }
+
+        @keyframes shake {
+            0% { transform: translateY(-2px) rotate(0deg); }
+            25% { transform: translateY(-2px) rotate(-1deg); }
+            50% { transform: translateY(-2px) rotate(1deg); }
+            75% { transform: translateY(-2px) rotate(-0.5deg); }
+            100% { transform: translateY(-2px) rotate(0deg); }
+        }
+
+        .masonry-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: none;
+        }
+
+        /* Modal for full-size images */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 20px;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border: 3px outset #cccccc;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .close:hover {
+            color: #ccc;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .new-header {
+                height: 100px;
+            }
+            
+            .main-content {
+                flex-direction: column;
+                min-height: calc(100vh - 305px);
+            }
+            
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 3px outset #d3d3d3;
+            }
+            
+            .category-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .category-btn {
+                flex: 1;
+                min-width: 80px;
+                margin: 0.2rem;
+                font-size: 0.7rem;
+            }
+            
+            .year-separator {
+                flex-basis: 100%;
+                margin: 0.3rem 0 0.2rem 0;
+                text-align: center;
+                font-size: 3.2rem;
+            }
+
+            .year-separator::after {
+                width: 80%;
+                margin: 0.2rem auto 0.3rem auto;
+            }
+            
+            .masonry-grid {
+                columns: 3;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .new-header {
+                height: 80px;
+            }
+            
+            .main-content {
+                min-height: calc(100vh - 285px);
+            }
+            
+            .masonry-grid {
+                columns: 2;
+            }
+            
+            .slideshow-section {
+                height: 150px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <!-- Slideshow Section -->
+        <div class="slideshow-section">
+            <div class="marquee-container">
+                <div class="marquee" id="marquee">
+                    <!-- Images will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Divider -->
+        <div class="header-divider"></div>
+        
+        <!-- NEW FRESH HEADER SECTION -->
+        <div class="new-header">
+            <div class="new-header-content">
+                Ready for your new design!
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h3>TIMELINE</h3>
+            <div class="timeline-arrow">↓</div>
+            <div class="category-buttons">
+                <!-- Category buttons will be generated dynamically -->
+            </div>
+        </aside>
+
+        <!-- Gallery -->
+        <section class="gallery">
+            <div class="gallery-header">
+                <h2 id="current-category">Loading...</h2>
+                <div class="gallery-metadata" id="category-info">Loading metadata...</div>
+                <div class="gallery-divider"></div>
+            </div>
+            <div class="masonry-grid" id="masonry-grid">
+                <div class="loading-message">Loading beautiful images...</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for full-size images -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="">
+        </div>
+    </div>
+
+    <script>
+        // Enhanced photo category configuration organized by year
+        const photoCategories = {
+            2024: {
+                "Mom's Surprise Party": {
+                    folder: 'photos/suprise',
+                    prefix: 'suprise',
+                    count: 26,
+                    extension: 'png',
+                    customTitle: "SURPRISE CELEBRATION",
+                    camera: "Canon EOS R5",
+                    format: "Digital RAW",
+                    month: "March",
+                    year: "2024"
+                },
+                "Iceland Trip": {
+                    folder: 'photos/iceland',
+                    prefix: 'iceland',
+                    count: 18,
+                    extension: 'png',
+                    customTitle: "NORDIC ADVENTURE",
+                    camera: "Sony A7 III",
+                    format: "Digital JPEG",
+                    month: "June",
+                    year: "2024"
+                }
+            }
+        };
+
+        // Generate image arrays dynamically from folder configuration
+        function generateImageData(categoryConfig) {
+            const images = [];
+            for (let i = 1; i <= categoryConfig.count; i++) {
+                const filename = `${categoryConfig.prefix}-${i}.${categoryConfig.extension}`;
+                const src = `${categoryConfig.folder}/${filename}`;
+                const alt = `${categoryConfig.prefix} ${i}`;
+                images.push({ src, alt, filename });
+            }
+            return images;
+        }
+
+        // Build the complete image categories object (flattened for easy access)
+        const imageCategories = {};
+        const categoryDisplayNames = {};
+        const categoryMetadata = {};
+        
+        for (const [year, yearCategories] of Object.entries(photoCategories)) {
+            for (const [displayName, config] of Object.entries(yearCategories)) {
+                const categoryKey = displayName.toLowerCase().replace(/[^a-z0-9]/g, '');
+                imageCategories[categoryKey] = generateImageData(config);
+                categoryDisplayNames[categoryKey] = displayName;
+                categoryMetadata[categoryKey] = {
+                    customTitle: config.customTitle || displayName.toUpperCase(),
+                    camera: config.camera || "Unknown Camera",
+                    format: config.format || "Digital",
+                    month: config.month || "Unknown",
+                    year: config.year || "Unknown",
+                    categoryName: displayName
+                };
+            }
+        }
+
+        function getCategoryDisplayName(categoryKey) {
+            return categoryDisplayNames[categoryKey] || categoryKey;
+        }
+
+        function generateSlideshowImages() {
+            const slideshowImages = [];
+            for (const [categoryKey, images] of Object.entries(imageCategories)) {
+                const categoryImages = images.slice(0, 2);
+                slideshowImages.push(...categoryImages.map(img => img.src));
+            }
+            if (slideshowImages.length === 0) {
+                return ['https://via.placeholder.com/400x200/cccccc/666666?text=Photo+Gallery'];
+            }
+            return slideshowImages;
+        }
+
+        function initializeSlideshow() {
+            const marquee = document.getElementById('marquee');
+            const slideshowImages = generateSlideshowImages();
+            
+            const allImages = [...slideshowImages, ...slideshowImages];
+            
+            allImages.forEach((src, index) => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = `Slideshow image ${(index % slideshowImages.length) + 1}`;
+                img.loading = index < 4 ? 'eager' : 'lazy';
+                
+                img.onerror = function() {
+                    this.src = 'https://via.placeholder.com/400x200/cccccc/666666?text=Image+Not+Found';
+                };
+                
+                marquee.appendChild(img);
+            });
+        }
+
+        function generateCategoryButtons() {
+            const buttonContainer = document.querySelector('.category-buttons');
+            buttonContainer.innerHTML = '';
+            
+            let firstCategory = null;
+            
+            const sortedYears = Object.keys(photoCategories).sort((a, b) => b - a);
+            
+            sortedYears.forEach(year => {
+                const yearSeparator = document.createElement('div');
+                yearSeparator.className = 'year-separator';
+                yearSeparator.textContent = year;
+                buttonContainer.appendChild(yearSeparator);
+                
+                const yearCategories = photoCategories[year];
+                for (const [displayName, config] of Object.entries(yearCategories)) {
+                    const categoryKey = displayName.toLowerCase().replace(/[^a-z0-9]/g, '');
+                    
+                    if (!firstCategory) firstCategory = categoryKey;
+                    
+                    const button = document.createElement('button');
+                    button.className = 'category-btn';
+                    button.setAttribute('data-category', categoryKey);
+                    button.textContent = displayName;
+                    
+                    if (categoryKey === firstCategory) {
+                        button.classList.add('active');
+                    }
+                    
+                    buttonContainer.appendChild(button);
+                }
+            });
+            
+            return firstCategory;
+        }
+
+        // Load images for a category
+        function loadCategory(category) {
+            const grid = document.getElementById('masonry-grid');
+            const categoryTitle = document.getElementById('current-category');
+            const categoryInfo = document.getElementById('category-info');
+            
+            // Show loading state
+            grid.innerHTML = '<div class="loading-message">Loading beautiful images...</div>';
+            
+            // Get metadata for this category
+            const metadata = categoryMetadata[category];
+            
+            // Update header with custom title
+            categoryTitle.textContent = metadata.customTitle;
+            
+            // Build metadata string with separators
+            const metadataText = `shot on: ${metadata.camera} | format: ${metadata.format} | dated: ${metadata.month} ${metadata.year} | category: ${metadata.categoryName}`;
+            categoryInfo.textContent = metadataText;
+            
+            // Simulate loading delay for better UX
+            setTimeout(() => {
+                grid.innerHTML = '';
+                const images = imageCategories[category];
+                
+                if (!images || images.length === 0) {
+                    grid.innerHTML = '<div class="loading-message">No images found in this category.</div>';
+                    return;
+                }
+                
+                images.forEach((imageData, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'masonry-item';
+                    
+                    const img = document.createElement('img');
+                    img.src = imageData.src;
+                    img.alt = imageData.alt;
+                    img.loading = 'lazy';
+                    
+                    // Add error handling for missing images
+                    img.onerror = function() {
+                        this.src = 'https://via.placeholder.com/300x400/cccccc/666666?text=Image+Not+Found';
+                        this.alt = 'Image not found';
+                    };
+                    
+                    // Add click event for modal
+                    item.addEventListener('click', () => openModal(imageData.src, imageData.alt));
+                    
+                    item.appendChild(img);
+                    grid.appendChild(item);
+                });
+            }, 300);
+        }
+
+        // Modal functionality
+        function openModal(src, alt) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = 'block';
+            modalImg.src = src;
+            modalImg.alt = alt;
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.style.display = 'none';
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize slideshow
+            initializeSlideshow();
+            
+            // Generate category buttons and get the first category
+            const firstCategory = generateCategoryButtons();
+            
+            // Load initial category
+            if (firstCategory) {
+                loadCategory(firstCategory);
+            } else {
+                // Fallback if no categories are configured
+                document.getElementById('masonry-grid').innerHTML = 
+                    '<div class="loading-message">No photo categories configured.</div>';
+            }
+            
+            // Category button listeners
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    btn.classList.add('active');
+                    
+                    // Load the category
+                    const category = btn.getAttribute('data-category');
+                    loadCategory(category);
+                });
+            });
+            
+            // Modal close listeners
+            document.querySelector('.close').addEventListener('click', closeModal);
+            document.getElementById('imageModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal();
+                }
+            });
+            
+            // Keyboard listener for modal
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
