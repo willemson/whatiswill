@@ -3,23 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pixel Guestbook</title>
+    <title>will's world</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
         body {
             margin: 0;
             padding: 20px;
             background-color: #f0f0f0;
-            font-family: "Courier New", monospace;
+            font-family: "Micro 5 Charted", monospace;
+            font-size: 12px;
+            line-height: 1.4;
             display: flex;
             justify-content: center;
-            align-items: center;
             min-height: 100vh;
         }
 
-        .notebook-container {
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            background-color: #e8e8e8;
+            border: 2px solid #999;
+            padding: 0;
+        }
+
+        /* Scrolling banner */
+        .banner {
+            background-color: #d0d0d0;
+            border-bottom: 1px solid #999;
+            padding: 8px 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .banner marquee {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .banner a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .banner a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main content area */
+        .content {
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        /* Website reel gif */
+        .reel-container {
+            margin: 20px 0 30px 0;
+        }
+
+        .website-reel {
+            max-width: 400px;
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid #999;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Subheading */
+        .subheading {
+            margin: 20px 0;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Navigation links */
+        .nav-links {
+            margin: 30px 0;
+            padding: 15px 0;
+            border-top: 1px solid #bbb;
+            border-bottom: 1px solid #bbb;
+            background-color: #e0e0e0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            margin: 0 8px;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Individual link colors */
+        .nav-links a:nth-child(1) { color: #cc6600; } /* about - orange */
+        .nav-links a:nth-child(1):hover { color: #994400; }
+        
+        .nav-links a:nth-child(2) { color: #9900cc; } /* Film Lab - purple */
+        .nav-links a:nth-child(2):hover { color: #660099; }
+        
+        .nav-links a:nth-child(3) { color: #cc0066; } /* films - pink */
+        .nav-links a:nth-child(3):hover { color: #990044; }
+        
+        .nav-links a:nth-child(4) { color: #0066cc; } /* Mad Men - blue */
+        .nav-links a:nth-child(4):hover { color: #004499; }
+        
+        .nav-links a:nth-child(5) { color: #00cc66; } /* journal - green */
+        .nav-links a:nth-child(5):hover { color: #009944; }
+        
+        .nav-links a:nth-child(6) { color: #cc9900; } /* plushies - yellow */
+        .nav-links a:nth-child(6):hover { color: #996600; }
+        
+        .nav-links a:nth-child(7) { color: #cc3300; } /* piggos - red */
+        .nav-links a:nth-child(7):hover { color: #992200; }
+        
+        .nav-links a:nth-child(8) { color: #6600cc; } /* junk - indigo */
+        .nav-links a:nth-child(8):hover { color: #440099; }
+        
+        .nav-links a:nth-child(9) { color: #00cccc; } /* tsz - cyan */
+        .nav-links a:nth-child(9):hover { color: #009999; }
+
+        .nav-links span {
+            
+            margin: 0 8px;
+        }
+
+        /* Text content section */
+        .text-section {
+            margin: 20px 0;
+            text-align: left;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            color: #333;
+        }
+
+        .text-section h3 {
+            margin-top: 0;
+            color: #333;
+            font-family: "Bitcount Prop Single", monospace;
+        }
+
+        .text-section p {
+            margin-bottom: 5px;
+        }
+
+        .text-section strong {
+            color: #000;
+        }
+
+        .text-section a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .text-section a:hover {
+            text-decoration: underline;
+        }
+
+        /* Bottom gif row */
+        .gif-row {
+            margin-top: 30px;
+            padding: 15px 0;
+            border-top: 1px solid #bbb;
+            text-align: center;
+            line-height: 0;
+            background-color: #e8e8e8;
+        }
+
+        .gif-row img {
+            height: 31px;
+            margin: 2px 1px;
+            vertical-align: top;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
+            body {
+                padding: 10px;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+            
+            .website-reel {
+                max-width: 100%;
+            }
+            
+            .nav-links a {
+                margin: 0 4px;
+                font-size: 11px;
+            }
+        }
+		
+		.notebook-container {
             position: relative;
             width: 600px;
             height: 400px;
@@ -161,6 +343,7 @@
             font-weight: bold;
             margin-bottom: 0;
             color: #654321;
+			text-align: left;
             font-size: 13px;
             font-family: 'Caveat', cursive;
             line-height: 22px;
@@ -210,6 +393,7 @@
             font-family: 'Caveat', cursive;
             font-size: 14px;
             font-weight: bold;
+			text-align: left;
             background: none;
             border: none;
             padding: 0;
@@ -234,6 +418,11 @@
             transform: translateX(-50%);
             display: flex;
             gap: 20px;
+        }
+		.guestbook-section {
+            margin: 10px 0;
+            display: flex;
+            justify-content: center;
         }
 
         .nav-btn {
@@ -378,10 +567,62 @@
         .page-right.flipping-backward {
             z-index: 5;
         }
+		
     </style>
 </head>
 <body>
-    <div class="notebook-container">
+    <div class="container">
+        <!-- Scrolling Banner -->
+        <div class="banner">
+            <marquee>
+                <strong>LATEST RELEASES:</strong> 
+                <a href="https://youtu.be/BCpXfmXl0qU?si=S8bxcqeFuPP-zClK">Print Shop of Horrors</a> | 
+                <a href="https://youtu.be/YQJJrvbCGUE?si=GMkkTwKAwBFanV0K">Crying Laughing Loving Lying</a> | 
+                <a href="https://youtu.be/eEKO0VXCM5c?si=goeFfTi_8eGqU0da">The Wedding Video</a>
+            </marquee>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <!-- Website Reel GIF -->
+            <div class="reel-container">
+                <img src="website-reel.gif" alt="Website Reel" class="website-reel">
+            </div>
+
+            <!-- Subheading -->
+          
+
+            <!-- Navigation Links -->
+            <div class="nav-links">
+			<span>|</span>
+                <a href="willtube.html">video archive</a>
+                <span>|</span>
+                <a href="photos.html">photos</a>
+                <span>|</span>
+                <a href="willboxd.html">media journal</a>
+                <span>|</span>
+                <a href="https://www.etsy.com/shop/WillsHomeVideo">etsy shop</a>
+                <span>|</span>
+            </div>
+
+            <!-- Text Content Section -->
+            <div class="text-section">
+                <h3>Welcome to my humble little home on the web!</h3>
+                <p>I wanted to create a portfolio with some flair and here we are. This website isn't perfect but it's 100% will. </p>
+				<p> Have fun, look around, and make sure to sign the guestbook! </p>
+				
+                <p><strong>WEBSITE LEGEND</strong>
+                <p><strong>VIDEO ARCHIVE:</strong> A collection of every video i've made that I can stomach rewatching and a decent amount of work I'm actually very proud of. You can go to my modern <a href="https://www.youtube.com/@willshomemovies">YOUTUBE CHANNEL</a> but this is way more fun. </p>
+                <p><strong>PHOTOS:</strong> Visit my <a href="https://www.flickr.com/photos/willunfiltered/">FLICKR</a> profile for the high res, but make sure to check out the page for a photo timeline! (I spent too long on a bitmap photo filter please) </p>
+				<p><strong>MEDIA JOURNAL:</strong> I love <a href="https://letterboxd.com/williamadultman/">LETTERBOXD</a> (give me a follow please) but why stop at just movies? I wanted a way to track basically everything I consume and a website was way easier than an app. </p>
+				<p><strong>ETSY:</strong> Gotta pay the bills, and without your help they won't get paid by ordering custom VHS tapes. </p>
+                <p style="margin-bottom: 0;">
+                    <a href="https://youtu.be/dQw4w9WgXcQ?si=z_D0llObc2Ov_9gY">Secret Files</a> | 
+                    <a href="https://youtu.be/i5m-sgtwFck?si=Zw66hupx5KpYCzYQ">Song of the Day</a>
+                </p>
+            </div>
+			<div class="guestbook-section">
+			<div class="notebook-container">
         <div class="notebook">
             <!-- Spiral binding -->
             <div class="spiral-binding"></div>
@@ -431,8 +672,30 @@
             <button class="nav-btn" id="newEntryBtn" onclick="goToForm()">New Entry</button>
         </div>
     </div>
+	</div>
+        </div>
 
-    <script>
+        <!-- Bottom GIF Row -->
+        <div class="gif-row">
+            <img src="https://ranfren.neocities.org/made_with_windows.gif" alt="Made with Windows">
+            <img src="https://ranfren.neocities.org/mailput.gif" alt="Mail">
+            <img src="https://ranfren.neocities.org/bestview.gif" alt="Best Viewed">
+            <img src="https://ranfren.neocities.org/neocities_button.gif" alt="Neocities">
+
+            <img src="https://ranfren.neocities.org/tropic88ee.gif" alt="Tropical">
+            <img src="https://ranfren.neocities.org/dp_NOW.gif" alt="DP Now">
+            <img src="https://ranfren.neocities.org/camtime.png" alt="Cam Time">
+            <img src="https://ranfren.neocities.org/DeadNow.jpg" alt="Dead Now">
+            <img src="https://ranfren.neocities.org/neko.gif" alt="Neko">
+            <img src="https://ranfren.neocities.org/wwwbutton.gif" alt="WWW">
+            <img src="https://ranfren.neocities.org/gayrat.png" alt="Gay Rat">
+            <img src="https://ranfren.neocities.org/caretaker.gif" alt="Caretaker">
+            <img src="https://ranfren.neocities.org/pensioner.gif" alt="Pensioner">
+            <img src="https://ranfren.neocities.org/ubinowbutton.jpg" alt="Ubi Now">
+            <img src="https://ranfren.neocities.org/nyonrbgif2.gif" alt="Nyon">
+        </div>
+    </div>
+	<script>
         // Configuration - Point to your Render server
         const API_BASE_URL = 'https://comment-server-cuos.onrender.com';
         
@@ -552,11 +815,10 @@
         function getInstructionsContent() {
             return `
                 <div class="instructions">
-                    <h2>Welcome to the Guestbook!</h2>
-                    <p>This is a nostalgic throwback to the classic web guestbooks of the 1990s and early 2000s.</p>
-                    <p>Feel free to sign the guestbook on the next page and leave your mark on this digital notebook.</p>
-                    <p>Use the navigation buttons below to browse through all the entries from fellow visitors.</p>
-                    <p>Turn the page to get started, or click "New Entry" to jump straight to the signing form.</p>
+                    <h2>Like what you see?!</h2>
+                    <p>I hope you have enjoyed your stay on my corner of the internet, before you leave make sure to leave a note!</p>
+                    <p>Feel free write a message on the next page and don't forget to hit submit or it won't be recorded in the book!.</p>
+                    <p>Use the buttons below to view messages from other visitors from across the web.</p>
                     <p>Thanks for visiting!</p>
                 </div>
             `;
