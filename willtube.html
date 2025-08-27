@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0">
-    <title>WillTube - Will's Digital Video Repository</title>
-    <meta name="description" content="Will's personal video collection featuring high-quality content up to 4K resolution">
+    <title>WillTube</title>
+    <meta name="description" content="Will's personal video collection">
     <meta name="keywords" content="videos, 4K, streaming, portfolio, tutorials">
     
     <!-- HLS.js for broader browser compatibility -->
@@ -1296,7 +1296,7 @@
             background: #a1a1a1;
         }
 		.category-description {
-    text-align: center;
+    text-align: left;
     margin: 10px 0 15px 0;
 }
 
@@ -1326,8 +1326,10 @@
 
         <!-- Instructions Section -->
         <div class="instructions">
-            <h3>Welcome to WillTube - HLS Edition</h3>
-            <p>Browse my collection of high-quality videos powered by adaptive HLS streaming. Videos automatically adjust quality based on your connection, delivering crystal-clear playback up to 4K resolution. Click on any video thumbnail to watch it in the player below. Use the search function to quickly find specific content.</p>
+            <h3>Welcome to WillTube!</h3>
+            <p>Sit back, relax, and enjoy my work like you're scrolling youtube in the early 2000s, but it's just me!</p>
+			<p>Not sure where to start? Check out the "Featured Videos" for the latest and greatest of my filmography.</p>
+			<p>If you want to take a deeper dive visit my video gallery and take a trip down my filmmaking journey all the way to the beginning! Use the searchbar if you have a specific video in mind. </p>
         </div>
 
         <!-- Search Section -->
@@ -1462,7 +1464,7 @@
             </div>
 			<div class="category-description" id="categoryDescription">
     <p class="description-text">
-        Description: <span id="categoryText">Browse through all videos in Will's collection. Use the category filters above to narrow down by specific collections.</span>
+        <b>Description:</b> <span id="categoryText">Browse all of WillTube in this section! If you watch them all you get a prize :)</span>
     </p>
 </div>
             <div class="video-grid" id="videoGrid">
@@ -1472,8 +1474,7 @@
 
         <!-- Footer -->
         <div class="footer">
-            <p>&copy; 2024 WillTube | Powered by <a href="#">Bunny CDN</a> | HLS Adaptive Streaming up to 4K</p>
-            <p style="margin-top: 5px; font-size: 9px;">Relive the golden age of video sharing with modern streaming technology</p>
+            <p>&copy; 2024 WillTube | Powered by <a href="#">Bunny CDN</a> </p>
         </div>
     </div>
 
@@ -1498,84 +1499,449 @@
         
         // Define your collections/categories
 const COLLECTIONS = {
-    lu: { 
-        name: 'Laker Update', 
-        color: '#4080ff',
-        description: 'Student journalism at its finest. These are the investigative reports and news segments that kept West Bloomfield High School informed about what really mattered.'
+
+whm: { 
+        name: 'Wills Home Movies', 
+        color: '#ff8040',
+        description: 'When did home movies become a derogatory term? I dont know but I aim to change that with this series of films capturing subjects both real and ficticious. Each film is recorded on Mini DV tapes on the legendary Canon GL2 and painstakingly digitized by me at home.'
     },
+
+	dc: { 
+        name: 'Directors Cuts', 
+        color: '#40ff80',
+        description: 'The creme of the crop. All of the films directed by me along with most of the crew positions due to budget constraints, but at least I can say its true to my vision.'
+    },
+
     fs: { 
         name: 'Film School', 
         color: '#cc0000',
-        description: 'Creative projects and technical exercises from film studies. From animation experiments to rotoscope work, these videos showcase the learning process behind filmmaking.'
+        description: 'Through my tenure at the prestige DePaul university I created a lot of work, and though I would like to erase some from my brain there are a lot of gems which I feature here. '
     },
-    whm: { 
-        name: 'Wills Home Movies', 
-        color: '#ff8040',
-        description: 'Personal projects and casual recordings. The informal side of video creation, capturing moments and experimenting with different styles and techniques.'
-    },
-    cin: { 
-        name: 'Cinema', 
+
+	l2: { 
+        name: 'Lighting 2', 
         color: '#40ff80',
-        description: 'Narrative films and cinematic projects. More polished productions that focus on storytelling, cinematography, and the art of visual narrative.'
+        description: 'Jerry Tran, the iconic DePaul film professor, has gifted me with his lighting knowlegde and this is a collection of my favorite excersizes from his class.'
+    },
+
+    lu: { 
+        name: 'Laker Update', 
+        color: '#4080ff',
+        description: 'Student journalism at its finest, or at least quickest. Our news director gave us only 2 minutes to tell our story so we ran with that, literally. Doing my best Billy on the Street impression I terrorized my school with whatever topic we could come up with each week, ranging from dress code violations to santa conspiracy theories.'
+    },
+
+    og: { 
+        name: 'Origin Story', 
+        color: '#40ff80',
+        description: 'Where it all started. If you are an employer please do not judge me by the films I made when I was 9. I like to keep these here though as a reminder to never lose my sparkle :)'
     },
 };
 
         // Video database - simplified for HLS (no resolution arrays needed)
         const VIDEO_DATABASE = {
-            'e9ce8e87-763b-48f4-8c70-b19dff16be49': {
-                title: 'CTA Parallax Animation',
-                description: 'Fun homework assignment. Play it on a loop and pretend like you\'re forever stuck on the best line in all of Chicago!',
-                collection: 'fs',
-                views: 654,
-                uploadDate: '2024-11-20',
+		
+			
+			
+			'377777b9-4eb7-40ca-aac3-1a8de7e5e04d': {
+                title: 'The Party',
+                description: 'We drove an hour just to leave in the first 5 minutes and I still think it was rude but I was outvoted.',
+                collection: 'whm',
+                views: 297,
+                uploadDate: '2020-05-20',
                 featured: true
             },
-            
-            'b3840759-4bb3-4fb5-818b-4b0e5760c98a': {
+			
+			'7732435f-f976-4325-8360-fd23d1a62dfc': {
+                title: 'Crying, Laughing, Loving, Lying',
+                description: 'A love story without any words. Inspired by the works of the great Labi Siffre, go stream their songs and check out their poems if you want to cry.',
+                collection: 'dc',
+                views: 297,
+                uploadDate: '2020-05-20',
+                featured: true
+            },
+			
+			'6b9524b0-73a9-4c27-b876-7e7acb8215a6': {
+                title: 'The Known Horror',
+                description: 'Shot this on my last night in the original Marvins Marvelous Mechanical Museum location. Quite an eerie finale but hey thats how I was feeling... still am :(',
+                collection: 'dc',
+                views: 297,
+                uploadDate: '2020-05-20',
+                featured: true
+            },
+			
+			'a4101dfc-a4fa-4cdb-beb1-bfcb9eda3524': {
+                title: 'Marvelous Marvins Fabulous Funeral',
+                description: 'Its crazy how the death of something so beautiful can bring together so many wonderful people. Visit the new Marvins Marvelous Mechanical Museum location when it opens and stream Tally Hall ASAP!',
+                collection: 'whm',
+                views: 297,
+                uploadDate: '2020-05-20',
+                featured: false
+            },
+			
+			'0838f0d4-f253-493a-929d-0ac50cc5ce62': {
+                title: 'The Wedding Video',
+                description: 'The best night of my life and I wasnt even the one getting married. 30 minutes will go by in a flash I guarentee it just push play already.',
+                collection: 'whm',
+                views: 297,
+                uploadDate: '2020-05-20',
+                featured: true
+            },
+			
+			'd249b325-1811-46ba-b4e0-66e0148cfcea': {
+                title: 'The Wedding Video: Official Trailer',
+                description: 'Watch the trailer and if it doesnt make you wanna watch the full film I owe you 20 bucks, scouts honor.',
+                collection: 'whm',
+                views: 297,
+                uploadDate: '2020-05-20',
+                featured: false
+            },
+			
+			'544c51d4-e95a-457b-b3e6-8414e54fc825': {
+                title: 'The Doorway Confessional',
+                description: 'Sometimes words are best left unspoken. Dont ask how he put together the lego roses with beer bottles taped to his hands.',
+                collection: 'whm',
+                views: 297,
+                uploadDate: '2020-05-20',
+                featured: false
+            },
+			
+			'd0520391-aae4-4773-b0de-39e03ab95f65': {
+                title: 'The Poodle: Blooper Reel',
+                description: 'Its hard to keep it together when youre covered in grease and fake tattoos while screaming about fake food orders. You can watch in real time how we slowly start to hate each other over the course of 3 long shooting days but its all peace and love now.',
+                collection: 'whm',
+                views: 297,
+                uploadDate: '2020-05-20',
+                featured: false
+            },
+			
+			'95168688-e025-41b1-995e-f2e6262e5ccf': {
+                title: 'The Poodle',
+                description: ' Its not just The Bear with pet food orders its so much more.',
+                collection: 'whm',
+                views: 297,
+                uploadDate: '2020-05-20',
+                featured: true
+            },
+			
+			'8979c158-d45b-43f5-a523-b88b293a4e20': {
+                title: 'Will and Maryannas Chicago Adventure',
+                description: 'The first weekend she spent with me in Chicago so how was I not going to document it. I hope we are not too corny.',
+                collection: 'whm',
+                views: 297,
+                uploadDate: '2020-05-20',
+                featured: false
+            },
+			
+			'b96708be-dfae-4874-a6b8-c781a1c240db': {
+                title: 'Print Shop of Horrors',
+                description: 'Took my workplace and turned it into a nightmare and it wasnt even that hard. I had a really fun time writing this and may have gotten a bit carried away, printers have a scary vibe after working with them 24/7. Also no I have not done salvia although I was tempted to method act.',
+                collection: 'fs',
+                views: 297,
+                uploadDate: '2020-05-20',
+                featured: false
+            },
+			
+			
+			
+			'25db62b2-9997-422c-ad60-cd2c273e3597': {
+                title: 'Lighting Excersise: Mock Road Trip',
+                description: 'My professor brought his car on the dound stage just so we could rig up a night driving scene, what a guy. I had fun moving two flashlights around in the back to simulate headlights, pretty curcial role.',
+                collection: 'l2',
+                views: 297,
+                uploadDate: '2020-05-20',
+                featured: false
+            },
+			
+			'047a17b8-cb48-4703-a2b2-4d0f0dc8bb53': {
+                title: 'Lighting Excersise: La La Land Dimmer',
+                description: 'Who doesnt love a whimsical lighting change. Its also crazy how just adding christmas lights can make a set look so much better. Shout out to Ashley on the keys.',
+                collection: 'l2',
+                views: 297,
+                uploadDate: '2020-05-20',
+                featured: false
+            },
+			
+			'9a7b5029-591f-4dff-baff-496c28e009a7': {
+                title: 'Lighting Excersise: Malcom and the Middle Spotlight',
+                description: 'Homage to one of the best shows to ever do it. Didnt know when I asked to be a stand in I would be getting my dreams crushed but thats just where the scene took her I guess :(',
+                collection: 'l2',
+                views: 297,
+                uploadDate: '2020-05-20',
+                featured: false
+            },
+			
+			'f7720378-b853-4700-ba78-40faf50d50b0': {
+                title: 'Lighting Excersise: Alone in the Club',
+                description: 'In the club thinking about how cozy your bed would be at home watching love island #relatable',
+                collection: 'l2',
+                views: 297,
+                uploadDate: '2020-05-20',
+                featured: false
+            },
+			
+			'8485ee53-84d1-42b9-9442-eceb0b342c6e': {
+                title: 'Lighting Excersise: DMX Euphoria',
+                description: 'Who doesnt love a party with only 3 people because that was the max amount of actors we could have in the scene. Thank god Jerry made a cameo or we wouldve been cooked.',
+                collection: 'l2',
+                views: 297,
+                uploadDate: '2020-05-20',
+                featured: false
+            },
+			
+			'ad14ccaa-6ac2-44a3-9568-9bcef046ffab': {
+                title: 'Lighting Excersise: Mood Switch',
+                description: 'When youre on a date and he doesnt order bread for the table.',
+                collection: 'l2',
+                views: 297,
+                uploadDate: '2020-05-20',
+                featured: false
+            },
+			
+			'576d3e4a-6fdf-4903-91ca-fdbaf634f1c4': {
+                title: 'OMNIPRESENT',
+                description: 'Fun lil campy horror short that we filmed over a weekend for a Film 220 class. Shot in my apartment of course and we got a note that it read as "toxic man" instead of "sweet girl" which I was somewhat offended by.',
+                collection: 'fs',
+                views: 297,
+                uploadDate: '2020-05-20',
+                featured: false
+            },
+			
+			'1475ac8e-37fa-48fb-8ebd-2445bb3ddbcc': {
+                title: 'Will Bowen Zanies Comedy Set',
+                description: 'The coolest final ever and yes I did have to take a stand up comedy class to perform it, the jokes write themselves. Honestly one of the most nervewracking but exciting experiences of my life. My professor chose me to headline no big deal. Sadly based on an entirely true story.',
+                collection: 'fs',
+                views: 297,
+                uploadDate: '2020-05-20',
+                featured: false
+            },
+			
+			'645a3b97-ff58-467e-96f8-f7b15ded2e00': {
+                title: 'Affleck Devouring His Son',
+                description: 'I was given the task to create a soundscape from an image by my sound design professor and I chose this paparrazzi pic of Ben Affleck. Theres something about it thats just off to me. There actually is a story to it if you can piece it together, be warned its pretty dark.',
+                collection: 'fs',
+                views: 297,
+                uploadDate: '2020-05-20',
+                featured: false
+            },
+			
+			'9c984152-5990-4373-ab96-a391b6bdbae8': {
+                title: 'Small Worlds',
+                description: 'My best attempt to show off the beauty of the underappreciated miniature room in the basement of the Chicago Art Institute. I mustve looked insane trying to make a makeshift darkroom with my coat to cancel out the reflections idk how I didnt get kickded out.',
+                collection: 'fs',
+                views: 297,
+                uploadDate: '2022-05-20',
+                featured: false
+            },
+			
+			'b201fb16-91ed-41cd-8c2e-6df0673f5d12': {
+                title: 'Rock Bottom',
+                description: 'It started as a joke and then somehow I actually got attached to this rock. Still have it to this day. One of my first times really exploring the city and I did it with an inanimate object, no its not sad.',
+                collection: 'fs',
+                views: 297,
+                uploadDate: '2020-05-20',
+                featured: false
+            },
+			
+            'e9ce8e87-763b-48f4-8c70-b19dff16be49': {
                 title: 'Bully Maguire VS The Red Line',
                 description: 'Learn how to build reusable React components with modern hooks and TypeScript.',
                 collection: 'fs',
                 views: 1243,
                 uploadDate: '2024-12-15',
-                featured: true
-		
+                featured: false
+            },
+			
+			'b3840759-4bb3-4fb5-818b-4b0e5760c98a': {
+                title: 'CTA Parallax Animation',
+                description: 'Fun homework assignment for Ani-101. Play it on a loop and pretend like you\'re forever stuck on the best line in all of Chicago!',
+                collection: 'fs',
+                views: 654,
+                uploadDate: '2024-11-20',
+                featured: false
             },
             
             'f38ba416-bf6a-4aa8-8a30-b730054621a7': {
                 title: 'iPod OG Ad Rotoscope',
-                description: 'Complete walkthrough of building a modern portfolio website from scratch.',
+                description: 'Rotoscope Assignment for my Ani-101 class. How could I not choose one of the most groovy ad campaigns of all time, I mean it has Daft Punk cmon.',
                 collection: 'fs',
                 views: 892,
                 uploadDate: '2024-12-10',
                 featured: false
             },
-            
-            '19a6cf39-f345-4b03-92a9-3466fdddc186': {
+			
+			'97329369-addd-4973-9ca4-1c72102c112d': {
+                title: 'Mothers in Mourning Sizzle Reel',
+                description: 'A sizzle reel I edited for a spec script about the tragic death of a young black man at the hands of racist police. Really love the assortment of clips I found to personify the script.',
+                collection: 'fs',
+                views: 297,
+                uploadDate: '2020-05-20',
+                featured: false
+            },
+			
+			'7c27b924-9d04-41ae-8b8d-5c4baf2318de': {
+                title: 'WALTER & ME',
+                description: 'A little backstory here. This was the final for my FILM 101 course and we had to use all the dialogue given to us but it was so bad we decided to make it an inside joke and make him an alien then add our own bit at the end. So effing meta.',
+                collection: 'fs',
+                views: 297,
+                uploadDate: '2021-08-20',
+                featured: false
+            },
+			
+			'283437d7-00a1-451d-855c-7c7ee09f7c81': {
+                title: 'Until Further Notice',
+                description: 'An assignment that I did for my DOC 101 class and one of my favorite mini documentary subjects. My senior year ending abruptly due to a pandemic and th eyears that followed were some of the hardest of my life and it was very healing to put it into film. Shoutout to my Mom who was a frontline Emergency Medicine doctor, the real heroes.',
+                collection: 'fs',
+                views: 297,
+                uploadDate: '2020-05-20',
+                featured: false
+            },
+			
+			'69423eab-8016-4cab-8d7e-08f2bed3876f': {
+                title: 'The Gang Commits Voter Fraud',
+                description: 'One of my favorite scenes from Its Always Sunny in Philidelphia and it couldnt have fit more perfectly than the 2020 election. Watch the original here https://youtu.be/1NBfZcNU4O0?si=vPKrlFGtQiU7p1vS and tell me how I did.',
+                collection: 'whm',
+                views: 297,
+                uploadDate: '2020-05-20',
+                featured: false
+            },
+			
+			'1a31b795-264b-405d-bd5e-3beccd7a89f2': {
+                title: 'Does Everyone Have a Valentine at WBHS?',
+                description: 'I play cupid and make sure no one is left out on this amazing holiday, but I couldnt save them all :(',
+                collection: 'lu',
+                views: 297,
+                uploadDate: '2020-02-13',
+                featured: false
+            },
+			
+			'bbde9256-6dc2-4131-ab39-fd962a9bbfe4': {
+                title: 'Do teenagers Still Follow Snow Day Traditions?',
+                description: 'Im willing to do whatever it takes to get a day off school but it appears my classmates didnt have what it takes.',
+                collection: 'lu',
+                views: 297,
+                uploadDate: '2020-02-06',
+                featured: false
+            },
+			
+			'573499c2-e630-4dd0-b3fd-b22bf0cf45db': {
+                title: 'Are High School Dress Codes too Strict?',
+                description: 'I stood in solidarity with all my girlies who got dress coded for no reason and somehow didnt get in trouble for this. F the Patriarchy.',
+                collection: 'lu',
+                views: 297,
+                uploadDate: '2020-02-03',
+                featured: false
+            },
+			
+			'5c84f875-cd15-4712-b98c-5ef495c0d562': {
+                title: 'Is there a Corona-virus Outbreak at WBHS?',
+                description: 'Made almost 3 months before school shut down and I lost my senior year. I tried to warn them...',
+                collection: 'lu',
+                views: 297,
+                uploadDate: '2020-01-20',
+                featured: false
+            },
+			
+			'49b6239d-0ab3-40d3-8cc8-a6d136444707': {
+                title: 'Does Anybody Read The School Newspaper?',
+                description: 'A video that swiftly ended the feud between the our school newpaper and the live news team, and also almost got me expelled. The lore of this video goes so deep but just so you know the newspaper club made us work on the weekends for a club we werent even apart of so they deserved it.',
+                collection: 'lu',
+                views: 297,
+                uploadDate: '2020-01-17',
+                featured: false
+            },
+			
+			'c58d9c9c-dd38-4649-b607-42ed8bc5bdc8': {
+                title: 'Are Teenagers Ready for the Draft?',
+                description: 'A bit sensationalist but hey what political commentary isnt right? Thankfully we didnt need to ship out for WW3... yet.',
+                collection: 'lu',
+                views: 297,
+                uploadDate: '2020-01-11',
+                featured: false
+            },
+			
+			'6487da88-6764-4bfa-afa5-ba0ca58703ac': {
+                title: 'Do High Schoolers Still Believe in Santa?',
+                description: 'I tried desperately to spread christmas cheer by interviewing loud for all to hear but I still got coal :(',
+                collection: 'lu',
+                views: 297,
+                uploadDate: '2019-12-19',
+                featured: false
+            },
+			
+			'66471047-e1a2-4148-9e39-fb2366c7d24b': {
+                title: 'Do Short People Face Discrimination at WBHS?',
+                description: 'This whole video was just a ploy to roll around in a chair during class and it worked perfectly.',
+                collection: 'lu',
+                views: 1456,
+                uploadDate: '2019-12-09',
+                featured: false
+            },
+			
+			  'cb5672f4-1437-4dbd-97e1-f41da5431586': {
+                title: 'Is Mr Watson Leaving WBHS?',
+                description: 'He transfered two months later...',
+                collection: 'lu',
+                views: 734,
+                uploadDate: '2019-11-19',
+                featured: false
+            },
+			
+			 '19a6cf39-f345-4b03-92a9-3466fdddc186': {
                 title: 'Is Tik Tok Taking Over WBHS?',
                 description: 'I couldnt stop it... no one could',
                 collection: 'lu',
                 views: 567,
                 uploadDate: '2019-01-07',
-                featured: true
-            },
-            
-            'cb5672f4-1437-4dbd-97e1-f41da5431586': {
-                title: 'Is Mr Watson Leaving WBHS?',
-                description: 'He transfered two months later...',
-                collection: 'lu',
-                views: 734,
-                uploadDate: '2024-11-28',
                 featured: false
             },
-            
-            '66471047-e1a2-4148-9e39-fb2366c7d24b': {
-                title: 'Do Short People Face Discrimination at WBHS?',
-                description: 'This whole video was just a ploy to roll around in a chair during class and it worked perfectly.',
-                collection: 'lu',
-                views: 1456,
-                uploadDate: '2024-11-25',
+			
+			//ORIGIN STORY
+			
+			'938381a4-aeee-4e04-81bc-b4e39cbc3a9a': {
+                title: 'NO NOTIFICATIONS',
+                description: 'I am embarrassed to admit I made this in high school, I stand by the premise though. At least I almost got that match cut right!',
+                collection: 'og',
+                views: 297,
+                uploadDate: '2015-8-11',
                 featured: false
-            }
+            },
+			
+			'd3c12dde-a038-4193-9772-6a92f9de7de2': {
+                title: 'No Way Out',
+                description: 'Jumping up to High School this is what I would call my first short film. Holds a special place in my heart',
+                collection: 'og',
+                views: 297,
+                uploadDate: '2015-6-24',
+                featured: false
+            },
+			
+			'1d5c887a-2f03-4d31-9a48-6af4212afa12': {
+                title: 'Why Nerds Dont Talk To Girls',
+                description: 'A cousins sleepover tunred into a film shoot when I realized I could make an ensebmle piece about a topic close to my heart. Make sure to stay for the post credits blooper reel.',
+                collection: 'og',
+                views: 297,
+                uploadDate: '2012-9-04',
+                featured: false
+            },
+			
+			'ccc405ee-6a5d-4950-873d-7fd9fdbbb392': {
+                title: 'Talk Time With William Bowen 2',
+                description: '2 Talk 2 William Bowen. The sequel that everybody was asking for and a prime example not to fly too close to the sun. Was torn about by critics but loved by my mom.',
+                collection: 'og',
+                views: 297,
+                uploadDate: '2012-7-13',
+                featured: false
+            },
+			
+			'348e2c73-f21f-40cc-a6d5-dec0b2ce6e94': {
+                title: 'Talk Time With William Bowen',
+                description: 'Technically the first film I ever made but I secretly copied the idea from a book I read. The sketches were original though but idk if that helps. Its cute though right?',
+                collection: 'og',
+                views: 297,
+                uploadDate: '2012-6-25',
+                featured: false
+            },
+			
         };
 
         // ============================================
@@ -1640,7 +2006,7 @@ const COLLECTIONS = {
             });
             
             // Set new featured videos
-            videoIds.slice(0, 4).forEach(id => {
+            videoIds.slice(0, 5).forEach(id => {
                 if (VIDEO_DATABASE[id]) {
                     VIDEO_DATABASE[id].featured = true;
                 }
@@ -1668,7 +2034,7 @@ const COLLECTIONS = {
                 .filter(id => VIDEO_DATABASE[id].featured)
                 .map(id => getVideoData(id))
                 .filter(video => video !== null)
-                .slice(0, 4);
+                .slice(0, 5);
         }
 
         // ============================================
@@ -1707,11 +2073,30 @@ const COLLECTIONS = {
                 hlsInstance.loadSource(hlsUrl);
                 hlsInstance.attachMedia(video);
                 
-                hlsInstance.on(Hls.Events.MANIFEST_PARSED, function(event, data) {
-                    console.log('HLS manifest loaded, found ' + data.levels.length + ' quality levels');
-                    populateQualityDropdown(data.levels);
-                    loadingSpinner.style.display = 'none';
-                });
+               hlsInstance.on(Hls.Events.MANIFEST_PARSED, function(event, data) {
+    console.log('HLS manifest loaded, found ' + data.levels.length + ' quality levels');
+    
+    // Set to highest quality (last level in array)
+    const highestQualityIndex = data.levels.length - 1;
+    hlsInstance.currentLevel = highestQualityIndex;
+    
+    // Update UI to show highest quality
+    const highestLevel = data.levels[highestQualityIndex];
+    updateCurrentQuality(highestLevel);
+    
+    populateQualityDropdown(data.levels);
+    
+    // Update dropdown to show highest as active
+    setTimeout(() => {
+        const qualityOptions = document.querySelectorAll('.quality-option');
+        qualityOptions.forEach(option => option.classList.remove('active'));
+        if (qualityOptions[highestQualityIndex + 1]) { // +1 because auto is first
+            qualityOptions[highestQualityIndex + 1].classList.add('active');
+        }
+    }, 100);
+    
+    loadingSpinner.style.display = 'none';
+});
                 
                 hlsInstance.on(Hls.Events.LEVEL_SWITCHED, function(event, data) {
                     const level = hlsInstance.levels[data.level];
@@ -2357,8 +2742,7 @@ function filterByCategory(category) {
             });
         }
 
-const API_BASE = 'https://comment-server-cuos.onrender.com';
-
+const API_BASE = 'https://comment-server-cuos.onrender.com/api';
 // Rating & Comment System Variables
 let userCurrentRating = 0;
 let selectedAvatarIndex = 0;
@@ -2371,6 +2755,7 @@ let videoRatingData = {
 // ============================================
 // AVATAR SYSTEM
 // ============================================
+
 
 function createAvatarRow() {
     const avatarRow = document.getElementById('avatarRow');
@@ -2452,6 +2837,7 @@ function createAvatarRow() {
     
     currentAvatarPage = 0;
     
+    // Delay the display update until the DOM is fully rendered
     setTimeout(() => {
         updateAvatarDisplay();
     }, 100);
@@ -2462,6 +2848,7 @@ function updateAvatarDisplay() {
     const prevBtn = document.getElementById('avatarPrev');
     const nextBtn = document.getElementById('avatarNext');
     
+    // Calculate how many avatars fit dynamically
     const avatarsPerPage = calculateAvatarsPerPage();
     
     avatarRow.innerHTML = '';
@@ -2562,18 +2949,20 @@ function getAvatarForComment(index) {
         fallbackLetter: String.fromCharCode(65 + (index % 26))
     };
 }
-
 function calculateAvatarsPerPage() {
     const avatarNavigation = document.querySelector('.avatar-navigation');
     const avatarRow = document.getElementById('avatarRow');
     const arrows = document.querySelectorAll('.avatar-arrow');
     
+    // Check if we're on mobile
     const isMobile = window.innerWidth <= 768;
     
+    // Force 4 avatars on mobile, calculate for desktop
     if (isMobile) {
         return 4; // Fixed 4 avatars on mobile
     }
     
+    // Desktop calculation (existing logic)
     const defaultWidth = 366;
     const totalWidth = (avatarNavigation && avatarNavigation.offsetWidth > 0) 
         ? avatarNavigation.offsetWidth 
@@ -2591,7 +2980,6 @@ function calculateAvatarsPerPage() {
     
     return result;
 }
-
 // ============================================
 // RATING SYSTEM
 // ============================================
@@ -2910,7 +3298,41 @@ async function loadVideoRatingData(videoId) {
             }
         });
 
+async function loadVideoRatingData(videoId) {
+    try {
+        console.log('Loading data for video:', videoId);
+        
+        // Load comments
+        const commentsResponse = await fetch(`${API_BASE}/comments/${encodeURIComponent(videoId)}`);
+        console.log('Comments response:', commentsResponse.status, commentsResponse.statusText);
+        
+        if (commentsResponse.ok) {
+            const comments = await commentsResponse.json();
+            console.log('Comments loaded:', comments);
+            videoRatingData.comments = comments;
+        } else {
+            console.error('Comments request failed:', commentsResponse.status);
+        }
 
+        // Load ratings
+        const ratingsResponse = await fetch(`${API_BASE}/ratings/${encodeURIComponent(videoId)}`);
+        console.log('Ratings response:', ratingsResponse.status, ratingsResponse.statusText);
+        
+        if (ratingsResponse.ok) {
+            const ratings = await ratingsResponse.json();
+            console.log('Ratings loaded:', ratings);
+            videoRatingData.ratings = ratings;
+        } else {
+            console.error('Ratings request failed:', ratingsResponse.status);
+        }
+    } catch (error) {
+        console.error('Failed to load video rating data:', error);
+        videoRatingData = {
+            ratings: { total: 0, sum: 0, average: 0 },
+            comments: []
+        };
+    }
+}
 
         console.log('🎬 WillTube HLS Edition loaded with FIXED progress bar!');
         console.log('📹 Use quickAddVideo() to add new videos');
