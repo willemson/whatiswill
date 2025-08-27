@@ -1295,6 +1295,23 @@
         .comments-list::-webkit-scrollbar-thumb:hover {
             background: #a1a1a1;
         }
+		.category-description {
+    text-align: center;
+    margin: 10px 0 15px 0;
+}
+
+.description-text {
+    font-size: 11px;
+    color: #666666;
+    margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .description-text {
+        font-size: 10px;
+    }
+}
     </style>
 </head>
 <body>
@@ -1443,6 +1460,11 @@
             <div class="category-filters" id="categoryFilters">
                 <!-- Category buttons will be populated here -->
             </div>
+			<div class="category-description" id="categoryDescription">
+    <p class="description-text">
+        Description: <span id="categoryText">Browse through all videos in Will's collection. Use the category filters above to narrow down by specific collections.</span>
+    </p>
+</div>
             <div class="video-grid" id="videoGrid">
                 <!-- Video items will be populated here -->
             </div>
@@ -1475,12 +1497,28 @@
         // ============================================
         
         // Define your collections/categories
-        const COLLECTIONS = {
-            lu: { name: 'Laker Update', color: '#4080ff' },
-            fs: { name: 'Film School', color: '#cc0000' },
-            whm: { name: 'Wills Home Movies', color: '#ff8040' },
-            cin: { name: 'Cinema', color: '#40ff80' },
-        };
+const COLLECTIONS = {
+    lu: { 
+        name: 'Laker Update', 
+        color: '#4080ff',
+        description: 'Student journalism at its finest. These are the investigative reports and news segments that kept West Bloomfield High School informed about what really mattered.'
+    },
+    fs: { 
+        name: 'Film School', 
+        color: '#cc0000',
+        description: 'Creative projects and technical exercises from film studies. From animation experiments to rotoscope work, these videos showcase the learning process behind filmmaking.'
+    },
+    whm: { 
+        name: 'Wills Home Movies', 
+        color: '#ff8040',
+        description: 'Personal projects and casual recordings. The informal side of video creation, capturing moments and experimenting with different styles and techniques.'
+    },
+    cin: { 
+        name: 'Cinema', 
+        color: '#40ff80',
+        description: 'Narrative films and cinematic projects. More polished productions that focus on storytelling, cinematography, and the art of visual narrative.'
+    },
+};
 
         // Video database - simplified for HLS (no resolution arrays needed)
         const VIDEO_DATABASE = {
@@ -1500,6 +1538,7 @@
                 views: 1243,
                 uploadDate: '2024-12-15',
                 featured: true
+		
             },
             
             'f38ba416-bf6a-4aa8-8a30-b730054621a7': {
@@ -1523,7 +1562,7 @@
             'cb5672f4-1437-4dbd-97e1-f41da5431586': {
                 title: 'Is Mr Watson Leaving WBHS?',
                 description: 'He transfered two months later...',
-                collection: 'demos',
+                collection: 'lu',
                 views: 734,
                 uploadDate: '2024-11-28',
                 featured: false
@@ -1532,7 +1571,7 @@
             '66471047-e1a2-4148-9e39-fb2366c7d24b': {
                 title: 'Do Short People Face Discrimination at WBHS?',
                 description: 'This whole video was just a ploy to roll around in a chair during class and it worked perfectly.',
-                collection: 'tutorials',
+                collection: 'lu',
                 views: 1456,
                 uploadDate: '2024-11-25',
                 featured: false
@@ -1995,30 +2034,38 @@
         /**
          * Filter videos by category
          */
-        function filterByCategory(category) {
-            const videoItems = document.querySelectorAll('.video-item');
-            const categoryButtons = document.querySelectorAll('.category-button');
-            
-            // Update active button
-            categoryButtons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            // Filter videos
-            videoItems.forEach(item => {
-                const itemCategory = item.getAttribute('data-category');
-                if (category === 'all' || itemCategory === category) {
-                    item.classList.remove('hidden');
-                } else {
-                    item.classList.add('hidden');
-                }
-            });
+function filterByCategory(category) {
+    const videoItems = document.querySelectorAll('.video-item');
+    const categoryButtons = document.querySelectorAll('.category-button');
+    const categoryText = document.getElementById('categoryText');
+    
+    // Update active button
+    categoryButtons.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    
+    // Update description based on category
+    if (category === 'all') {
+        categoryText.textContent = 'Browse through all videos in Will\'s collection. Use the category filters above to narrow down by specific collections.';
+    } else if (COLLECTIONS[category]) {
+        categoryText.textContent = COLLECTIONS[category].description;
+    }
+    
+    // Filter videos
+    videoItems.forEach(item => {
+        const itemCategory = item.getAttribute('data-category');
+        if (category === 'all' || itemCategory === category) {
+            item.classList.remove('hidden');
+        } else {
+            item.classList.add('hidden');
+        }
+    });
             
             // Update search if there's an active search term
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            if (searchTerm) {
-                searchVideos();
-            }
-        }
+  const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    if (searchTerm) {
+        searchVideos();
+    }
+}
 
         /**
          * Search videos
@@ -2310,19 +2357,497 @@
             });
         }
 
-        // ============================================
-        // RATING & COMMENT SYSTEM 
-        // ============================================
-        const API_BASE = 'https://comment-server-cuos.onrender.com/api';
-        // Rating & Comment System Variables
-        let userCurrentRating = 0;
-        let selectedAvatarIndex = 0;
-        let currentAvatarPage = 0;
-        let allAvatars = [];
-        let videoRatingData = {
+const API_BASE = 'https://comment-server-cuos.onrender.com';
+
+// Rating & Comment System Variables
+let userCurrentRating = 0;
+let selectedAvatarIndex = 0;
+let currentAvatarPage = 0;
+let allAvatars = [];
+let videoRatingData = {
+    ratings: { total: 0, sum: 0, average: 0 },
+    comments: []
+};
+// ============================================
+// AVATAR SYSTEM
+// ============================================
+
+function createAvatarRow() {
+    const avatarRow = document.getElementById('avatarRow');
+    if (!avatarRow) return;
+    
+    allAvatars = [];
+    
+    const colors = [
+        'linear-gradient(135deg, #4080ff, #2060df)',
+        'linear-gradient(135deg, #ff4080, #df2060)',
+        'linear-gradient(135deg, #80ff40, #60df20)',
+        'linear-gradient(135deg, #ff8040, #df6020)',
+        'linear-gradient(135deg, #8040ff, #6020df)',
+        'linear-gradient(135deg, #40ff80, #20df60)',
+        'linear-gradient(135deg, #ff4040, #df2020)',
+        'linear-gradient(135deg, #4040ff, #2020df)',
+        'linear-gradient(135deg, #ff8080, #df6060)',
+        'linear-gradient(135deg, #80ff80, #60df60)',
+        'linear-gradient(135deg, #8080ff, #6060df)',
+        'linear-gradient(135deg, #ffff40, #dfdf20)',
+        'linear-gradient(135deg, #ff40ff, #df20df)',
+        'linear-gradient(135deg, #40ffff, #20dfdf)',
+        'linear-gradient(135deg, #ffaa40, #dfaa20)',
+        'linear-gradient(135deg, #aa40ff, #aa20df)',
+        'linear-gradient(135deg, #40aaff, #20aadf)',
+        'linear-gradient(135deg, #ffaa80, #dfaa60)',
+        'linear-gradient(135deg, #aa80ff, #aa60df)',
+        'linear-gradient(135deg, #80aaff, #60aadf)',
+        'linear-gradient(135deg, #ffccaa, #dfccaa)',
+        'linear-gradient(135deg, #aaccff, #aaccdf)',
+        'linear-gradient(135deg, #ccaaff, #ccaadf)',
+        'linear-gradient(135deg, #ffccff, #dfccdf)',
+        'linear-gradient(135deg, #ccffaa, #ccdfaa)',
+        'linear-gradient(135deg, #aaffcc, #aadfcc)',
+        'linear-gradient(135deg, #ffaacc, #dfaacc)',
+        'linear-gradient(135deg, #ccaaaa, #ccaaaa)',
+        'linear-gradient(135deg, #aaccaa, #aaccaa)'
+    ];
+    
+    for (let i = 0; i < 29; i++) {
+        const avatarDiv = document.createElement('div');
+        avatarDiv.className = 'avatar-choice';
+        avatarDiv.dataset.index = i;
+        
+        if (i === 0) {
+            avatarDiv.classList.add('selected');
+        }
+        
+        const avatarNumber = i + 1;
+        const avatarFile = `avatar${avatarNumber}.png`;
+        
+        const img = new Image();
+        img.onload = function() {
+            avatarDiv.style.backgroundImage = `url('avatars/${avatarFile}')`;
+            avatarDiv.style.backgroundSize = 'cover';
+            avatarDiv.style.backgroundPosition = 'center';
+            avatarDiv.textContent = '';
+            avatarDiv.style.color = 'transparent';
+        };
+        
+        img.onerror = function() {
+            avatarDiv.style.backgroundImage = 'none';
+            avatarDiv.style.background = colors[i % colors.length];
+            avatarDiv.textContent = String.fromCharCode(65 + (i % 26));
+            avatarDiv.style.color = 'white';
+            avatarDiv.style.fontSize = '10px';
+            avatarDiv.style.fontWeight = 'bold';
+        };
+        
+        img.src = `avatars/${avatarFile}`;
+        
+        avatarDiv.onclick = function() {
+            selectAvatarByIndex(i);
+        };
+        
+        avatarDiv.title = `Avatar ${avatarNumber}`;
+        allAvatars.push(avatarDiv);
+    }
+    
+    currentAvatarPage = 0;
+    
+    setTimeout(() => {
+        updateAvatarDisplay();
+    }, 100);
+}
+
+function updateAvatarDisplay() {
+    const avatarRow = document.getElementById('avatarRow');
+    const prevBtn = document.getElementById('avatarPrev');
+    const nextBtn = document.getElementById('avatarNext');
+    
+    const avatarsPerPage = calculateAvatarsPerPage();
+    
+    avatarRow.innerHTML = '';
+    
+    const startIndex = currentAvatarPage * avatarsPerPage;
+    const endIndex = Math.min(startIndex + avatarsPerPage, allAvatars.length);
+    
+    for (let i = startIndex; i < endIndex; i++) {
+        avatarRow.appendChild(allAvatars[i]);
+    }
+    
+    if (currentAvatarPage === 0) {
+        prevBtn.classList.add('disabled');
+    } else {
+        prevBtn.classList.remove('disabled');
+    }
+    
+    const maxPage = Math.ceil(allAvatars.length / avatarsPerPage) - 1;
+    if (currentAvatarPage >= maxPage) {
+        nextBtn.classList.add('disabled');
+    } else {
+        nextBtn.classList.remove('disabled');
+    }
+}
+
+function previousAvatarPage() {
+    if (currentAvatarPage > 0) {
+        currentAvatarPage--;
+        updateAvatarDisplay();
+    }
+}
+
+function nextAvatarPage() {
+    const avatarsPerPage = calculateAvatarsPerPage();
+    const maxPage = Math.ceil(allAvatars.length / avatarsPerPage) - 1;
+    if (currentAvatarPage < maxPage) {
+        currentAvatarPage++;
+        updateAvatarDisplay();
+    }
+}
+
+function selectAvatarByIndex(index) {
+    selectedAvatarIndex = index;
+    
+    allAvatars.forEach(avatar => {
+        avatar.classList.remove('selected');
+    });
+    
+    allAvatars[index].classList.add('selected');
+    
+    const avatarsPerPage = calculateAvatarsPerPage();
+    const avatarPage = Math.floor(index / avatarsPerPage);
+    if (avatarPage !== currentAvatarPage) {
+        currentAvatarPage = avatarPage;
+        updateAvatarDisplay();
+    }
+}
+
+function getAvatarForComment(index) {
+    const colors = [
+        'linear-gradient(135deg, #4080ff, #2060df)',
+        'linear-gradient(135deg, #ff4080, #df2060)',
+        'linear-gradient(135deg, #80ff40, #60df20)',
+        'linear-gradient(135deg, #ff8040, #df6020)',
+        'linear-gradient(135deg, #8040ff, #6020df)',
+        'linear-gradient(135deg, #40ff80, #20df60)',
+        'linear-gradient(135deg, #ff4040, #df2020)',
+        'linear-gradient(135deg, #4040ff, #2020df)',
+        'linear-gradient(135deg, #ff8080, #df6060)',
+        'linear-gradient(135deg, #80ff80, #60df60)',
+        'linear-gradient(135deg, #8080ff, #6060df)',
+        'linear-gradient(135deg, #ffff40, #dfdf20)',
+        'linear-gradient(135deg, #ff40ff, #df20df)',
+        'linear-gradient(135deg, #40ffff, #20dfdf)',
+        'linear-gradient(135deg, #ffaa40, #dfaa20)',
+        'linear-gradient(135deg, #aa40ff, #aa20df)',
+        'linear-gradient(135deg, #40aaff, #20aadf)',
+        'linear-gradient(135deg, #ffaa80, #dfaa60)',
+        'linear-gradient(135deg, #aa80ff, #aa60df)',
+        'linear-gradient(135deg, #80aaff, #60aadf)',
+        'linear-gradient(135deg, #ffccaa, #dfccaa)',
+        'linear-gradient(135deg, #aaccff, #aaccdf)',
+        'linear-gradient(135deg, #ccaaff, #ccaadf)',
+        'linear-gradient(135deg, #ffccff, #dfccdf)',
+        'linear-gradient(135deg, #ccffaa, #ccdfaa)',
+        'linear-gradient(135deg, #aaffcc, #aadfcc)',
+        'linear-gradient(135deg, #ffaacc, #dfaacc)',
+        'linear-gradient(135deg, #ccaaaa, #ccaaaa)',
+        'linear-gradient(135deg, #aaccaa, #aaccaa)'
+    ];
+    
+    const avatarNumber = index + 1;
+    const avatarFile = `avatar${avatarNumber}.png`;
+    
+    return {
+        avatarFile: avatarFile,
+        fallbackBackground: colors[index % colors.length],
+        fallbackLetter: String.fromCharCode(65 + (index % 26))
+    };
+}
+
+function calculateAvatarsPerPage() {
+    const avatarNavigation = document.querySelector('.avatar-navigation');
+    const avatarRow = document.getElementById('avatarRow');
+    const arrows = document.querySelectorAll('.avatar-arrow');
+    
+    const isMobile = window.innerWidth <= 768;
+    
+    if (isMobile) {
+        return 4; // Fixed 4 avatars on mobile
+    }
+    
+    const defaultWidth = 366;
+    const totalWidth = (avatarNavigation && avatarNavigation.offsetWidth > 0) 
+        ? avatarNavigation.offsetWidth 
+        : defaultWidth;
+    
+    if (!avatarRow || arrows.length < 2) return 9;
+    
+    const arrowWidth = arrows.length >= 2 ? arrows[0].offsetWidth * 2 : 40;
+    const navigationGaps = 8;
+    const availableWidth = totalWidth - arrowWidth - navigationGaps;
+    const avatarWidth = 24;
+    const avatarGap = 4;
+    const avatarsPerPage = Math.floor((availableWidth + avatarGap) / (avatarWidth + avatarGap));
+    const result = Math.max(1, Math.min(avatarsPerPage, 29));
+    
+    return result;
+}
+
+// ============================================
+// RATING SYSTEM
+// ============================================
+
+function updateRatingDisplay() {
+    const avgStars = document.getElementById('avgRatingStars');
+    const ratingText = document.getElementById('ratingText');
+    const ratings = videoRatingData.ratings;
+
+    const avgRating = ratings.average || 0;
+    const stars = avgStars.querySelectorAll('.star');
+    
+    stars.forEach((star, index) => {
+        if (index < Math.floor(avgRating)) {
+            star.textContent = '★';
+            star.style.color = '#ffd700';
+        } else if (index < avgRating) {
+            star.textContent = '★';
+            star.style.color = '#ffd700';
+            star.style.opacity = '0.5';
+        } else {
+            star.textContent = '☆';
+            star.style.color = '#ddd';
+            star.style.opacity = '1';
+        }
+    });
+
+    if (ratings.total > 0) {
+        ratingText.textContent = `${avgRating.toFixed(1)}/5 stars • ${ratings.total} rating${ratings.total !== 1 ? 's' : ''}`;
+    } else {
+        ratingText.textContent = 'No ratings yet';
+    }
+}
+
+function setUserRating(rating) {
+    userCurrentRating = rating;
+    const userStars = document.getElementById('userRatingStars');
+    const stars = userStars.querySelectorAll('.star');
+    const submitButton = document.getElementById('submitRating');
+
+    stars.forEach((star, index) => {
+        if (index < rating) {
+            star.textContent = '★';
+            star.style.color = '#ffd700';
+        } else {
+            star.textContent = '☆';
+            star.style.color = '#ddd';
+        }
+    });
+
+    submitButton.disabled = false;
+}
+
+async function submitRating() {
+    if (userCurrentRating === 0 || !currentVideoId) return;
+
+    const submitButton = document.getElementById('submitRating');
+    const originalText = submitButton.textContent;
+    
+    try {
+        submitButton.textContent = 'Rating...';
+        submitButton.disabled = true;
+
+        const response = await fetch(`${API_BASE}/ratings`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ videoId: currentVideoId, rating: userCurrentRating })
+        });
+        
+        if (response.ok) {
+            const result = await response.json();
+            videoRatingData.ratings = result.ratings;
+            updateRatingDisplay();
+            
+            submitButton.textContent = 'Rated!';
+            setTimeout(() => {
+                submitButton.textContent = originalText;
+                submitButton.disabled = true;
+                userCurrentRating = 0;
+                resetUserRatingStars();
+            }, 2000);
+        } else {
+            throw new Error('Failed to submit rating');
+        }
+
+    } catch (error) {
+        console.error('Rating error:', error);
+        submitButton.textContent = originalText;
+        submitButton.disabled = false;
+    }
+}
+
+function resetUserRatingStars() {
+    const userStars = document.getElementById('userRatingStars');
+    const stars = userStars.querySelectorAll('.star');
+    
+    stars.forEach(star => {
+        star.textContent = '☆';
+        star.style.color = '#ddd';
+    });
+}
+
+// ============================================
+// COMMENT SYSTEM
+// ============================================
+
+function updateCommentsDisplay() {
+    const commentsList = document.getElementById('commentsList');
+    const commentsHeader = document.getElementById('commentsHeader');
+    const comments = videoRatingData.comments || [];
+
+    commentsHeader.textContent = `Comments (${comments.length})`;
+    commentsList.innerHTML = '';
+
+    const sortedComments = [...comments].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+    sortedComments.forEach(comment => {
+        const commentDiv = document.createElement('div');
+        commentDiv.className = 'comment';
+        
+        const avatarIndex = comment.avatarIndex || 0;
+        const avatarInfo = getAvatarForComment(avatarIndex);
+        
+        const date = new Date(comment.timestamp).toLocaleString();
+        
+        const avatarElement = document.createElement('div');
+        avatarElement.className = 'comment-avatar';
+        
+        const img = new Image();
+        img.onload = function() {
+            avatarElement.style.backgroundImage = `url('avatars/${avatarInfo.avatarFile}')`;
+            avatarElement.style.backgroundSize = 'cover';
+            avatarElement.style.backgroundPosition = 'center';
+            avatarElement.textContent = '';
+        };
+        img.onerror = function() {
+            avatarElement.style.background = avatarInfo.fallbackBackground;
+            avatarElement.textContent = avatarInfo.fallbackLetter;
+            avatarElement.style.color = 'white';
+            avatarElement.style.fontSize = '14px';
+            avatarElement.style.fontWeight = 'bold';
+            avatarElement.style.display = 'flex';
+            avatarElement.style.alignItems = 'center';
+            avatarElement.style.justifyContent = 'center';
+        };
+        img.src = `avatars/${avatarInfo.avatarFile}`;
+        
+        commentDiv.innerHTML = `
+            <div class="comment-content">
+                <div class="comment-author">${escapeHtml(comment.author)}</div>
+                <div class="comment-text">${escapeHtml(comment.text)}</div>
+                <div class="comment-date">${date}</div>
+            </div>
+        `;
+        
+        commentDiv.insertBefore(avatarElement, commentDiv.firstChild);
+        commentsList.appendChild(commentDiv);
+    });
+
+    commentsList.scrollTop = 0;
+}
+
+async function submitComment() {
+    const nameInput = document.getElementById('commentName');
+    const messageInput = document.getElementById('commentMessage');
+    const submitButton = document.getElementById('submitComment');
+    
+    const name = nameInput.value.trim();
+    const message = messageInput.value.trim();
+    
+    if (!name || !message) {
+        alert('Please enter both name and message!');
+        return;
+    }
+
+    if (!currentVideoId) {
+        alert('Please select a video first!');
+        return;
+    }
+
+    const originalText = submitButton.textContent;
+    
+    try {
+        submitButton.textContent = 'Posting...';
+        submitButton.disabled = true;
+
+        const response = await fetch(`${API_BASE}/comments`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                mediaTitle: currentVideoId, 
+                author: name, 
+                text: message,
+                avatarIndex: selectedAvatarIndex 
+            })
+        });
+        
+        if (response.ok) {
+            const result = await response.json();
+            
+            videoRatingData.comments.push({
+                author: result.author,
+                text: result.text,
+                timestamp: result.timestamp,
+                avatarIndex: selectedAvatarIndex,
+                id: result.id
+            });
+        } else {
+            throw new Error('Failed to submit comment');
+        }
+
+    } catch (error) {
+        console.error('Comment error:', error);
+    }
+
+    nameInput.value = '';
+    messageInput.value = '';
+    updateCommentsDisplay();
+    
+    submitButton.textContent = originalText;
+    submitButton.disabled = false;
+}
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+// ============================================
+// LOADING FUNCTIONS
+// ============================================
+
+async function loadVideoRatingData(videoId) {
+    try {
+        // Load comments
+        const commentsResponse = await fetch(`${API_BASE}/comments/${encodeURIComponent(videoId)}`);
+        if (commentsResponse.ok) {
+            const comments = await commentsResponse.json();
+            videoRatingData.comments = comments;
+        }
+
+        // Load ratings
+        const ratingsResponse = await fetch(`${API_BASE}/ratings/${encodeURIComponent(videoId)}`);
+        if (ratingsResponse.ok) {
+            const ratings = await ratingsResponse.json();
+            videoRatingData.ratings = ratings;
+        }
+    } catch (error) {
+        console.error('Failed to load video rating data:', error);
+        videoRatingData = {
             ratings: { total: 0, sum: 0, average: 0 },
             comments: []
         };
+    }
+}
 
         // Rating system functions and avatar functions would go here...
         // (Including all the rating/comment functionality from the original)
@@ -2344,29 +2869,34 @@
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
-            initializePage();
-            
-            // Add smooth scrolling for category filter on mobile
-            const categoryFilters = document.querySelector('.category-filters');
-            if (categoryFilters && window.innerWidth <= 480) {
-                categoryFilters.style.scrollBehavior = 'smooth';
-            }
+    initializePage();
+    
+    // Add smooth scrolling for category filter on mobile
+    const categoryFilters = document.querySelector('.category-filters');
+    if (categoryFilters && window.innerWidth <= 480) {
+        categoryFilters.style.scrollBehavior = 'smooth';
+    }
 
-            // Add search functionality on Enter key
-            const searchInput = document.getElementById('searchInput');
-            searchInput.addEventListener('keypress', function(event) {
-                if (event.key === 'Enter') {
-                    searchVideos();
-                }
-            });
+    // Add search functionality on Enter key
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            searchVideos();
+        }
+    });
 
-            // Real-time search as user types (with debounce)
-            let searchTimeout;
-            searchInput.addEventListener('input', function() {
-                clearTimeout(searchTimeout);
-                searchTimeout = setTimeout(searchVideos, 300);
-            });
-        });
+    // Real-time search as user types (with debounce)
+    let searchTimeout;
+    searchInput.addEventListener('input', function() {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(searchVideos, 300);
+    });
+
+    // Initialize comment system - wait for layout to be complete
+    setTimeout(() => {
+        createAvatarRow();
+    }, 200);
+});
 
         // Handle window resize
         window.addEventListener('resize', function() {
@@ -2380,22 +2910,7 @@
             }
         });
 
-        // Placeholder functions for rating/comment system
-        async function loadVideoRatingData(videoId) {
-            // Placeholder - implement your rating/comment loading here
-        }
-        
-        function updateRatingDisplay() {
-            // Placeholder - implement your rating display here
-        }
-        
-        function updateCommentsDisplay() {
-            // Placeholder - implement your comments display here
-        }
-        
-        function resetUserRatingStars() {
-            // Placeholder - implement your rating reset here
-        }
+
 
         console.log('🎬 WillTube HLS Edition loaded with FIXED progress bar!');
         console.log('📹 Use quickAddVideo() to add new videos');
