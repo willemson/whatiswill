@@ -556,6 +556,7 @@
         }
     </style>
 </head>
+<link rel="icon" type="image/x-icon" href="/assets/favicon-main.ico">
 <body>
     <!-- Site Container -->
     <div class="site-container">
@@ -636,9 +637,11 @@
     <script>
         // Enhanced photo category configuration organized by year
         const photoCategories = {
-            2024: {
+		
+			
+			2024: {
                 "Mom's Surprise Party": {
-                    folder: 'photos/suprise',
+                    folder: 'photos/2024/suprise',
                     prefix: 'suprise',
                     count: 26,
                     extension: 'png',
@@ -649,7 +652,7 @@
                     year: "2024"
                 },
                 "Iceland Trip": {
-                    folder: 'photos/iceland',
+                    folder: 'photos/2024/iceland',
                     prefix: 'iceland',
                     count: 18,
                     extension: 'png',
@@ -658,8 +661,94 @@
                     format: "Digital JPEG",
                     month: "June",
                     year: "2024"
-                }
-            }
+                },
+				"READ!": {
+                    folder: 'photos/2024/read',
+                    prefix: 'read',
+                    count: 4,
+                    extension: 'png',
+                    customTitle: "READ! It's good for you!",
+                    camera: "Pentax K1000",
+                    format: "35mm",
+                    month: "March",
+                    year: "2024"
+                },
+                "Grouptherapy Concert": {
+                    folder: 'photos/2024/grouptherapy',
+                    prefix: 'grouptherapy',
+                    count: 7,
+                    extension: 'png',
+                    customTitle: "GROUPTHERAPY CONCERT",
+                    camera: "Fujifilm Disposable Camera",
+                    format: "35mm",
+                    month: "June",
+                    year: "2024"
+                },
+				"Boating": {
+                    folder: 'photos/2024/boating',
+                    prefix: 'boating',
+                    count: 29,
+                    extension: 'png',
+                    customTitle: "A DAY ON THE LAKE",
+                    camera: "Canon AE1",
+                    format: "35mm",
+                    month: "June",
+                    year: "2024"
+                },
+            },
+            
+			
+			2023: {
+                "Deployment": {
+                    folder: 'photos/2023/deployment',
+                    prefix: 'deployment',
+                    count: 7,
+                    extension: 'png',
+                    customTitle: "LOGAN SHIPS OFF TO THE MARINES",
+                    camera: "Fujifilm Disposable Camera",
+                    format: "35mm",
+                    month: "March",
+                    year: "2023"
+                },
+                "Halloween": {
+                    folder: 'photos/2023/halloween',
+                    prefix: 'halloween',
+                    count: 25,
+                    extension: 'png',
+                    customTitle: "HALLOWEEN PARTY OF THE YEAR",
+                    camera: "Canon AE1",
+                    format: "35mm",
+                    month: "March",
+                    year: "2023"
+                },
+				"Golden Hour": {
+                    folder: 'photos/2023/golden-hour',
+                    prefix: 'golden-hour',
+                    count: 17,
+                    extension: 'png',
+                    customTitle: "LOGAN SHIPS OFF TO THE MARINES",
+                    camera: "Fujifilm Disposable Camera",
+                    format: "35mm",
+                    month: "March",
+                    year: "2023"
+                },
+            },
+			
+			2020: {
+                "Voter Fraud!": {
+                    folder: 'photos/2020/voter-fraud',
+                    prefix: 'voter-fraud',
+                    count: 23,
+                    extension: 'png',
+                    customTitle: "BTS FROM THE GANG COMMITTS VOTER FRAUD",
+                    camera: "Pentax K1000",
+                    format: "35mm",
+                    month: "March",
+                    year: "2020"
+            },
+			},
+
+
         };
 
         // Generate image arrays dynamically from folder configuration
